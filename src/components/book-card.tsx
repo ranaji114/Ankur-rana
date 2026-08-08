@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { Book } from "@/data/content";
 
 type BookCardProps = {
@@ -36,13 +35,15 @@ export function BookCard({ book, compact = false }: BookCardProps) {
             </span>
           ))}
         </div>
-        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-          <a className="button-primary" href={book.amazonUrl} target="_blank" rel="noreferrer">
-            Buy on Kindle
+        <div style={{ marginTop: "1.75rem" }}>
+          <a
+            className="button-primary"
+            href={book.amazonUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Read on Amazon →
           </a>
-          <Link className="button-secondary" href={`/books/#${book.id}`}>
-            View details
-          </Link>
         </div>
       </div>
     </article>

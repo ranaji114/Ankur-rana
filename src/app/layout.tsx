@@ -16,43 +16,45 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   applicationName: "Ankur Rana",
   title: {
-    default: "Ankur Rana | Author, Independent Researcher, and Thinker",
+    default: "Ankur Rana — AI-Assisted Developer, Programmer, Author & Researcher",
     template: "%s | Ankur Rana",
   },
   description:
-    "The official website of Ankur Rana, author, independent researcher, and thinker exploring time, reality, perception, consciousness, psychology, language, and human understanding.",
+    "Ankur Rana builds software, writes books, and conducts independent research. AI-assisted developer, programmer, author, and independent researcher based in India.",
   creator: "Ankur Rana",
   publisher: "Ankur Rana",
   authors: [{ name: "Ankur Rana" }],
-  category: "Author Website",
+  category: "Personal Portfolio",
   keywords: [
     "Ankur Rana",
+    "developer",
+    "programmer",
+    "AI-assisted development",
     "author",
     "independent researcher",
+    "Ezra programming language",
+    "Rust",
+    "Next.js",
     "research papers",
     "Zenodo",
     "Kindle books",
-    "independent thinker",
     "time",
-    "reality",
     "consciousness",
-    "psychology",
-    "relationships",
     "Awadhi",
     "Hindi poetry",
   ],
   openGraph: {
-    title: "Ankur Rana | Author, Independent Researcher, and Thinker",
+    title: "Ankur Rana — AI-Assisted Developer, Programmer, Author & Researcher",
     description:
-      "Books and independent research on time, reality, perception, consciousness, psychology, language, and human understanding.",
+      "Building software, exploring ideas, and turning curiosity into working products.",
     type: "website",
     siteName: "Ankur Rana",
   },
   twitter: {
     card: "summary",
-    title: "Ankur Rana | Author, Independent Researcher, and Thinker",
+    title: "Ankur Rana — Developer, Author & Researcher",
     description:
-      "Books and independent research on time, reality, perception, consciousness, psychology, language, and human understanding.",
+      "Building software, exploring ideas, and turning curiosity into working products.",
   },
 };
 

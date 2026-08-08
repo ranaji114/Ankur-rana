@@ -1,25 +1,37 @@
 export type SocialLink = {
   label: string;
   href: string;
-  platform: "instagram" | "facebook";
+  platform: "instagram" | "facebook" | "github";
 };
 
 export const author = {
   name: "Ankur Rana",
-  role: "Author • Independent Researcher • Thinker",
+  role: "AI-Assisted Developer · Programmer · Author · Independent Researcher",
+  roleShort: "Developer · Author · Researcher",
   email: "ranaankur442@gmail.com",
+  githubUrl: "https://github.com/ranaji114",
   amazonAuthorUrl: "https://www.amazon.in/s?k=Ankur+Rana&i=digital-text&ref=nb_sb_noss",
   portrait: "/assets/author/author-photo.jpeg",
   location: "India",
+  tagline: "Building software, exploring ideas, and turning curiosity into working products.",
   shortBio:
-    "Ankur Rana is an author, independent researcher, and thinker whose work explores time, reality, psychology, relationships, poetry, language, and human understanding.",
+    "Ankur Rana builds software, writes books, and conducts independent research. He uses AI as a development partner while continuously deepening his own programming and computer science fundamentals.",
   longBio:
-    "Ankur Rana works across books, independent research papers, conceptual hypotheses, and thought experiments. His writing moves between large questions and intimate human concerns: what time is, how reality may be understood, how perception shapes experience, how attention is protected, how distance changes love, and how language preserves culture. His work is research-driven, guided by intellectual curiosity, clear language, and a persistent interest in the foundations of understanding.",
+    "Ankur Rana works across software, books, and independent research. As a programmer, he builds real-world applications using AI as a collaborative tool while continuously improving his own understanding of computer science fundamentals. As an author, his writing moves between large questions and intimate human concerns — time, reality, attention, relationships, language, and poetry. As an independent researcher, he explores conceptual questions about the nature of time, consciousness, and perception.",
+  devBio:
+    "I use AI as a development partner, not a replacement for thinking. Every project starts with my own requirements, architecture decisions, and product direction. AI helps with implementation, debugging, and iteration — but I remain responsible for understanding, testing, and owning the final result.",
   philosophy:
-    "The work is built on a simple belief: serious ideas should be readable, emotionally honest, and useful to real people. A book or research paper can clarify a concept, preserve a culture, examine a relationship, or give shape to a question that deserves more careful attention.",
+    "The work is built on a simple belief: serious ideas should be readable, emotionally honest, and useful to real people. Software should solve real problems. A book or research paper can clarify a concept, preserve a culture, examine a relationship, or give shape to a question that deserves more careful attention.",
   quote:
     "Understanding begins when we stop treating the mind, time, love, and language as separate mysteries.",
+  devQuote:
+    "AI is part of my development workflow, not a substitute for thinking.",
   socialLinks: [
+    {
+      label: "GitHub",
+      href: "https://github.com/ranaji114",
+      platform: "github",
+    },
     {
       label: "Instagram",
       href: "https://www.instagram.com/its_my_dark_world/",
@@ -47,6 +59,10 @@ export type Book = {
   amazonUrl: string;
   previewUrl: string;
   related: string[];
+  isLatest?: boolean;
+  publishDate?: string;
+  pages?: number;
+  language?: string;
 };
 
 export type ResearchPaper = {
@@ -64,6 +80,30 @@ export type ResearchTopic = {
 };
 
 export const books: Book[] = [
+  {
+    id: "unknowable-reality",
+    title: "The Unknowable Reality",
+    subtitle: "The Evolution of Intelligence, Knowledge, and the Limits of Understanding",
+    cover: "/assets/books/unknowable-reality.jpeg",
+    category: "Science and Philosophy",
+    difficulty: "Deep read",
+    hook: "A rigorous and wide-ranging inquiry into why intelligence — human or artificial — may never fully grasp the reality it inhabits.",
+    description:
+      "This book examines the co-evolution of intelligence and knowledge across biology, science, philosophy, and artificial intelligence. It argues that the limits of understanding are not temporary problems to be solved — they may be structural features of any mind attempting to model a reality larger than itself.",
+    themes: ["Intelligence", "Knowledge", "Epistemology", "Philosophy of Mind"],
+    whyRead: [
+      "For readers who want to understand why intelligence has boundaries, not just capabilities.",
+      "Connects cognitive science, philosophy of science, and AI into a single readable inquiry.",
+      "Challenges the assumption that more information automatically leads to deeper understanding.",
+    ],
+    amazonUrl: "https://amzn.in/d/06YNVlNC",
+    previewUrl: "https://amzn.in/d/06YNVlNC",
+    related: ["architecture-of-existence", "world-through-our-mind", "attention-asset"],
+    isLatest: true,
+    publishDate: "30 July 2026",
+    pages: 169,
+    language: "English",
+  },
   {
     id: "architecture-of-existence",
     title: "The Architecture of Existence",
@@ -208,9 +248,9 @@ export const researchPapers: ResearchPaper[] = [
 ];
 
 export const featuredBookIds = [
+  "unknowable-reality",
   "architecture-of-existence",
   "world-through-our-mind",
-  "attention-asset",
 ];
 
 export const categories = [
@@ -307,4 +347,439 @@ export const publicationTimeline = [
     title: "Tumhare Baad....",
     note: "A Hindi poetry collection about unfinished love, heartbreak, and return to self.",
   },
+  {
+    year: "2026",
+    title: "The Unknowable Reality",
+    note: "An inquiry into intelligence, knowledge, and the structural limits of understanding.",
+  },
+];
+
+// ─── Projects ────────────────────────────────────────────────────────────────
+
+export type ProjectStatus = "live" | "archived" | "in-progress";
+
+export type ProjectFeature = {
+  title: string;
+  description: string;
+};
+
+export type ProjectSection = {
+  id: string;
+  label: string;
+  content: string;
+};
+
+export type Project = {
+  id: string;
+  slug: string;
+  number: string;
+  title: string;
+  tagline: string;
+  description: string;
+  status: ProjectStatus;
+  liveUrl?: string;
+  githubUrl: string;
+  stack: string[];
+  highlights: string[];
+  features: ProjectFeature[];
+  sections: ProjectSection[];
+  architecture?: string[];
+  challenges: string[];
+  learned: string[];
+};
+
+export const projects: Project[] = [
+  {
+    id: "ezra",
+    slug: "ezra",
+    number: "01",
+    title: "Ezra",
+    tagline: "A readable scripting language and developer ecosystem built with Rust.",
+    description:
+      "Ezra is a programming language designed with readability and developer experience as first-class concerns. Built in Rust, it features its own lexer, parser, AST, compiler, bytecode VM, CLI, and standard library — forming a complete language ecosystem from source code to execution.",
+    status: "live",
+    liveUrl: "https://ezra-programming-lang.vercel.app/",
+    githubUrl: "https://github.com/ranaji114/Ezra-programming-lang",
+    stack: ["Rust", "TypeScript", "Next.js", "Vercel"],
+    highlights: [
+      "Complete language pipeline: lexer → parser → AST → compiler → bytecode → VM",
+      "Custom CLI tooling for running, formatting, and linting Ezra programs",
+      "VS Code extension with syntax highlighting and LSP support",
+      "Dedicated documentation website",
+    ],
+    features: [
+      {
+        title: "Lexer",
+        description:
+          "Tokenizes Ezra source code into a stream of meaningful tokens — identifiers, keywords, literals, operators, and punctuation.",
+      },
+      {
+        title: "Parser",
+        description:
+          "Transforms the token stream into a structured parse tree, validating syntax and grammar rules.",
+      },
+      {
+        title: "Abstract Syntax Tree",
+        description:
+          "The AST represents the program structure in a form that can be analysed, transformed, and compiled.",
+      },
+      {
+        title: "Compiler",
+        description:
+          "Walks the AST and emits bytecode instructions that can be executed by the Ezra virtual machine.",
+      },
+      {
+        title: "Bytecode VM",
+        description:
+          "A stack-based virtual machine that executes compiled Ezra bytecode efficiently.",
+      },
+      {
+        title: "CLI",
+        description:
+          "A command-line interface for running, compiling, formatting, and linting Ezra programs.",
+      },
+      {
+        title: "Standard Library",
+        description:
+          "A growing set of built-in functions and modules for common programming tasks.",
+      },
+      {
+        title: "VS Code Extension",
+        description:
+          "Syntax highlighting, error detection, and LSP integration for Ezra development in VS Code.",
+      },
+      {
+        title: "Formatter",
+        description:
+          "An opinionated code formatter that enforces consistent style across Ezra source files.",
+      },
+      {
+        title: "Linter",
+        description:
+          "Static analysis tooling that identifies potential issues and style violations in Ezra code.",
+      },
+    ],
+    architecture: [
+      "Source Code",
+      "Lexer",
+      "Parser",
+      "Abstract Syntax Tree",
+      "Compiler",
+      "Bytecode",
+      "Virtual Machine",
+      "Output",
+    ],
+    sections: [
+      {
+        id: "overview",
+        label: "Overview",
+        content:
+          "Ezra is a scripting language built to be readable first. The language design prioritises clear syntax and a smooth developer experience over performance at the expense of clarity. It is implemented entirely in Rust and ships as a single binary.",
+      },
+      {
+        id: "why",
+        label: "Why I Built It",
+        content:
+          "Building a programming language from scratch is one of the most complete learning experiences in computer science. Ezra was built to understand every layer of how languages work — from scanning raw text to executing instructions — and to produce something genuinely usable.",
+      },
+      {
+        id: "philosophy",
+        label: "Language Philosophy",
+        content:
+          "Ezra is designed around the idea that code should read like a clear description of its intent. Syntax choices prioritise human readability. The toolchain is opinionated so developers spend time on logic rather than configuration.",
+      },
+      {
+        id: "toolchain",
+        label: "Toolchain",
+        content:
+          "The Ezra toolchain includes a CLI for running and compiling programs, a formatter for consistent style, a linter for static analysis, and a VS Code extension for syntax highlighting and LSP support. The documentation site lives at ezra-programming-lang.vercel.app.",
+      },
+    ],
+    challenges: [
+      "Designing a grammar that is both expressive and unambiguous to parse.",
+      "Implementing a correct and efficient bytecode compiler from scratch.",
+      "Building a stack-based VM that handles control flow, functions, and closures correctly.",
+      "Creating VS Code tooling and LSP integration for a custom language.",
+    ],
+    learned: [
+      "Deep understanding of how programming languages work end-to-end.",
+      "Practical experience with Rust's type system, ownership, and performance characteristics.",
+      "How compiler design decisions cascade through the entire toolchain.",
+      "The discipline required to ship developer tooling that others can actually use.",
+    ],
+  },
+  {
+    id: "shri-krishna",
+    slug: "shri-krishna-coaching-center",
+    number: "02",
+    title: "Shri Krishna Coaching Center",
+    tagline: "A full-stack educational platform for a real-world coaching institute.",
+    description:
+      "A complete web application built for Shri Krishna Coaching Center — a real educational institution. The platform includes a public website, course listings, faculty profiles, admission workflow, notices, gallery, contact and enquiry functionality, and administrative features backed by a database.",
+    status: "live",
+    liveUrl: "https://shri-krishna-coaching-center.vercel.app/",
+    githubUrl: "https://github.com/ranaji114/Shri-Krishna-coaching-center",
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "Vercel"],
+    highlights: [
+      "Real-world client project deployed and accessible publicly",
+      "Complete admission and enquiry workflow",
+      "Database-backed faculty and course management",
+      "Fully responsive across all device sizes",
+    ],
+    features: [
+      {
+        title: "Public Website",
+        description:
+          "A polished, professional-facing website presenting the coaching center's identity, mission, and offerings.",
+      },
+      {
+        title: "Courses",
+        description:
+          "Structured course listings with details about subjects, levels, schedule, and fees.",
+      },
+      {
+        title: "Faculty Profiles",
+        description:
+          "Dedicated faculty section with profiles, qualifications, and subject expertise.",
+      },
+      {
+        title: "Admission Workflow",
+        description:
+          "A guided admission process allowing prospective students to submit enquiries and applications.",
+      },
+      {
+        title: "Notices",
+        description:
+          "A notice board for announcements, exam schedules, holidays, and important updates.",
+      },
+      {
+        title: "Gallery",
+        description:
+          "A visual gallery showcasing institute events, activities, and environment.",
+      },
+      {
+        title: "Contact & Enquiry",
+        description:
+          "A contact system where visitors can submit enquiries that are stored and accessible to administration.",
+      },
+      {
+        title: "Responsive Design",
+        description:
+          "The platform is fully responsive across desktop, tablet, and mobile screen sizes.",
+      },
+    ],
+    architecture: [
+      "Admission / Enquiry Form",
+      "React Context Store (useStore hook)",
+      "Supabase Insert (if configured)",
+      "localStorage Fallback (offline-safe)",
+      "Admin Dashboard — /admin/admissions & /admin/messages",
+    ],
+    sections: [
+      {
+        id: "overview",
+        label: "Overview",
+        content:
+          "Shri Krishna Coaching Center is a real-world educational institution. This platform was built to give them a professional online presence with working functionality — not a static brochure website.",
+      },
+      {
+        id: "why",
+        label: "Why I Built It",
+        content:
+          "This project came from a real need: a coaching center with no digital presence, losing prospective students to competitors who had websites. The goal was to build something functional, maintainable, and actually useful.",
+      },
+      {
+        id: "technical",
+        label: "Technical Approach",
+        content:
+          "The application is built with Next.js and TypeScript on the frontend, Supabase for the database and backend, and deployed on Vercel. The architecture allows content to be managed without touching code.",
+      },
+    ],
+    challenges: [
+      "Designing a system that non-technical administrators could actually use.",
+      "Building a reliable admission and enquiry workflow that works on slow connections.",
+      "Handling image uploads and gallery management without excessive complexity.",
+    ],
+    learned: [
+      "How to translate real-world institutional requirements into technical specifications.",
+      "The importance of admin UX — backend systems that users can manage independently.",
+      "Supabase as a rapid full-stack backend for Next.js projects.",
+    ],
+  },
+  {
+    id: "vani",
+    slug: "vani",
+    number: "03",
+    title: "Vani",
+    tagline: "A Medium-like publishing platform for writing professionals.",
+    description:
+      "Vani was a full-stack publishing platform built for writers and writing professionals. It featured authentication, author profiles, a rich writing editor, a publishing workflow, and a content architecture designed around long-form writing. The project is currently archived and offline.",
+    status: "archived",
+    githubUrl: "https://github.com/ranaji114/Vani-is-for-the-writing-professionals",
+    stack: ["React", "Node.js", "MongoDB", "Express", "JavaScript"],
+    highlights: [
+      "Full authentication system with author profiles",
+      "Rich text editor for long-form writing",
+      "Complete publish/draft/edit workflow",
+      "Reader-facing article pages with clean typography",
+    ],
+    features: [
+      {
+        title: "Authentication",
+        description:
+          "User registration and login with secure session management. Each user has a dedicated author profile.",
+      },
+      {
+        title: "Author Profiles",
+        description:
+          "Public-facing author profile pages showing published articles and author information.",
+      },
+      {
+        title: "Writing Editor",
+        description:
+          "A focused writing environment for composing long-form articles with formatting support.",
+      },
+      {
+        title: "Publishing Workflow",
+        description:
+          "Articles move through draft → review → published states with clear controls.",
+      },
+      {
+        title: "Content Architecture",
+        description:
+          "A MongoDB-backed content model designed to support articles, authors, drafts, and tags.",
+      },
+      {
+        title: "Reader Experience",
+        description:
+          "Clean, typographically focused reading pages for published articles.",
+      },
+    ],
+    sections: [
+      {
+        id: "overview",
+        label: "Overview",
+        content:
+          "Vani was conceived as a publishing platform specifically designed for writing professionals — a space where serious writers could publish, manage, and share long-form work with a clean reading experience.",
+      },
+      {
+        id: "why",
+        label: "Why I Built It",
+        content:
+          "The project came from an interest in building a product that matched the user's intent. Most publishing platforms are built for general audiences. Vani was designed specifically for people who take writing seriously.",
+      },
+      {
+        id: "status",
+        label: "Current Status",
+        content:
+          "Vani is currently archived and offline. The project served as a significant learning exercise in full-stack product development, authentication systems, content architecture, and editor UX. The repository is available on GitHub.",
+      },
+    ],
+    challenges: [
+      "Building a writing editor that felt good to use — simple, focused, and reliable.",
+      "Designing a content architecture that could scale beyond a prototype.",
+      "Managing the complexity of authentication, sessions, and user-owned content.",
+    ],
+    learned: [
+      "Full-stack product development from concept to working application.",
+      "How authentication and user-owned content requires careful architectural thinking.",
+      "The difficulty of editor UX — making a writing tool feel lightweight and trustworthy.",
+      "When to archive a project rather than accumulate technical debt.",
+    ],
+  },
+  {
+    id: "alfarooq",
+    slug: "alfarooq",
+    number: "04",
+    title: "Al-Farooq",
+    tagline: "A clean, responsive website for a school institution.",
+    description:
+      "Al-Farooq is a school website project built to provide an institution with a professional digital presence. The project focused on clean design, responsive layout, and clear information architecture for prospective students and parents.",
+    status: "live",
+    githubUrl: "https://github.com/ranaji114/alfarooq",
+    stack: ["HTML", "CSS", "JavaScript"],
+    highlights: [
+      "Clean institutional design with clear visual hierarchy",
+      "Fully responsive across desktop and mobile",
+      "Structured information architecture for a school audience",
+    ],
+    features: [
+      {
+        title: "Home / Landing",
+        description: "A welcoming landing page communicating the school's identity and values.",
+      },
+      {
+        title: "About Section",
+        description: "Information about the institution's history, mission, and approach.",
+      },
+      {
+        title: "Responsive Interface",
+        description: "The layout adapts cleanly to all screen sizes without breaking.",
+      },
+    ],
+    sections: [
+      {
+        id: "overview",
+        label: "Overview",
+        content:
+          "Al-Farooq is a school website project. The goal was to give the institution a clean, professional web presence with clearly organised information for students, parents, and visitors.",
+      },
+      {
+        id: "approach",
+        label: "Design Approach",
+        content:
+          "The design focused on clarity and institutional credibility. A school website needs to communicate trust immediately. Typography, spacing, and colour were chosen to feel professional and approachable.",
+      },
+    ],
+    challenges: [
+      "Communicating institutional credibility through design alone.",
+      "Keeping the layout responsive and readable across very different screen sizes.",
+    ],
+    learned: [
+      "How institutional websites differ from product or portfolio websites in their communication goals.",
+      "The importance of typographic hierarchy in information-heavy pages.",
+    ],
+  },
+];
+
+// ─── Skills ──────────────────────────────────────────────────────────────────
+
+export type SkillCategory = {
+  label: string;
+  skills: string[];
+};
+
+export const skillCategories: SkillCategory[] = [
+  {
+    label: "Languages",
+    skills: ["Python", "JavaScript", "TypeScript", "C++", "Rust", "Java", "HTML", "CSS"],
+  },
+  {
+    label: "Web & Frameworks",
+    skills: ["React", "Next.js"],
+  },
+  {
+    label: "Backend & Data",
+    skills: ["Node.js", "MongoDB", "Firebase", "Supabase"],
+  },
+  {
+    label: "Deployment",
+    skills: ["Vercel", "Render"],
+  },
+  {
+    label: "Workflow",
+    skills: ["Git", "GitHub", "AI-Assisted Development"],
+  },
+];
+
+export const aiWorkflowSteps = [
+  { step: "01", label: "Idea", description: "Define the problem and what success looks like." },
+  { step: "02", label: "Requirements", description: "Break down the idea into clear, testable requirements." },
+  { step: "03", label: "Research", description: "Understand existing solutions, constraints, and approaches." },
+  { step: "04", label: "Architecture", description: "Design the system structure — my responsibility, my decisions." },
+  { step: "05", label: "AI-Assisted Implementation", description: "Use AI as a coding partner for implementation, suggestions, and iteration." },
+  { step: "06", label: "Testing", description: "Verify the implementation actually works as intended." },
+  { step: "07", label: "Debugging", description: "Diagnose and fix issues, always understanding the root cause." },
+  { step: "08", label: "Iteration", description: "Improve the product based on real use and honest feedback." },
+  { step: "09", label: "Deployment", description: "Ship and maintain. Take responsibility for the live product." },
 ];
