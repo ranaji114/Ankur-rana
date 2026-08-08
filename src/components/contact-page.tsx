@@ -38,7 +38,7 @@ function validate(data: FormData): FormErrors {
 
 const FORMSPREE_ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ID
   ? `https://formspree.io/f/${process.env.NEXT_PUBLIC_FORMSPREE_ID}`
-  : null;
+  : "https://formspree.io/f/xyegkepz";
 
 const reasons = [
   "Project / Freelance",
@@ -75,18 +75,6 @@ export function ContactPage() {
     const validationErrors = validate(formData);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
-      return;
-    }
-
-    if (!FORMSPREE_ENDPOINT) {
-      // Fallback: construct mailto and trigger via temporary link
-      const body = encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\nReason: ${formData.reason}\nSubject: ${formData.subject}\n\n${formData.message}`
-      );
-      const mailtoUrl = `mailto:${author.email}?subject=${encodeURIComponent(formData.subject)}&body=${body}`;
-      const link = document.createElement("a");
-      link.href = mailtoUrl;
-      link.click();
       return;
     }
 
