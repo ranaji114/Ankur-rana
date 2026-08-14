@@ -1,14 +1,15 @@
 <div align="center">
 
 <!-- ═══════════════════════════════════════════════════════════════════ -->
-<!-- 🚀 FUTURISTIC CYBERPUNK HEADER BANNER                              -->
+<!-- ⚡ BULLETPROOF ULTRA-RELIABLE ANIMATED HEADER                      -->
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,2,0,20,30&height=230&section=header&text=⚡%20ANKUR%20RANA&fontSize=56&fontColor=ffffff&fontAlignY=34&desc=⚡%20Exploring%20Code,%20Time%20%26%20Mind%20%20%7C%20%20Systems%20%26%20Full-Stack%20Architect&descAlignY=56&descFontSize=18&descAlign=50" width="100%" alt="Ankur Rana Header Banner" />
-
-<!-- ── Dynamic Orbitron / Fira Code Animated Typing Banner ── -->
 <a href="https://readme-typing-svg.demolab.com">
-  <img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=700&size=21&duration=2600&pause=800&color=38BDF8&center=true&vCenter=true&multiline=true&width=880&height=85&lines=%F0%9F%A6%80+Crafting+Ezra+%E2%80%94+A+Scripting+Language+%26+Bytecode+VM+in+Rust;%E2%9A%A1+Architecting+Full-Stack+Systems+%C2%B7+Next.js+16.2+%2B+React+19+%2B+Supabase;%F0%9F%93%96+Author+of+7+Published+Books+on+Time%2C+Mind+%26+Human+Reality;%E2%9A%9B%EF%B8%8F+Independent+Physics+Researcher+on+Quantum+Entanglement+%26+Time" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=900&size=40&duration=3000&pause=1000&color=38BDF8&center=true&vCenter=true&width=800&height=75&lines=%E2%9A%A1+ANKUR+RANA;%F0%9F%9A%80+SYSTEMS+ARCHITECT;%F0%9F%A6%80+RUST+COMPILER+DEV;%F0%9F%93%96+AUTHOR+OF+7+BOOKS" alt="Ankur Rana Title" />
+</a>
+
+<a href="https://readme-typing-svg.demolab.com">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=2500&pause=800&color=F59E0B&center=true&vCenter=true&multiline=true&width=900&height=85&lines=%E2%9A%A1+Exploring+Code%2C+Time+%26+Mind+%7C+Systems+%26+Full-Stack+Architect;%F0%9F%A6%80+Creator+of+Ezra+%E2%80%94+A+Scripting+Language+%26+Bytecode+VM+in+Rust;%F0%9F%9B%A0%EF%B8%8F+Architecting+Next.js+16.2+%2B+React+19+%2B+Supabase+Platforms;%F0%9F%93%96+Author+of+7+Published+Books+%C2%B7+Zenodo+Quantum+Physics+Researcher" alt="Typing SVG Subtitle" />
 </a>
 
 <br />
@@ -36,7 +37,7 @@
   </a>
 </p>
 
-<!-- ── Real-Time GitHub Telemetry Badges ── -->
+<!-- ── Real-Time Telemetry Badges ── -->
 <p align="center">
   <img src="https://komarev.com/ghpvc/?username=ranaji114&label=PROFILE+VIEWS&color=38bdf8&style=flat-square" alt="Profile Views" />
   &nbsp;
@@ -44,7 +45,7 @@
   &nbsp;
   <img src="https://img.shields.io/badge/STATUS-ACTIVE_BUILDING-22c55e?style=flat-square" alt="Status" />
   &nbsp;
-  <img src="https://img.shields.io/badge/ARCHITECTURE-RUST_%2B_NEXT.JS_%2B_SUPABASE-818cf8?style=flat-square" alt="Architecture" />
+  <img src="https://img.shields.io/badge/CORE_STACK-RUST_%2B_NEXT.JS_%2B_SUPABASE-818cf8?style=flat-square" alt="Core Stack" />
 </p>
 
 </div>
