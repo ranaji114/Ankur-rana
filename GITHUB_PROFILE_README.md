@@ -1,222 +1,186 @@
 <div align="center">
 
+# ⚡ Ankur Rana
+### **Systems Programmer · Compiler Architect · Author of 7 Books · Independent Researcher**
+
 <a href="https://readme-typing-svg.demolab.com">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=28&duration=3500&pause=1000&color=58A6FF&center=true&vCenter=true&width=800&lines=Hey%2C+I'm+Ankur+Rana+%F0%9F%91%8B;AI-Assisted+Developer+%C2%B7+Programmer;Author+of+7+Published+Books;Independent+Researcher;Building+Ezra+%E2%80%94+A+Language+Written+in+Rust" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=24&duration=3000&pause=1000&color=38BDF8&center=true&vCenter=true&width=800&lines=Building+Ezra+%E2%80%94+A+Scripting+Language+%26+VM+in+Rust;Full-Stack+Architect+%C2%B7+Next.js+16+%2B+React+19+%2B+Supabase;Author+of+7+Published+Books+on+Time%2C+Mind+%26+Reality;Independent+Physics+Researcher+on+Zenodo" alt="Typing SVG" />
 </a>
 
 <br />
 
-<img src="https://komarev.com/ghpvc/?username=ranaji114&label=Profile+Views&color=0e75b6&style=flat" alt="Profile views" />
+<p align="center">
+  <a href="https://ankur-rana.vercel.app"><img src="https://img.shields.io/badge/🌐_Live_Portfolio-09090B?style=for-the-badge&logo=vercel&logoColor=white&border=1&borderColor=38BDF8" alt="Portfolio" /></a>
+  &nbsp;
+  <a href="https://www.linkedin.com/in/ankur-rana-45b522312/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+  &nbsp;
+  <a href="mailto:ranaankur442@gmail.com"><img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
+  &nbsp;
+  <a href="https://zenodo.org/records/16827645"><img src="https://img.shields.io/badge/Zenodo-Open_Access-024dad?style=for-the-badge&logo=zenodo&logoColor=white" alt="Zenodo" /></a>
+  &nbsp;
+  <a href="https://www.amazon.in/s?k=Ankur+Rana&i=digital-text"><img src="https://img.shields.io/badge/Amazon-7_Books_Published-FF9900?style=for-the-badge&logo=amazon&logoColor=white" alt="Amazon Books" /></a>
+</p>
+
+<img src="https://komarev.com/ghpvc/?username=ranaji114&label=PROFILE+VIEWS&color=38bdf8&style=flat-square" alt="Profile views" />
 &nbsp;
-<a href="https://github.com/ranaji114"><img src="https://img.shields.io/github/followers/ranaji114?label=Followers&style=social" alt="GitHub followers" /></a>
+<a href="https://github.com/ranaji114"><img src="https://img.shields.io/github/followers/ranaji114?label=FOLLOWERS&style=flat-square&color=f59e0b" alt="GitHub followers" /></a>
 
 </div>
 
 ---
 
+## 🏛️ Executive Summary
+
+I operate at the intersection of **low-level systems programming**, **full-stack application architecture**, **conceptual physics research**, and **published literature**.
+
+- 🦀 **Systems & Compilers**: Creator of **Ezra**, a readable scripting language with a complete lexer, AST parser, bytecode compiler, and stack-based virtual machine written from scratch in **Rust**.
+- ⚡ **Full-Stack Engineering**: Architecting production web platforms with **Next.js 16 (App Router)**, **React 19**, **TypeScript**, **Express 5**, **Supabase (PostgreSQL)**, and **Tailwind CSS**.
+- 📖 **Author (7 Titles)**: Published author of 7 books examining human attention, perception, the nature of time, relationship psychology, Hindi poetry, and Awadhi linguistic heritage.
+- ⚛️ **Independent Researcher**: Author of 2 conceptual research papers published on **Zenodo** investigating quantum entanglement origins and subjective-physical temporal divergence.
+
+> *"AI is part of my development workflow as an intellectual compiler and force multiplier — never a substitute for deep architectural thinking and first-principles mastery."*
+
+---
+
+## 🚀 Featured Engineering Systems
+
+### 01 · [Ezra Programming Language](https://github.com/ranaji114/Ezra)
+> **A readable scripting language, compiler, and stack-based Bytecode Virtual Machine built in Rust.**
+
+```text
+┌─────────────┐     ┌──────────────┐     ┌────────────┐     ┌─────────────┐     ┌────────────────┐
+│ Source Code │ ──> │ Rust Lexer   │ ──> │ AST Parser │ ──> │ Bytecode    │ ──> │ Stack-Based VM │ ──> Output
+│ (.ezra)     │     │ (Zero-Copy)  │     │ (Grammar)  │     │ Compiler    │     │ (Disassembler) │
+└─────────────┘     └──────────────┘     └────────────┘     └─────────────┘     └────────────────┘
+```
+- **Language Pipeline**: Full custom hand-crafted Lexer, AST Parser, Bytecode Emitter, and Stack Virtual Machine.
+- **Developer Tooling**: CLI toolchain for executing, formatting, and linting Ezra programs; custom VS Code extension with syntax highlighting.
+- **Ecosystem**: Interactive web playground compiling and executing Ezra bytecode live in the browser.
+- **Tech Stack**: `Rust` · `TypeScript` · `Next.js` · `Bytecode VM` · `VS Code LSP`
+- **Links**: [📦 GitHub Repository](https://github.com/ranaji114/Ezra) · [🌐 Live Documentation](https://ezra-lang.vercel.app)
+
+---
+
+### 02 · [Shri Krishna Coaching Center Platform](https://github.com/ranaji114/Shri-Krishna-coaching-center)
+> **A modern, full-stack production educational portal & secure management system (Kadipur, UP).**
+
+```text
+Public Portal (PCM/B/Eng Classes 6–12) ──> Multi-step Digital Admission ──> Supabase PostgreSQL
+                                                                                │
+Faculty Spotlight & Google Maps Coordinates (26.17934, 82.46372)               ▼
+                                                        Double-Field /admin Portal (SHA-256 Crypto)
+```
+- **Client Production Project**: Deployed web platform for a real-world coaching institution (Est. 2021).
+- **Admissions Pipeline**: Multi-step student registration form capturing parent details, class target, and subject choices.
+- **Security & Admin**: Role-based `/admin` management portal with User ID authentication and **SHA-256 Web Crypto API** encryption.
+- **Tech Stack**: `Next.js 16.2` · `React 19` · `TypeScript` · `Supabase Cloud DB` · `Tailwind CSS v4` · `Vercel`
+- **Links**: [🌐 Live Platform](https://shri-krishna-coaching-center.vercel.app/) · [📦 GitHub Repository](https://github.com/ranaji114/Shri-Krishna-coaching-center)
+
+---
+
+### 03 · [Maa Sarswati Digital Library](https://github.com/ranaji114/Ma-Sarswati-Digital-Library)
+> **Full-stack study library management system with document upload & JWT administrative dashboard.**
+
+```text
+React 19 + Vite 7 Frontend (Vercel) ──[Axios]──> Express 5 REST API (Render) ──> Supabase Postgres
+        │                                                     │
+        ├── Online Admission (Multer Aadhaar/Photo Upload)   └── JWT Admin Control Panel (/admin/login)
+        └── Real-time Student Reviews Engine (Instant Post)
+```
+- **Decoupled Full-Stack Architecture**: React 19 SPA on Vercel communicating with an Express 5 ESM backend on Render.
+- **Multipart Document Upload**: Secure Multer pipeline processing student identification and Aadhaar uploads.
+- **Interactive Review System**: Instant public feedback publishing with real-time state sync and administrative moderation.
+- **Tech Stack**: `React 19` · `Vite 7` · `Express 5` · `Node.js` · `Supabase PostgreSQL` · `Render` · `Vercel`
+- **Links**: [🌐 Live Website](https://ma-sarswati-digital-library-fronten.vercel.app) · [🔐 Admin Panel](https://ma-sarswati-digital-library-fronten.vercel.app/admin/login) · [📦 GitHub Repository](https://github.com/ranaji114/Ma-Sarswati-Digital-Library)
+
+---
+
+### 04 · [AL FAROOQ Institutional Architecture](https://github.com/ranaji114/alfarooq)
+> **Dual-layer institutional digital presence & centralized 6-module admin management dashboard.**
+
+- **11-Page Public Portal**: Home, About, Academics, Admissions, Gallery, Infrastructure, Staff, Notices, Contact, SMC, and Mandatory Disclosure.
+- **Centralized Admin Dashboard**: Dedicated interfaces for Admissions Manager, Gallery Manager, Hero Manager, Notices Manager, and Staff Manager.
+- **Reusable Component UI Layer**: Modular design system built with Radix UI primitives and Tailwind CSS.
+- **Tech Stack**: `React 19` · `TypeScript` · `Vite` · `Tailwind CSS` · `Radix UI`
+- **Links**: [📦 GitHub Repository](https://github.com/ranaji114/alfarooq)
+
+---
+
+### 05 · [Vani Editorial Publishing Engine](https://github.com/ranaji114/Vani-is-for-the-writing-professionals)
+> **MERN stack long-form publishing engine designed for writing professionals (Archived).**
+
+- **Editorial Features**: Focused Markdown writing editor, estimated read time computation, draft/publish lifecycle, and JWT authentication.
+- **Tech Stack**: `React` · `Node.js` · `MongoDB` · `Express` · `JavaScript`
+- **Links**: [📦 GitHub Repository](https://github.com/ranaji114/Vani-is-for-the-writing-professionals)
+
+---
+
+## 🛠️ Technical Arsenal & Core Competencies
+
 <div align="center">
 
-<a href="https://ankur-rana.vercel.app"><img src="https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white" /></a>
-&nbsp;
-<a href="mailto:ranaankur442@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
-&nbsp;
-<a href="https://www.linkedin.com/in/ankur-rana-45b522312"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
-&nbsp;
-<a href="https://www.instagram.com/its_my_dark_world/"><img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" /></a>
+| Domain | Technologies & Frameworks |
+| :--- | :--- |
+| **Languages** | `Rust` `TypeScript` `JavaScript (ESNext)` `Python` `C++` `HTML5` `CSS3` `SQL` |
+| **Frontend & UI** | `React 19` `Next.js 16 (App Router)` `Vite 7` `Tailwind CSS v4` `Radix UI` `Framer Motion` |
+| **Backend & APIs** | `Node.js` `Express 5 (ESM)` `REST APIs` `JWT Auth` `Multer` `Zod` `bcryptjs` `Web Crypto API` |
+| **Databases & Cloud** | `Supabase (PostgreSQL)` `MongoDB` `Vercel Edge` `Render` `Cloudinary` |
+| **Systems & Theory** | `Compiler Construction` `AST Parsing` `Bytecode Virtual Machines` `Lexical Analysis` `State Machines` |
 
 </div>
 
 ---
 
-## About
+## 📚 Published Books Catalog (Amazon Kindle)
 
-I build software, write books, and conduct independent research.
+I have authored and published **7 original books** spanning philosophy, physics, cognitive psychology, emotional clarity, and cultural heritage:
 
-As a **programmer**, I build real-world applications using AI as a collaborative tool — while continuously improving my own understanding of computer science fundamentals. As an **author**, my writing moves between large questions and everyday human concerns: time, reality, attention, relationships, language, and poetry. As a **researcher**, I explore conceptual questions about consciousness, perception, and the nature of time.
-
-> *"AI is part of my development workflow, not a substitute for thinking."*
-
-```
-Location  →  India
-Portfolio →  ankur-rana.vercel.app
-Email     →  ranaankur442@gmail.com
-```
-
----
-
-## Projects
-
-### 01 — Ezra · [Live](https://ezra-programming-lang.vercel.app) · [GitHub](https://github.com/ranaji114/Ezra-programming-lang)
-
-> A readable scripting language and developer ecosystem built with Rust.
-
-Ezra is a programming language designed with readability and developer experience as first-class concerns. Built entirely in Rust, it ships as a complete language ecosystem.
-
-```
-Source Code → Lexer → Parser → AST → Compiler → Bytecode → Virtual Machine → Output
-```
-
-**What it includes:**
-- Complete language pipeline — lexer, parser, AST, compiler, bytecode VM
-- Custom CLI for running, formatting, and linting Ezra programs
-- VS Code extension with syntax highlighting and LSP support
-- Dedicated documentation website
-
-`Rust` `TypeScript` `Next.js` `Vercel` · Status: 🟢 **Live**
+| # | Title | Focus Area | Access |
+|---|---|---|:---:|
+| **01** | **The Architecture of Existence** | Physical structure of time, historical measurement, and cosmological order | [Amazon Kindle →](https://www.amazon.in/dp/B0DNHF2QHY) |
+| **02** | **The Attention Asset** | Cognitive focus, digital distraction, and attention economics | [Amazon Kindle →](https://www.amazon.in/dp/B0GX2XL7BN) |
+| **03** | **The World Through Our Mind** | Perception, belief models, consciousness, and constructed reality | [Amazon Kindle →](https://www.amazon.in/dp/B0G3CLWDHC) |
+| **04** | **Learn Awadhi** | Comprehensive 2000+ word dictionary, grammar, and Awadhi cultural preservation | [Amazon Kindle →](https://www.amazon.in/dp/B0DKNGWBCN) |
+| **05** | **Long Distance Love Blueprint** | Relationship psychology, overthinking mitigation, and emotional stability | [Amazon Kindle →](https://www.amazon.in/dp/B0GZJQLR51) |
+| **06** | **Tumhare Baad....** | Hindi poetry exploring memory, heartbreak, and emotional recovery | [Amazon Kindle →](https://www.amazon.in/dp/B0H395X6R7) |
+| **07** | **The Unknowable Reality** *(Latest — Jul 2026)* | Epistemology, intelligence boundaries, and structural limits of knowledge | [Amazon Kindle →](https://www.amazon.in/dp/B0DNHF2QHY) |
 
 ---
 
-### 02 — Shri Krishna Coaching Center · [Live](https://shri-krishna-coaching-center.vercel.app) · [GitHub](https://github.com/ranaji114/Shri-Krishna-coaching-center)
+## ⚛️ Independent Conceptual Physics Research
 
-> Full-stack educational platform for a real-world coaching institute.
+Published on **Zenodo Open Access**:
 
-Built for a real institution — includes public website, course listings, faculty profiles, admission workflow, notices, gallery, and an admin dashboard backed by Supabase.
-
-**Data flow:**
-```
-Admission Form → React Context Store → Supabase Insert → Admin Dashboard
-                                     ↘ localStorage fallback (offline-safe)
-```
-
-`Next.js` `TypeScript` `Supabase` `Tailwind CSS` `Vercel` · Status: 🟢 **Live**
+1. 📄 **[A Unified Connectivity Hypothesis for the Origin of Quantum Entanglement](https://zenodo.org/records/16827645)**  
+   *Proposes that entangled particles represent manifestations of a single continuous underlying quantum object, with spatial separation emerging as a higher-layer illusion.*
+2. 📄 **[Temporal Layers: Divergence Between Human Perception and Physical Time](https://zenodo.org/records/17274810)**  
+   *Investigates the divergence between subjective temporal consciousness and objective physical time frameworks.*
 
 ---
 
-### 03 — Vani · [GitHub](https://github.com/ranaji114/Vani-is-for-the-writing-professionals)
-
-> A Medium-like publishing platform for writing professionals.
-
-Full-stack publishing platform with authentication, author profiles, a writing editor, and a complete publish/draft workflow backed by MongoDB.
-
-`React` `Node.js` `MongoDB` `Express` · Status: 🔘 **Archived**
-
----
-
-### 04 — Al-Farooq · [GitHub](https://github.com/ranaji114/alfarooq)
-
-> A clean, responsive website for a school institution.
-
-Institutional website with clear information architecture, responsive layout, and professional design focused on communicating trust to students and parents.
-
-`HTML` `CSS` `JavaScript` · Status: 🟢 **Live**
-
----
-
-## How I Build
-
-I use AI as a development partner — not a replacement for thinking.
-
-```
-Idea → Requirements → Architecture → Build → Test → Debug → Iterate → Deploy
-```
-
-| AI helps me with | I remain responsible for |
-|---|---|
-| Exploration & research | Product direction & requirements |
-| Implementation & iteration | Architecture & system design |
-| Debugging & root-cause analysis | Testing & quality assurance |
-| Refactoring & code quality | Final implementation decisions |
-| Documentation | Understanding & owning the result |
-
----
-
-## Technologies
-
-**Languages**
-
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
-![C++](https://img.shields.io/badge/C++-00599C?style=flat-square&logo=c%2B%2B&logoColor=white)
-![Rust](https://img.shields.io/badge/Rust-000000?style=flat-square&logo=rust&logoColor=white)
-![Java](https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
-
-**Web & Frameworks**
-
-![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white)
-
-**Backend & Data**
-
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
-![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=firebase&logoColor=black)
-![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
-
-**Deployment & Workflow**
-
-![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
-![Render](https://img.shields.io/badge/Render-46E3B7?style=flat-square&logo=render&logoColor=black)
-![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)
-
----
-
-## Published Books — 7 Titles
-
-All available on [Amazon Kindle](https://www.amazon.in/s?k=Ankur+Rana&i=digital-text).
-
-| Title | Category | |
-|-------|----------|---|
-| **The Unknowable Reality** | Science & Philosophy | ⭐ *Latest — July 2026* |
-| The Architecture of Existence | Science & Philosophy | [Amazon →](https://www.amazon.in/dp/B0H3CD8QZ6) |
-| The World Through Our Mind | Mind & Consciousness | [Amazon →](https://www.amazon.in/dp/B0G3CLWDHC) |
-| The Attention Asset | Self-Growth & Focus | [Amazon →](https://www.amazon.in/dp/B0GX2XL7BN) |
-| Long Distance Love Blueprint | Relationships | [Amazon →](https://www.amazon.in/dp/B0GZJQLR51) |
-| Learn Awadhi | Language & Culture | [Amazon →](https://www.amazon.in/dp/B0DKNGWBCN) |
-| Tumhare Baad.... | Hindi Poetry | [Amazon →](https://www.amazon.in/dp/B0H395X6R7) |
-
----
-
-## Independent Research
-
-Two conceptual papers published on [Zenodo](https://zenodo.org).
-
-**[A Unified Connectivity Hypothesis for the Origin of Quantum Entanglement](https://zenodo.org/records/16827645)**
-> Proposes that entangled particles may represent different manifestations of a single underlying quantum object, with spatial separation emerging only at higher layers of reality.
-
-`Conceptual Physics` `Quantum Foundations` `Independent Research`
-
----
-
-**[Temporal Layers: Exploring the Divergence Between Human Perception and Physical Time](https://zenodo.org/records/17274810)**
-> Explores the possibility that subjective and objective temporal experience operate according to different principles — and may coexist as distinct temporal layers.
-
-`Interdisciplinary` `Consciousness` `Philosophy of Time` `Independent Research`
-
-> *Both papers are independent conceptual research contributions — not institutional academic work. Published openly on Zenodo.*
-
----
-
-## GitHub Stats
+## 📊 GitHub Analytics & Activity
 
 <div align="center">
-
-<img height="180em" src="https://github-readme-stats.vercel.app/api?username=ranaji114&show_icons=true&theme=github_dark&hide_border=true&count_private=true&include_all_commits=true" alt="GitHub Stats" />
-<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=ranaji114&layout=compact&theme=github_dark&hide_border=true&langs_count=8" alt="Top Languages" />
-
+  <img src="https://github-readme-stats.vercel.app/api?username=ranaji114&show_icons=true&theme=tokyonight&hide_border=true&bg_color=09090b&title_color=38bdf8&text_color=9ca3af&icon_color=f59e0b" alt="Ankur's GitHub Stats" />
+  &nbsp;
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ranaji114&layout=compact&theme=tokyonight&hide_border=true&bg_color=09090b&title_color=38bdf8&text_color=9ca3af" alt="Top Languages" />
 </div>
 
-<div align="center">
-
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=ranaji114&theme=github-dark-blue&hide_border=true" alt="GitHub Streak" />
-
-</div>
+<br />
 
 <div align="center">
-
-<img src="https://github-profile-trophy.vercel.app/?username=ranaji114&theme=darkhub&no-frame=true&column=7&margin-w=15" alt="GitHub Trophies" />
-
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=ranaji114&theme=tokyonight&hide_border=true&background=09090b&ring=38bdf8&fire=f59e0b&currStreakLabel=38bdf8" alt="GitHub Streak" />
 </div>
 
 ---
 
+## 📬 Let's Connect & Build
+
+- 🌐 **Portfolio Website**: [https://ankur-rana.vercel.app](https://ankur-rana.vercel.app)
+- 💼 **LinkedIn**: [https://www.linkedin.com/in/ankur-rana-45b522312/](https://www.linkedin.com/in/ankur-rana-45b522312/)
+- 📩 **Email**: [ranaankur442@gmail.com](mailto:ranaankur442@gmail.com)
+- 📍 **Location**: India
+
 <div align="center">
-
-*Building software, exploring ideas, and turning curiosity into working products.*
-
-**[ankur-rana.vercel.app](https://ankur-rana.vercel.app)** · India · © 2026 Ankur Rana
-
+  <sub>Designed &amp; Engineered by <b>Ankur Rana</b> · © 2026</sub>
 </div>
