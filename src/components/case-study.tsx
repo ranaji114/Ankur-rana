@@ -5,14 +5,14 @@ import { useState } from "react";
 import { Reveal } from "@/components/reveal";
 import { StatusBadge } from "@/components/status-badge";
 import { SiteShell } from "@/components/site-shell";
+import { EzraPlayground } from "@/components/ezra-playground";
+import { sound } from "@/lib/audio-haptics";
 import type { Project } from "@/data/content";
 
 type CaseStudyProps = {
   project: Project;
 };
 
-// Tabs are used only for projects with 4+ sections (Ezra).
-// Shorter projects use stacked prose sections.
 const USE_TABS_THRESHOLD = 4;
 
 function TabbedSections({ sections }: { sections: Project["sections"] }) {
@@ -42,7 +42,10 @@ function TabbedSections({ sections }: { sections: Project["sections"] }) {
               aria-selected={isActive}
               aria-controls={`tab-panel-${section.id}`}
               id={`tab-${section.id}`}
-              onClick={() => setActive(section.id)}
+              onClick={() => {
+                sound.play("click");
+                setActive(section.id);
+              }}
               style={{
                 padding: "0.7rem 1.15rem",
                 fontSize: "0.82rem",
@@ -57,8 +60,6 @@ function TabbedSections({ sections }: { sections: Project["sections"] }) {
                 marginBottom: "-1px",
                 outline: "none",
               }}
-              onFocus={(e) => { e.currentTarget.style.outline = "2px solid var(--accent)"; e.currentTarget.style.outlineOffset = "2px"; }}
-              onBlur={(e) => { e.currentTarget.style.outline = "none"; }}
             >
               {section.label}
             </button>
@@ -95,16 +96,14 @@ function StackedSections({ sections }: { sections: Project["sections"] }) {
 
 export function CaseStudy({ project }: CaseStudyProps) {
   const useTabs = project.sections.length >= USE_TABS_THRESHOLD;
-  const isLast = (index: number, arr: unknown[]) => index === arr.length - 1;
 
   return (
     <SiteShell>
-
       {/* ── Hero ── */}
       <section className="case-hero">
         <div className="container-page">
           <Reveal>
-            <Link href="/work" className="back-link">
+            <Link href="/work" className="back-link" onClick={() => sound.play("click")}>
               ← All Projects
             </Link>
             <p className="eyebrow">Project {project.number}</p>
@@ -129,10 +128,9 @@ export function CaseStudy({ project }: CaseStudyProps) {
                   textDecoration: "none",
                   transition: "color 160ms ease",
                 }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--text)")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--muted)")}
+                onClick={() => sound.play("click")}
               >
-                GitHub →
+                GitHub Repository →
               </a>
             </div>
           </Reveal>
@@ -158,6 +156,7 @@ export function CaseStudy({ project }: CaseStudyProps) {
                   rel="noreferrer"
                   className="case-meta-value"
                   style={{ color: "var(--accent)", textDecoration: "none" }}
+                  onClick={() => sound.play("click")}
                 >
                   github.com →
                 </a>
@@ -166,6 +165,19 @@ export function CaseStudy({ project }: CaseStudyProps) {
           </Reveal>
         </div>
       </section>
+
+      {/* ── Live Playground for Ezra ── */}
+      {project.id === "ezra" && (
+        <section className="section" style={{ borderBottom: "1px solid var(--border)", background: "var(--surface)" }}>
+          <div className="container-page">
+            <Reveal>
+              <p className="eyebrow" style={{ color: "var(--accent)", marginBottom: "0.5rem" }}>✦ Live Interactive Visualizer</p>
+              <h2 className="heading-large mb-6">Inspect the Compiler Pipeline</h2>
+              <EzraPlayground />
+            </Reveal>
+          </div>
+        </section>
+      )}
 
       {/* ── Overview ── */}
       <section className="case-section">
@@ -200,7 +212,7 @@ export function CaseStudy({ project }: CaseStudyProps) {
         </div>
       </section>
 
-      {/* ── Architecture (if present) ── */}
+      {/* ── Architecture ── */}
       {project.architecture && project.architecture.length > 0 && (
         <section className="case-section" style={{ background: "var(--surface)" }}>
           <div className="container-page">
@@ -266,7 +278,7 @@ export function CaseStudy({ project }: CaseStudyProps) {
         </section>
       )}
 
-      {/* ── Case Study Sections (adaptive: tabs vs stacked) ── */}
+      {/* ── Case Study Sections ── */}
       {project.sections.length > 0 && (
         <section className="case-section" style={{ background: "var(--surface)" }}>
           <div className="container-page">
@@ -340,8 +352,9 @@ export function CaseStudy({ project }: CaseStudyProps) {
                   target="_blank"
                   rel="noreferrer"
                   className="button-primary"
+                  onClick={() => sound.play("pop")}
                 >
-                  Visit Live Site
+                  Visit Live Site ↗
                 </a>
               )}
               <a
@@ -349,17 +362,17 @@ export function CaseStudy({ project }: CaseStudyProps) {
                 target="_blank"
                 rel="noreferrer"
                 className="button-secondary"
+                onClick={() => sound.play("click")}
               >
                 View on GitHub
               </a>
-              <Link href="/work" className="button-secondary">
+              <Link href="/work" className="button-secondary" onClick={() => sound.play("click")}>
                 ← All Projects
               </Link>
             </div>
           </Reveal>
         </div>
       </section>
-
     </SiteShell>
   );
 }

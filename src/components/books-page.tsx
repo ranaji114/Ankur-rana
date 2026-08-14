@@ -1,11 +1,13 @@
 "use client";
 
-import Image from "next/image";
-import { BookCard } from "@/components/book-card";
+import { useState } from "react";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { SiteShell } from "@/components/site-shell";
-import { author, books, categories, readingPaths } from "@/data/content";
+import { BookVaultCard } from "@/components/book-vault-card";
+import { BookPreviewModal } from "@/components/book-preview-modal";
+import { sound } from "@/lib/audio-haptics";
+import { author, books, categories, readingPaths, Book } from "@/data/content";
 
 const pathLabels = {
   curiousMinds: "Curious Minds",
@@ -17,124 +19,127 @@ const pathLabels = {
 const getBookTitle = (id: string) => books.find((book) => book.id === id)?.title ?? id;
 
 export function BooksPage() {
-  const latestBook = books.find((b) => b.isLatest);
-  const otherBooks = books.filter((b) => !b.isLatest);
+  const [previewBook, setPreviewBook] = useState<Book | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+
+  const latestBook = books.find((b) => b.isLatest) || books[0];
+  const filteredBooks = selectedCategory === "All"
+    ? books
+    : books.filter((b) => b.category === selectedCategory);
+
+  const handleCategoryFilter = (cat: string) => {
+    sound.play("click");
+    setSelectedCategory(cat);
+  };
 
   return (
     <SiteShell>
+      {/* Interactive Quick Preview Modal */}
+      <BookPreviewModal book={previewBook} onClose={() => setPreviewBook(null)} />
+
+      {/* ── Page Hero ── */}
       <section className="page-hero">
         <div className="container-page">
           <Reveal>
-            <p className="eyebrow">Books</p>
+            <p className="eyebrow">The Complete Catalog</p>
             <h1 className="page-title mt-5">Seven published books.</h1>
-            <p className="body-large mt-6" style={{ maxWidth: "680px" }}>
-              A catalog spanning time, reality, attention, relationships, Hindi poetry, and language —
-              each book a distinct entry point into a connected body of thought.
+            <p className="body-large mt-6" style={{ maxWidth: "720px" }}>
+              A connected intellectual universe spanning cosmology and time, cognitive perception,
+              digital minimalism, relationships, Hindi poetry, and the Awadhi language.
             </p>
           </Reveal>
         </div>
       </section>
 
-      {/* ── Latest Release ── */}
+      {/* ── Latest Release Feature ── */}
       {latestBook && (
-        <section className="section border-b border-[#E5E5E5]">
+        <section className="section" style={{ borderBottom: "1px solid var(--border)" }}>
           <div className="container-page">
             <Reveal>
               <SectionHeading
-                eyebrow="Latest Release"
-                title="The newest book — July 2026."
+                eyebrow="Flagship Release — July 2026"
+                title="The newest inquiry into understanding."
               />
             </Reveal>
             <Reveal delay={0.06}>
-              <article
-                className="book-card"
-                id={latestBook.id}
-                style={{ marginTop: "2rem", scrollMarginTop: "6rem" }}
-              >
-                <div className="book-cover-wrap" style={{ position: "relative" }}>
-                  <span className="latest-badge" style={{ marginBottom: "0.5rem" }}>
-                    Latest Release
-                  </span>
-                  <Image
-                    src={latestBook.cover}
-                    alt={`${latestBook.title} cover`}
-                    width={420}
-                    height={630}
-                    className="book-cover"
-                    sizes="(max-width: 720px) 52vw, 190px"
-                    onError={() => {}}
-                  />
-                </div>
-                <div>
-                  <div className="meta-row">
-                    <span className="meta-chip">{latestBook.category}</span>
-                    <span className="meta-chip">{latestBook.difficulty}</span>
-                    {latestBook.pages && (
-                      <span className="meta-chip">{latestBook.pages} pages</span>
-                    )}
-                    {latestBook.publishDate && (
-                      <span className="meta-chip">{latestBook.publishDate}</span>
-                    )}
-                  </div>
-                  <h2 className="book-title mt-4">{latestBook.title}</h2>
-                  <p className="book-subtitle mt-2">{latestBook.subtitle}</p>
-                  <p className="body-copy mt-4">{latestBook.description}</p>
-                  <div className="meta-row mt-5">
-                    {latestBook.themes.map((theme) => (
-                      <span key={theme} className="theme-chip">{theme}</span>
-                    ))}
-                  </div>
-                  <div className="mt-6" style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-                    <a className="button-primary" href={latestBook.amazonUrl} target="_blank" rel="noreferrer">
-                      Read on Amazon →
-                    </a>
-                  </div>
-                </div>
-              </article>
+              <div style={{ marginTop: "2.5rem", maxWidth: "920px" }}>
+                <BookVaultCard
+                  book={latestBook}
+                  onPreview={(b) => setPreviewBook(b)}
+                />
+              </div>
             </Reveal>
           </div>
         </section>
       )}
 
-      {/* ── Categories ── */}
-      <section className="section bg-white">
+      {/* ── Interactive Categories Filter ── */}
+      <section className="section" style={{ background: "var(--surface)", borderBottom: "1px solid var(--border)" }}>
         <div className="container-page">
           <Reveal>
             <SectionHeading
-              eyebrow="Categories"
-              title="Six areas of work, one connected body of ideas."
+              eyebrow="Explore by Domain"
+              title="Six areas of inquiry, one unified worldview."
             />
           </Reveal>
           <div className="meta-row mt-8">
+            <button
+              type="button"
+              className={`theme-chip ${selectedCategory === "All" ? "button-primary" : ""}`}
+              style={{ cursor: "pointer", border: "none" }}
+              onClick={() => handleCategoryFilter("All")}
+            >
+              All 7 Titles ({books.length})
+            </button>
             {categories.map((category) => (
-              <span key={category} className="theme-chip">
+              <button
+                type="button"
+                key={category}
+                className={`theme-chip ${selectedCategory === category ? "button-primary" : ""}`}
+                style={{ cursor: "pointer", border: "none" }}
+                onClick={() => handleCategoryFilter(category)}
+              >
                 {category}
-              </span>
+              </button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Reading Paths ── */}
-      <section className="section border-y border-[#E5E5E5] bg-white">
+      {/* ── Curated Reading Paths ── */}
+      <section className="section" style={{ borderBottom: "1px solid var(--border)" }}>
         <div className="container-page">
           <Reveal>
             <SectionHeading
-              eyebrow="Reading paths"
-              title="Not sure where to start? These paths help."
-              copy="Each path is a curated sequence of books by reader intent."
+              eyebrow="Curated Reading Sequences"
+              title="Where should you start? Choose your path."
+              copy="Sequential reading paths tailored to reader intent."
             />
           </Reveal>
           <div className="reading-path-grid mt-12">
             {Object.entries(readingPaths).map(([key, ids]) => (
               <Reveal key={key}>
-                <article className="path-card">
+                <article
+                  className="path-card"
+                  onClick={() => {
+                    const firstId = ids[0];
+                    const target = books.find((b) => b.id === firstId);
+                    if (target) {
+                      sound.play("pop");
+                      setPreviewBook(target);
+                    }
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
                   <p className="eyebrow">{pathLabels[key as keyof typeof pathLabels]}</p>
                   <ol style={{ marginTop: "1.4rem", display: "grid", gap: "0.85rem", color: "var(--muted)", listStylePosition: "inside" }}>
                     {ids.map((id) => (
-                      <li key={id}>{getBookTitle(id)}</li>
+                      <li key={id} style={{ fontWeight: 600 }}>{getBookTitle(id)}</li>
                     ))}
                   </ol>
+                  <span style={{ display: "block", marginTop: "1.2rem", fontSize: "0.75rem", color: "var(--accent)", fontWeight: 700 }}>
+                    Click to preview starting title →
+                  </span>
                 </article>
               </Reveal>
             ))}
@@ -142,67 +147,50 @@ export function BooksPage() {
         </div>
       </section>
 
-      {/* ── All Books ── */}
+      {/* ── All Books Vault Grid ── */}
       <section className="section">
         <div className="container-page">
           <Reveal>
             <SectionHeading
-              eyebrow="All books"
-              title="The complete catalog."
+              eyebrow="Full Vault"
+              title={selectedCategory === "All" ? "All 7 Published Titles" : `${selectedCategory} Titles`}
             />
           </Reveal>
           <div className="grid gap-8 mt-12">
-            {otherBooks.map((book, index) => (
-              <Reveal key={book.id} delay={index * 0.025}>
-                <div id={book.id} className="scroll-mt-28">
-                  <BookCard book={book} />
-                  <div className="book-detail-grid">
-                    <div>
-                      <p className="detail-title">Why read this</p>
-                      <div className="mt-4 grid gap-3">
-                        {book.whyRead.map((reason) => (
-                          <p key={reason} className="list-line">
-                            {reason}
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      <p className="detail-title">Related books</p>
-                      <div className="meta-row mt-4">
-                        {book.related.map((related) => (
-                          <span key={related} className="theme-chip">
-                            {related}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="mt-7" style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-                        <a className="button-primary" href={book.amazonUrl} target="_blank" rel="noreferrer">
-                          Read on Amazon →
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            {filteredBooks.map((book, index) => (
+              <Reveal key={book.id} delay={index * 0.03}>
+                <BookVaultCard
+                  book={book}
+                  onPreview={(b) => setPreviewBook(b)}
+                />
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Amazon CTA ── */}
-      <section className="section border-t border-[#E5E5E5] bg-white">
+      {/* ── Amazon Direct CTA ── */}
+      <section className="section" style={{ borderTop: "1px solid var(--border)", background: "var(--surface)" }}>
         <div className="container-page split-grid">
           <Reveal>
             <SectionHeading
-              eyebrow="Amazon"
-              title="All books are available on Amazon Kindle."
+              eyebrow="Amazon Kindle"
+              title="All books available worldwide on Amazon."
+              copy="Instant download available across Kindle readers, iOS, Android, and Web."
             />
           </Reveal>
           <Reveal delay={0.08}>
-            <a className="button-primary" href={author.amazonAuthorUrl} target="_blank" rel="noreferrer">
-              Visit Amazon Author Page
-            </a>
+            <div style={{ marginTop: "1rem" }}>
+              <a
+                className="button-primary"
+                href={author.amazonAuthorUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => sound.play("pop")}
+              >
+                Visit Amazon Author Page ↗
+              </a>
+            </div>
           </Reveal>
         </div>
       </section>

@@ -2,16 +2,21 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { author } from "@/data/content";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { AmbientBackground } from "@/components/ambient-background";
+import { CommandPalette } from "@/components/command-palette";
+import { ScrollProgress } from "@/components/scroll-progress";
+import { sound } from "@/lib/audio-haptics";
 
 const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/work", label: "Work" },
-  { href: "/about", label: "About" },
-  { href: "/books", label: "Books" },
-  { href: "/research", label: "Research" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", label: "Home", subtitle: "Hero & Key Highlights" },
+  { href: "/work", label: "Work & Systems", subtitle: "Ezra & Software Case Studies" },
+  { href: "/about", label: "About & Philosophy", subtitle: "My Story & AI Workflow" },
+  { href: "/books", label: "Books Vault", subtitle: "7 Published Kindle Titles" },
+  { href: "/research", label: "Zenodo Research", subtitle: "Quantum & Temporal Inquiries" },
+  { href: "/contact", label: "Contact", subtitle: "Send a Direct Message" },
 ];
 
 function GitHubIcon() {
@@ -26,25 +31,13 @@ function GitHubIcon() {
   );
 }
 
-function SocialIcon({ platform }: { platform: "instagram" | "facebook" | "github" }) {
-  if (platform === "github") return <GitHubIcon />;
-
-  if (platform === "instagram") {
-    return (
-      <svg aria-hidden="true" viewBox="0 0 24 24" className="social-icon">
-        <rect x="3" y="3" width="18" height="18" rx="5" />
-        <circle cx="12" cy="12" r="4" />
-        <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
-      </svg>
-    );
-  }
-
+function LinkedInIcon() {
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24" className="social-icon">
       <path
         fill="currentColor"
         stroke="none"
-        d="M14.1 8.1V6.7c0-.7.5-.9.9-.9h2.2V2.2L14.1 2c-3.4 0-4.2 2.5-4.2 4.1v2H7.2v3.9h2.7V22h4.2V12h3.1l.5-3.9h-3.6Z"
+        d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"
       />
     </svg>
   );
@@ -57,13 +50,48 @@ type SiteShellProps = {
 export function SiteShell({ children }: SiteShellProps) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [cmdOpen, setCmdOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
   const currentYear = new Date().getFullYear();
+
+  const soundActive = useSyncExternalStore(
+    (callback) => sound.subscribe(callback),
+    () => sound.isEnabled(),
+    () => false
+  );
+
+  const handleToggleSound = () => {
+    sound.toggle();
+  };
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(author.email);
+    setCopied(true);
+    sound.play("chime");
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <div className="site-shell">
+      {/* Top Scroll Laser Progress Bar */}
+      <ScrollProgress />
+
+      {/* Ambient background aura & lighting */}
+      <AmbientBackground />
+
+      {/* Global Command Palette (Cmd+K) */}
+      <CommandPalette isOpen={cmdOpen} onClose={() => setCmdOpen(false)} />
+
       <header className="site-header">
         <div className="container-page header-inner">
-          <Link className="brand-mark" href="/" onClick={() => setOpen(false)}>
+          <Link
+            className="brand-mark"
+            href="/"
+            onClick={() => {
+              sound.play("click");
+              setOpen(false);
+            }}
+          >
             <span className="brand-name">{author.name}</span>
             <span className="brand-role">Developer · Author · Researcher</span>
           </Link>
@@ -77,6 +105,7 @@ export function SiteShell({ children }: SiteShellProps) {
                   key={item.href}
                   className={`nav-link ${active ? "nav-link-active" : ""}`}
                   href={item.href}
+                  onClick={() => sound.play("click")}
                 >
                   {item.label}
                 </Link>
@@ -88,41 +117,140 @@ export function SiteShell({ children }: SiteShellProps) {
               rel="noreferrer"
               className="nav-link"
               aria-label="GitHub profile"
+              onClick={() => sound.play("click")}
+              title="GitHub Profile"
             >
               <GitHubIcon />
             </a>
-          </nav>
-
-          <button
-            className="menu-button"
-            type="button"
-            onClick={() => setOpen((value) => !value)}
-            aria-expanded={open}
-            aria-label={open ? "Close menu" : "Open menu"}
-          >
-            {open ? "Close" : "Menu"}
-          </button>
-        </div>
-
-        {open ? (
-          <nav className="mobile-nav" aria-label="Mobile navigation">
-            <div className="container-page mobile-nav-inner">
-              {navItems.map((item) => (
-                <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>
-                  {item.label}
-                </Link>
-              ))}
+            {author.linkedinUrl && (
               <a
-                href={author.githubUrl}
+                href={author.linkedinUrl}
                 target="_blank"
                 rel="noreferrer"
-                onClick={() => setOpen(false)}
+                className="nav-link"
+                aria-label="LinkedIn profile"
+                onClick={() => sound.play("click")}
+                title="LinkedIn Profile"
               >
-                GitHub
+                <LinkedInIcon />
               </a>
-            </div>
+            )}
           </nav>
-        ) : null}
+
+          {/* Header Action Tools */}
+          <div className="header-actions">
+            {/* Cmd+K trigger */}
+            <button
+              type="button"
+              className="cmd-trigger-btn"
+              onClick={() => {
+                sound.play("pop");
+                setCmdOpen(true);
+              }}
+              title="Search and actions (Cmd + K)"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+              <span className="cmd-kbd-badge">⌘K</span>
+            </button>
+
+            {/* Audio Haptics Toggle */}
+            <button
+              type="button"
+              className={`audio-toggle-btn ${soundActive ? "active" : ""}`}
+              onClick={handleToggleSound}
+              title={soundActive ? "Mute UI sounds" : "Enable tactile UI sounds"}
+              aria-label="Toggle UI sounds"
+            >
+              {soundActive ? "🔊" : "🔈"}
+            </button>
+
+            {/* Theme Toggle (Obsidian / Pearl) */}
+            <ThemeToggle />
+
+            {/* Mobile Animated Hamburger Button */}
+            <button
+              className={`menu-button ${open ? "menu-button-open" : ""}`}
+              type="button"
+              onClick={() => {
+                sound.play("pop");
+                setOpen((value) => !value);
+              }}
+              aria-expanded={open}
+              aria-label={open ? "Close menu" : "Open menu"}
+            >
+              <span>{open ? "✕" : "☰"}</span>
+            </button>
+          </div>
+        </div>
+
+        {/* ── Ultra-Luxury Full-Screen Mobile Glass Sheet ── */}
+        {open && (
+          <div className="mobile-sheet-overlay" role="dialog" aria-modal="true">
+            <div className="container-page mobile-sheet-content">
+              <p className="eyebrow" style={{ color: "var(--accent)" }}>Navigation</p>
+              
+              <div className="mobile-links-list">
+                {navItems.map((item) => {
+                  const active =
+                    item.href === "/" ? pathname === item.href : pathname.startsWith(item.href);
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`mobile-link-item ${active ? "mobile-link-active" : ""}`}
+                      onClick={() => {
+                        sound.play("click");
+                        setOpen(false);
+                      }}
+                    >
+                      <div className="mobile-link-title">{item.label}</div>
+                      <div className="mobile-link-sub">{item.subtitle}</div>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              {/* Mobile Quick Action Strip */}
+              <div className="mobile-sheet-actions">
+                <button
+                  type="button"
+                  className="mobile-action-pill"
+                  onClick={handleCopyEmail}
+                >
+                  <span>✉</span>
+                  <span>{copied ? "✓ Copied!" : "Copy Email"}</span>
+                </button>
+
+                <a
+                  href={author.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mobile-action-pill"
+                  onClick={() => sound.play("click")}
+                >
+                  <GitHubIcon />
+                  <span>GitHub</span>
+                </a>
+
+                {author.linkedinUrl && (
+                  <a
+                    href={author.linkedinUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mobile-action-pill"
+                    onClick={() => sound.play("click")}
+                  >
+                    <LinkedInIcon />
+                    <span>LinkedIn</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </header>
 
       <main>{children}</main>
@@ -140,10 +268,10 @@ export function SiteShell({ children }: SiteShellProps) {
           <div>
             <p className="eyebrow">Explore</p>
             <div className="mt-4 grid gap-2">
-              <Link href="/work">Work</Link>
-              <Link href="/books">Books</Link>
-              <Link href="/research">Research</Link>
-              <Link href="/about">About</Link>
+              <Link href="/work" onClick={() => sound.play("click")}>Work &amp; Engineering</Link>
+              <Link href="/books" onClick={() => sound.play("click")}>Books Vault</Link>
+              <Link href="/research" onClick={() => sound.play("click")}>Zenodo Research</Link>
+              <Link href="/about" onClick={() => sound.play("click")}>About &amp; Philosophy</Link>
             </div>
           </div>
 
@@ -151,7 +279,7 @@ export function SiteShell({ children }: SiteShellProps) {
             <p className="eyebrow">Connect</p>
             <div className="mt-4 grid gap-2">
               <a href={author.githubUrl} target="_blank" rel="noreferrer">GitHub</a>
-              <Link href="/contact">Contact</Link>
+              <Link href="/contact" onClick={() => sound.play("click")}>Contact Form</Link>
               {author.socialLinks.filter(l => l.platform !== "github").map((link) => (
                 <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
                   {link.label}

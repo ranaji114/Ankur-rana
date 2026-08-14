@@ -1,7 +1,7 @@
 export type SocialLink = {
   label: string;
   href: string;
-  platform: "instagram" | "facebook" | "github";
+  platform: "instagram" | "facebook" | "github" | "linkedin";
 };
 
 export const author = {
@@ -10,23 +10,29 @@ export const author = {
   roleShort: "Developer · Author · Researcher",
   email: "ranaankur442@gmail.com",
   githubUrl: "https://github.com/ranaji114",
+  linkedinUrl: "https://www.linkedin.com/in/ankur-rana-45b522312/",
   amazonAuthorUrl: "https://www.amazon.in/s?k=Ankur+Rana&i=digital-text&ref=nb_sb_noss",
   portrait: "/assets/author/author-photo.jpeg",
   location: "India",
   tagline: "Building software, exploring ideas, and turning curiosity into working products.",
   shortBio:
-    "Ankur Rana builds software, writes books, and conducts independent research. He uses AI as a development partner while continuously deepening his own programming and computer science fundamentals.",
+    "I build software, author books, and conduct independent research. I use AI as an intellectual development partner while continuously mastering systems engineering and computer science fundamentals.",
   longBio:
-    "Ankur Rana works across software, books, and independent research. As a programmer, he builds real-world applications using AI as a collaborative tool while continuously improving his own understanding of computer science fundamentals. As an author, his writing moves between large questions and intimate human concerns — time, reality, attention, relationships, language, and poetry. As an independent researcher, he explores conceptual questions about the nature of time, consciousness, and perception.",
+    "I work across software systems, books, and independent conceptual research. As a programmer, I build real-world tools like Ezra (a scripting language compiler & VM in Rust) and production web platforms, using AI as a collaborative pairing partner while deeply owning the architecture and first principles. As an author of seven published titles, my writing moves between cosmological questions and human depth — time, reality, attention, relationships, Hindi poetry, and Awadhi heritage. As an independent researcher, I explore the fundamental nature of time and quantum entanglement.",
   devBio:
     "I use AI as a development partner, not a replacement for thinking. Every project starts with my own requirements, architecture decisions, and product direction. AI helps with implementation, debugging, and iteration — but I remain responsible for understanding, testing, and owning the final result.",
   philosophy:
-    "The work is built on a simple belief: serious ideas should be readable, emotionally honest, and useful to real people. Software should solve real problems. A book or research paper can clarify a concept, preserve a culture, examine a relationship, or give shape to a question that deserves more careful attention.",
+    "My work is built on a simple conviction: serious ideas should be readable, emotionally honest, and genuinely useful to real people. Software should solve real problems with uncompromising elegance. A book or research paper can clarify a difficult concept, preserve a living culture, examine a relationship, or give shape to a question that deserves more careful attention.",
   quote:
     "Understanding begins when we stop treating the mind, time, love, and language as separate mysteries.",
   devQuote:
     "AI is part of my development workflow, not a substitute for thinking.",
   socialLinks: [
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/in/ankur-rana-45b522312/",
+      platform: "linkedin",
+    },
     {
       label: "GitHub",
       href: "https://github.com/ranaji114",
@@ -513,103 +519,182 @@ export const projects: Project[] = [
     slug: "shri-krishna-coaching-center",
     number: "02",
     title: "Shri Krishna Coaching Center",
-    tagline: "A full-stack educational platform for a real-world coaching institute.",
+    tagline: "A Modern, Full-Stack Production Educational Platform & Management Portal",
     description:
-      "A complete web application built for Shri Krishna Coaching Center — a real educational institution. The platform includes a public website, course listings, faculty profiles, admission workflow, notices, gallery, contact and enquiry functionality, and administrative features backed by a database.",
+      "A complete full-stack web application built for Shri Krishna Coaching Center (Est. 2021, Kadipur, Sultanpur, UP). The platform features an editorial public portal showcasing specialized curriculum for Classes 6th–12th (Physics, Chemistry, Math, Biology, English), faculty spotlights (Krishna Sir & Priyanshu Singh Sir), interactive Google Maps coordinate embed, a multi-step digital admission application form, and a double-field authenticated management portal (/admin) backed by Supabase Cloud Database.",
     status: "live",
     liveUrl: "https://shri-krishna-coaching-center.vercel.app/",
     githubUrl: "https://github.com/ranaji114/Shri-Krishna-coaching-center",
-    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase", "Vercel"],
+    stack: ["Next.js 16.2", "React 19", "TypeScript", "Tailwind CSS v4", "Supabase", "Vercel"],
     highlights: [
-      "Real-world client project deployed and accessible publicly",
-      "Complete admission and enquiry workflow",
-      "Database-backed faculty and course management",
-      "Fully responsive across all device sizes",
+      "Full-stack Next.js App Router with Supabase cloud database & storage",
+      "Multi-step digital admission form capturing student & parent details",
+      "Secure double-field admin portal (/admin) with SHA-256 Web Crypto encryption",
+      "Interactive Google Maps coordinates embed, notice board & faculty spotlight",
     ],
     features: [
       {
-        title: "Public Website",
+        title: "Public Editorial Platform",
         description:
-          "A polished, professional-facing website presenting the coaching center's identity, mission, and offerings.",
+          "Premium gold (#C48A2A) & dark obsidian (#18181B) theme showcasing structured curriculum for Classes 6th-10th & 11th-12th.",
       },
       {
-        title: "Courses",
+        title: "Faculty Spotlight",
         description:
-          "Structured course listings with details about subjects, levels, schedule, and fees.",
+          "Dedicated profiles highlighting lead educators Krishna Sir (B.Com, LL.B.) and Priyanshu Singh Sir.",
       },
       {
-        title: "Faculty Profiles",
+        title: "Digital Admission Workflow",
         description:
-          "Dedicated faculty section with profiles, qualifications, and subject expertise.",
+          "Multi-step student application form with parent information, target class, subject selection, and previous school records.",
       },
       {
-        title: "Admission Workflow",
+        title: "Secure Admin Portal (/admin)",
         description:
-          "A guided admission process allowing prospective students to submit enquiries and applications.",
+          "Double-field authentication dashboard (User ID & Password) with SHA-256 Web Crypto encryption for managing admissions and student inquiries.",
       },
       {
-        title: "Notices",
+        title: "Interactive Coordinates & Notice Board",
         description:
-          "A notice board for announcements, exam schedules, holidays, and important updates.",
+          "Accurate Google Maps coordinate embed (26.1793424, 82.4637253) and real-time announcements board.",
       },
       {
-        title: "Gallery",
+        title: "Direct WhatsApp Inquiry",
         description:
-          "A visual gallery showcasing institute events, activities, and environment.",
-      },
-      {
-        title: "Contact & Enquiry",
-        description:
-          "A contact system where visitors can submit enquiries that are stored and accessible to administration.",
-      },
-      {
-        title: "Responsive Design",
-        description:
-          "The platform is fully responsive across desktop, tablet, and mobile screen sizes.",
+          "Instant one-click WhatsApp chat routing for quick prospective student and parent consultations.",
       },
     ],
     architecture: [
-      "Admission / Enquiry Form",
-      "React Context Store (useStore hook)",
-      "Supabase Insert (if configured)",
-      "localStorage Fallback (offline-safe)",
-      "Admin Dashboard — /admin/admissions & /admin/messages",
+      "Public Next.js 16 Client Portal",
+      "Multi-step Admission Form Validation",
+      "Supabase Cloud Database & Storage API",
+      "Double-Field Admin Auth (SHA-256 Web Crypto)",
+      "Centralized Admin Management Dashboard (/admin)",
     ],
     sections: [
       {
         id: "overview",
         label: "Overview",
         content:
-          "Shri Krishna Coaching Center is a real-world educational institution. This platform was built to give them a professional online presence with working functionality — not a static brochure website.",
+          "Shri Krishna Coaching Center (Established 2021, Kadipur, Mudila Bazar, Sultanpur, UP) needed a modern, production-grade digital platform to manage student admissions, public presence, faculty profiles, and announcements.",
       },
       {
         id: "why",
-        label: "Why I Built It",
+        label: "Problem & Architecture",
         content:
-          "This project came from a real need: a coaching center with no digital presence, losing prospective students to competitors who had websites. The goal was to build something functional, maintainable, and actually useful.",
+          "Traditional institutes struggle with offline admissions and manual communication. This platform provides an automated digital pipeline: parents can apply online, check course curriculums, and administrators can manage records from a secure portal.",
       },
       {
         id: "technical",
-        label: "Technical Approach",
+        label: "Technical Implementation",
         content:
-          "The application is built with Next.js and TypeScript on the frontend, Supabase for the database and backend, and deployed on Vercel. The architecture allows content to be managed without touching code.",
+          "Built on Next.js 16.2 App Router, React 19, TypeScript, Tailwind CSS v4, and Supabase Cloud Database. State management combines client stores with direct cloud database syncing and SHA-256 Web Crypto authentication.",
       },
     ],
     challenges: [
-      "Designing a system that non-technical administrators could actually use.",
-      "Building a reliable admission and enquiry workflow that works on slow connections.",
-      "Handling image uploads and gallery management without excessive complexity.",
+      "Building a secure client-side and cloud-authenticated admin system without third-party bloat.",
+      "Ensuring seamless form submission and fast image loading on mobile devices across 4G/3G networks.",
+      "Integrating interactive Google Maps coordinate navigation and direct messaging.",
     ],
     learned: [
-      "How to translate real-world institutional requirements into technical specifications.",
-      "The importance of admin UX — backend systems that users can manage independently.",
-      "Supabase as a rapid full-stack backend for Next.js projects.",
+      "End-to-end full-stack Next.js 16 and Supabase integration in a production client environment.",
+      "The value of intuitive admin dashboard ergonomics for non-technical educators.",
+      "Designing high-converting educational interfaces with clear typography and color accents.",
+    ],
+  },
+  {
+    id: "maa-sarswati-digital-library",
+    slug: "maa-sarswati-digital-library",
+    number: "03",
+    title: "Maa Sarswati Digital Library",
+    tagline: "Full-Stack Digital Study Library Management Platform & Admin Portal",
+    description:
+      "A production-ready full-stack web application built for a modern study library in MudilaDeeh, Kadipur, Sultanpur, UP. The platform features an editorial public presence (facilities showcase, membership pricing plans, instant student reviews, live notices board, photo gallery), an online student admission system with photo & Aadhaar multipart upload, and a dedicated role-based JWT administrative dashboard backed by Express 5, Supabase PostgreSQL, and Cloudinary.",
+    status: "live",
+    liveUrl: "https://ma-sarswati-digital-library-fronten.vercel.app",
+    githubUrl: "https://github.com/ranaji114/Ma-Sarswati-Digital-Library",
+    stack: ["React 19", "Vite 7", "Express 5", "Node.js", "Supabase", "Tailwind CSS 3", "Render", "Vercel"],
+    highlights: [
+      "Full-stack production deployment: Vercel (Frontend), Render (Express REST API), Supabase (PostgreSQL)",
+      "Digital student admission system with Multer photo & Aadhaar multipart document upload",
+      "Interactive student reviews system with immediate public publishing and admin moderation",
+      "Secure JWT admin dashboard with rate-limited brute-force protection, admissions manager & notices CRUD",
+    ],
+    features: [
+      {
+        title: "Public Facility & Membership Portal",
+        description:
+          "Hero showcase, study amenities, membership pricing plans, photo gallery, and live notice board.",
+      },
+      {
+        title: "Digital Admission with Document Upload",
+        description:
+          "Online registration form supporting photo and Aadhaar card upload via Multer with validation.",
+      },
+      {
+        title: "Live Student Reviews Engine",
+        description:
+          "Public rating and review system where students submit real-time feedback with instant rendering.",
+      },
+      {
+        title: "Admin Dashboard & Applications Manager",
+        description:
+          "Secure JWT management portal with brute-force rate limiting to approve/reject admissions and manage enrolled students.",
+      },
+      {
+        title: "Announcements & Gallery CRUD",
+        description:
+          "Real-time administrative interfaces to publish instant exam alerts and manage library gallery albums.",
+      },
+      {
+        title: "Production REST API & PostgreSQL",
+        description:
+          "Express 5 backend deployed on Render edge with Zod payload validation, Helmet security headers, and Supabase database.",
+      },
+    ],
+    architecture: [
+      "React 19 + Vite 7 Frontend Client (Vercel)",
+      "Express 5 ESM REST API (Render)",
+      "JWT Authentication & bcrypt Password Hashing",
+      "Supabase PostgreSQL Cloud Database",
+      "Multer Multipart Document Processing",
+      "Admin Control Panel (/admin/login)",
+    ],
+    sections: [
+      {
+        id: "overview",
+        label: "Overview",
+        content:
+          "Maa Sarswati Digital Library (located in MudilaDeeh, Kadipur, Sultanpur, UP) is a dedicated modern digital study library. The goal was to build an end-to-end full-stack platform managing student admissions, membership tiers, reviews, announcements, and an owner administrative control center.",
+      },
+      {
+        id: "architecture",
+        label: "Architecture & Stack",
+        content:
+          "The platform uses a decoupled full-stack architecture: a React 19 + Vite 7 SPA hosted on Vercel communicating via Axios with an Express 5 REST API on Render. Data persistence is handled by Supabase PostgreSQL with service-role security and Zod schema validation.",
+      },
+      {
+        id: "admin-system",
+        label: "Administrative Control",
+        content:
+          "The owner can log in at /admin/login via secure JWT auth to approve or reject student admissions, review uploaded Aadhaar cards, post urgent library notices, moderate student reviews, and view contact enquiries.",
+      },
+    ],
+    challenges: [
+      "Handling multipart form uploads (Aadhaar & student photo) reliably across mobile networks.",
+      "Configuring cross-origin communication, edge trust proxy, and rate-limiting between Vercel and Render.",
+      "Optimizing mobile viewport ergonomics and eliminating iOS input zoom delays.",
+    ],
+    learned: [
+      "Full-stack microservices deployment bridging Vercel SPA and Render Node.js backend.",
+      "Building robust multipart upload workflows with Multer and cloud storage.",
+      "Implementing resilient Zod schema validation and JWT authentication guards.",
     ],
   },
   {
     id: "vani",
     slug: "vani",
-    number: "03",
+    number: "04",
     title: "Vani",
     tagline: "A Medium-like publishing platform for writing professionals.",
     description:
@@ -642,7 +727,7 @@ export const projects: Project[] = [
       {
         title: "Publishing Workflow",
         description:
-          "Articles move through draft → review → published states with clear controls.",
+          "Draft, preview, edit, and publish states allowing writers to manage their work.",
       },
       {
         title: "Content Architecture",
@@ -655,89 +740,121 @@ export const projects: Project[] = [
           "Clean, typographically focused reading pages for published articles.",
       },
     ],
+    architecture: [
+      "React Frontend",
+      "Express.js REST API",
+      "JWT Authentication Middleware",
+      "MongoDB Article & Author Store",
+      "Article Reader View",
+    ],
     sections: [
       {
         id: "overview",
         label: "Overview",
         content:
-          "Vani was conceived as a publishing platform specifically designed for writing professionals — a space where serious writers could publish, manage, and share long-form work with a clean reading experience.",
+          "Vani was designed as a dedicated writing and publishing platform. It aimed to give writers a clean, distraction-free environment for composing and sharing long-form work.",
       },
       {
-        id: "why",
-        label: "Why I Built It",
+        id: "technical",
+        label: "Architecture",
         content:
-          "The project came from an interest in building a product that matched the user's intent. Most publishing platforms are built for general audiences. Vani was designed specifically for people who take writing seriously.",
-      },
-      {
-        id: "status",
-        label: "Current Status",
-        content:
-          "Vani is currently archived and offline. The project served as a significant learning exercise in full-stack product development, authentication systems, content architecture, and editor UX. The repository is available on GitHub.",
+          "Built using the MERN stack with a RESTful API architecture. The frontend was built with React, the backend with Express and Node.js, and MongoDB was used for persistent storage.",
       },
     ],
     challenges: [
-      "Building a writing editor that felt good to use — simple, focused, and reliable.",
       "Designing a content architecture that could scale beyond a prototype.",
       "Managing the complexity of authentication, sessions, and user-owned content.",
     ],
     learned: [
       "Full-stack product development from concept to working application.",
       "How authentication and user-owned content requires careful architectural thinking.",
-      "The difficulty of editor UX — making a writing tool feel lightweight and trustworthy.",
-      "When to archive a project rather than accumulate technical debt.",
     ],
   },
   {
     id: "alfarooq",
     slug: "alfarooq",
-    number: "04",
+    number: "05",
     title: "Al-Farooq",
-    tagline: "A clean, responsive website for a school institution.",
+    tagline: "Digital Presence. Institutional Identity. Centralized Management.",
     description:
-      "Al-Farooq is a school website project built to provide an institution with a professional digital presence. The project focused on clean design, responsive layout, and clear information architecture for prospective students and parents.",
-    status: "live",
+      "A modern educational institution platform built with React, TypeScript, and Vite. Features a comprehensive 11-page public portal (Home, About, Academics, Admissions, Gallery, Infrastructure, Staff, Notices, Contact, SMC, Mandatory Disclosure) seamlessly integrated with a dedicated administrative management system (Dashboard, Admissions Manager, Gallery Manager, Hero Manager, Notices Manager, and Staff Manager).",
+    status: "archived",
     githubUrl: "https://github.com/ranaji114/alfarooq",
-    stack: ["HTML", "CSS", "JavaScript"],
+    stack: ["React", "TypeScript", "Vite", "Tailwind CSS", "Radix UI"],
     highlights: [
-      "Clean institutional design with clear visual hierarchy",
-      "Fully responsive across desktop and mobile",
-      "Structured information architecture for a school audience",
+      "Dual-layer architecture: 11-page public institutional website + dedicated admin system",
+      "Centralized admin dashboard with Admissions, Gallery, Notices, Staff & Hero managers",
+      "Reusable UI component system (dialogs, sheets, tooltips, toasts, sidebars)",
+      "Polished UX with scroll reveal animations, toast notifications, and mobile-aware layouts",
     ],
     features: [
       {
-        title: "Home / Landing",
-        description: "A welcoming landing page communicating the school's identity and values.",
+        title: "11-Page Public Experience",
+        description:
+          "Dedicated pages for Home, About, Academics, Admissions, Gallery, Infrastructure, Staff, Notices, Contact, SMC, and Mandatory Disclosure.",
       },
       {
-        title: "About Section",
-        description: "Information about the institution's history, mission, and approach.",
+        title: "Centralized Admin Dashboard",
+        description:
+          "Administrative area with separate layout and routing to manage website content without touching code.",
       },
       {
-        title: "Responsive Interface",
-        description: "The layout adapts cleanly to all screen sizes without breaking.",
+        title: "Admissions & Notices Manager",
+        description:
+          "Dedicated admin modules to review admissions, update academic criteria, and publish real-time institutional notices.",
       },
+      {
+        title: "Gallery & Hero Content Manager",
+        description:
+          "Interface for administrators to update school gallery albums and primary landing hero banners on the fly.",
+      },
+      {
+        title: "Staff & Faculty Manager",
+        description:
+          "Centralized roster interface to maintain teacher profiles, qualifications, and department allocations.",
+      },
+      {
+        title: "Reusable Design System",
+        description:
+          "Modular UI library covering buttons, dialogs, forms, inputs, tables, tabs, sheets, toasts, and tooltips.",
+      },
+    ],
+    architecture: [
+      "Public React 19 + Vite Experience",
+      "Component Design System & UI Layer",
+      "Administrative Management Core & Layout",
+      "Modular Admin Interfaces (Admissions, Notices, Gallery, Staff)",
+      "Centralized Dashboard & Auth Guard",
     ],
     sections: [
       {
         id: "overview",
         label: "Overview",
         content:
-          "Al-Farooq is a school website project. The goal was to give the institution a clean, professional web presence with clearly organised information for students, parents, and visitors.",
+          "Al Farooq is a modern educational digital platform designed to solve a fundamental problem: school websites become stale when every minor notice or gallery update requires a developer. Al Farooq solves this by pairing an 11-page public portal with a dedicated centralized admin management dashboard.",
       },
       {
-        id: "approach",
-        label: "Design Approach",
+        id: "architecture",
+        label: "Dual Architecture",
         content:
-          "The design focused on clarity and institutional credibility. A school website needs to communicate trust immediately. Typography, spacing, and colour were chosen to feel professional and approachable.",
+          "The platform is cleanly split into two distinct experiences: what visitors see (Admissions, Academics, Staff, Infrastructure, SMC) and what administrators manage (Admissions Manager, Notices Manager, Gallery Manager, Staff Manager).",
+      },
+      {
+        id: "design-system",
+        label: "Design System",
+        content:
+          "Built around a reusable UI component library using React, TypeScript, Vite, Tailwind CSS, and Radix primitives — ensuring rock-solid accessibility, consistent visual hierarchy, and sub-second load times.",
       },
     ],
     challenges: [
-      "Communicating institutional credibility through design alone.",
-      "Keeping the layout responsive and readable across very different screen sizes.",
+      "Architecting a clean separation between public routing and administrative management interfaces.",
+      "Building a lightweight, intuitive admin UX that school staff can operate without technical friction.",
+      "Structuring 11 comprehensive institutional pages while maintaining sub-second performance.",
     ],
     learned: [
-      "How institutional websites differ from product or portfolio websites in their communication goals.",
-      "The importance of typographic hierarchy in information-heavy pages.",
+      "How to design full-scale educational management systems with role-separated UI layers.",
+      "Building scalable component libraries with Radix UI and Tailwind CSS.",
+      "Creating maintainable CMS architectures for non-technical organizations.",
     ],
   },
 ];

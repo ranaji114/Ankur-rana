@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Reveal } from "@/components/reveal";
 import { SiteShell } from "@/components/site-shell";
+import { sound } from "@/lib/audio-haptics";
 import { author } from "@/data/content";
 
 type FormState = "idle" | "submitting" | "success" | "error";
@@ -74,10 +75,12 @@ export function ContactPage() {
     e.preventDefault();
     const validationErrors = validate(formData);
     if (Object.keys(validationErrors).length > 0) {
+      sound.play("pop");
       setErrors(validationErrors);
       return;
     }
 
+    sound.play("click");
     setFormState("submitting");
     try {
       const response = await fetch(FORMSPREE_ENDPOINT, {
@@ -97,6 +100,7 @@ export function ContactPage() {
       });
 
       if (response.ok) {
+        sound.play("chime");
         setFormState("success");
         setFormData({ name: "", email: "", reason: "", subject: "", message: "" });
       } else {
@@ -112,9 +116,9 @@ export function ContactPage() {
       <section className="page-hero">
         <div className="container-page">
           <Reveal>
-            <p className="eyebrow">Contact</p>
+            <p className="eyebrow">Direct Contact &amp; Inquiries</p>
             <h1 className="page-title mt-5">Get in touch.</h1>
-            <p className="body-large mt-6" style={{ maxWidth: "580px" }}>
+            <p className="body-large mt-6" style={{ maxWidth: "620px" }}>
               I&apos;m interested in building software, exploring language systems, researching ideas,
               and having thoughtful conversations about how things work. If any of this resonates,
               write to me.
@@ -134,7 +138,7 @@ export function ContactPage() {
 
                 {formState === "success" && (
                   <div className="form-success" style={{ marginBottom: "1.5rem" }}>
-                    <strong>Message sent.</strong> I&apos;ll get back to you as soon as I can.
+                    <strong>Message sent successfully.</strong> I will get back to you promptly.
                   </div>
                 )}
 
@@ -295,11 +299,12 @@ export function ContactPage() {
                       textDecoration: "none",
                       wordBreak: "break-all",
                     }}
+                    onClick={() => sound.play("click")}
                   >
                     {author.email}
                   </a>
                   <p className="body-copy mt-3">
-                    For reader messages, collaboration ideas, and professional enquiries.
+                    For reader messages, collaboration ideas, and professional inquiries.
                     I reply to every thoughtful message.
                   </p>
                 </div>
@@ -318,6 +323,7 @@ export function ContactPage() {
                       color: "inherit",
                       transition: "background 160ms ease",
                     }}
+                    onClick={() => sound.play("click")}
                   >
                     <p className="eyebrow" style={{ marginBottom: "0.5rem" }}>{link.label}</p>
                     <p style={{ fontWeight: 600, fontSize: "0.9rem" }}>
@@ -354,15 +360,14 @@ export function ContactPage() {
                 Explore the work
               </p>
               <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-                <Link className="button-secondary" href="/work">Projects</Link>
-                <Link className="button-secondary" href="/books">Books</Link>
-                <Link className="button-secondary" href="/research">Research</Link>
+                <Link className="button-secondary" href="/work" onClick={() => sound.play("click")}>Projects</Link>
+                <Link className="button-secondary" href="/books" onClick={() => sound.play("click")}>Books</Link>
+                <Link className="button-secondary" href="/research" onClick={() => sound.play("click")}>Research</Link>
               </div>
             </div>
           </Reveal>
         </div>
       </div>
-
     </SiteShell>
   );
 }
