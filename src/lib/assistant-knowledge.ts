@@ -162,6 +162,7 @@ export function getAssistantContext(question: string) {
   const asksSocialProfiles = /\b(social|media|instagram|facebook|linkedin|whatsapp)\b/i.test(question);
   const asksContact = /\b(contact|email|phone|mobile|number|reach|call)\b/i.test(question);
   const asksLocation = /\b(where|live|lives|reside|resides|from|hometown|village|gaon|block|district|state|country|address|native)\b/i.test(question);
+  const asksPortfolioWebsite = /\b(portfolio|website|web site|this site|site itself|design|tech stack|technology stack|built with|pages|features)\b/i.test(question);
   const asksEverything = /\b(everything(?: about)?|complete profile|full profile|full context|entire profile|deep dive|all information|all details)\b/i.test(question);
   const ranked = allRecords.map((record) => {
     const titleTerms = new Set(terms(record.title));
@@ -190,7 +191,9 @@ export function getAssistantContext(question: string) {
                 ? broadProjectRecords
                 : asksResearch
                   ? researchRecords
-                  : ranked.filter((item) => item.score > 0).slice(0, 5).map(({ record }) => record);
+                  : asksPortfolioWebsite
+                    ? allRecords.filter((record) => record.id === "dossier-portfolio-website")
+                    : ranked.filter((item) => item.score > 0).slice(0, 5).map(({ record }) => record);
   const fallback = [
     { id: "project-ezra", score: 0 },
     { id: "book-unknowable-reality", score: 0 },
