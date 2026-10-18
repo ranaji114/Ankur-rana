@@ -59,7 +59,7 @@ export function BookPreviewModal({ book, onClose }: BookPreviewModalProps) {
           ✕
         </button>
 
-        <div style={{ display: "grid", gap: "2rem", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))" }}>
+        <div className="book-modal-content-grid" style={{ display: "grid", gap: "2rem", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))" }}>
           {/* Cover & Quick Meta */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
             <div style={{ position: "relative", maxWidth: "240px", width: "100%" }}>

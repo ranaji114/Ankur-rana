@@ -38,11 +38,13 @@ export function HomePage() {
       <BookPreviewModal book={previewBook} onClose={() => setPreviewBook(null)} />
 
       {/* ── 1. Hero Section (Cinematic Split Screen) ── */}
-      <section className="section" style={{ paddingBottom: "4rem" }}>
+      <section className="section cinema-opening" style={{ paddingBottom: "4rem" }}>
+        <div className="cinema-opening-light" aria-hidden="true" />
+        <div className="cinema-opening-frame" aria-hidden="true" />
         <div className="container-page">
           <div className="hero-split-grid">
             {/* Left Side: Context & Persona Switcher */}
-            <Reveal>
+            <Reveal className="cinema-hero-copy">
               <LiveClock />
 
               {/* Persona Switcher */}
@@ -78,7 +80,7 @@ export function HomePage() {
                   : "AI-ASSISTED DEVELOPER · PROGRAMMER · AUTHOR · RESEARCHER"}
               </p>
 
-              <h1 className="display-title mt-4" style={{ maxWidth: "680px" }}>
+              <h1 className="display-title cinema-title mt-4" style={{ maxWidth: "680px" }}>
                 {persona === "dev"
                   ? "Compilers, state machines, and building robust systems."
                   : persona === "author"
@@ -130,13 +132,17 @@ export function HomePage() {
             </Reveal>
 
             {/* Right Side: 3D Portrait Centerpiece */}
-            <Reveal delay={0.08}>
+            <Reveal delay={0.08} className="cinema-hero-portrait">
               <div style={{ maxWidth: "440px", marginInline: "auto", width: "100%" }}>
                 <PortraitCard priority={true} />
               </div>
             </Reveal>
           </div>
         </div>
+        <a className="cinema-scroll-cue" href="#work-scene" aria-label="Scroll to explore the portfolio">
+          <span>SCROLL TO EXPLORE</span>
+          <i aria-hidden="true" />
+        </a>
       </section>
 
       {/* ── 2. Infinite Luxury Marquee Ticker ── */}
@@ -144,7 +150,8 @@ export function HomePage() {
 
       {/* ── 3. Featured Projects & Live Ezra Compiler Playground ── */}
       <section
-        className="section"
+        id="work-scene"
+        className="section cinema-scene cinema-scene-work"
         style={{ borderTop: "1px solid var(--border)", background: "var(--surface)" }}
       >
         <div className="container-page">
@@ -171,7 +178,7 @@ export function HomePage() {
       </section>
 
       {/* ── 4. AI Workflow Circuit Stepper ── */}
-      <section className="section" style={{ borderTop: "1px solid var(--border)" }}>
+      <section className="section cinema-scene cinema-scene-process" style={{ borderTop: "1px solid var(--border)" }}>
         <div className="container-page">
           <Reveal>
             <p className="eyebrow">How I Build</p>
@@ -193,7 +200,7 @@ export function HomePage() {
 
       {/* ── 5. Latest Release & Books Vault Feature ── */}
       <section
-        className="section"
+        className="section cinema-scene cinema-scene-books"
         style={{ borderTop: "1px solid var(--border)", background: "var(--surface)" }}
       >
         <div className="container-page">
@@ -225,7 +232,7 @@ export function HomePage() {
       </section>
 
       {/* ── 6. Research Section ── */}
-      <section className="section" style={{ borderTop: "1px solid var(--border)" }}>
+      <section className="section cinema-scene cinema-scene-research" style={{ borderTop: "1px solid var(--border)" }}>
         <div className="container-page">
           <Reveal>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "1rem" }}>
@@ -293,7 +300,7 @@ export function HomePage() {
       </section>
 
       {/* ── 7. Quote Block ── */}
-      <section className="quote-block">
+      <section className="quote-block cinema-quote-scene">
         <div className="container-page">
           <Reveal>
             <p className="eyebrow">Core Philosophy</p>
@@ -304,7 +311,7 @@ export function HomePage() {
       </section>
 
       {/* ── 8. Final CTA ── */}
-      <section className="section" style={{ background: "var(--surface)" }}>
+      <section className="section cinema-scene cinema-scene-contact" style={{ background: "var(--surface)" }}>
         <div className="container-page">
           <Reveal>
             <div

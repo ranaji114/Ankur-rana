@@ -50,6 +50,7 @@ export function ResearchPage() {
             {researchPapers.map((paper, index) => (
               <Reveal key={paper.id} delay={index * 0.06}>
                 <article
+                  className="research-paper-card"
                   style={{
                     border: "1px solid var(--border)",
                     background: "var(--surface)",

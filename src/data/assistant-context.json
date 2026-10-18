@@ -1,0 +1,177 @@
+[
+  {
+    "id": "dossier-how-ankur-describes-his-work",
+    "title": "How Ankur describes his work",
+    "text": "The portfolio presents Ankur as someone working across software systems, books, and independent conceptual research. He builds Ezra, a readable scripting language and compiler/virtual machine in Rust, alongside real-world full-stack platforms. His writing ranges from questions about time and reality to attention, relationships, Hindi poetry, and Awadhi language and heritage.\nHis stated development stance is that AI is a collaborative development partner and intellectual accelerator, while he owns the requirements, product direction, architectural choices, understanding, testing, and final result. He describes AI as a collaborator while retaining ownership of judgment and responsibility."
+  },
+  {
+    "id": "dossier-research-and-intellectual-interests",
+    "title": "Research and intellectual interests",
+    "text": "Time: physical structure, subjective experience, historical measurement, and conceptual mystery.\nReality: models, assumptions, perception, and layers of interpretation.\nConsciousness and human perception: awareness, memory, attention, and the filters that shape what people notice and recall.\nPsychology: focus, overthinking, emotional patterns, relationship behavior, and modern life.\nPhilosophy: meaning, identity, love, discipline, culture, and human questions.\nLanguage: cultural memory and living identity, especially the preservation and teaching of Awadhi.\nPortfolio quote: “Understanding begins when we stop treating the mind, time, love, and language as separate mysteries.”"
+  },
+  {
+    "id": "dossier-how-he-works-with-ai",
+    "title": "How he works with AI",
+    "text": "The published workflow has nine steps: define an idea and success; specify testable requirements; research approaches and constraints; make architecture decisions; use AI-assisted implementation; test; debug root causes; iterate from real use and feedback; deploy and maintain. The portfolio specifically assigns architecture and responsibility to Ankur."
+  },
+  {
+    "id": "dossier-ezra",
+    "title": "Ezra",
+    "text": "A readable scripting language and developer ecosystem built in Rust. The project is explicitly positioned as a way to understand the whole language pipeline and to make a useful, readability-first toolchain.\nCurrent portfolio status: Live (as listed in the portfolio; deployment can change).\nDesign principle: Readable source and a smooth developer experience take priority over sacrificing clarity for performance.\nPipeline: Source → lexer → parser → abstract syntax tree → compiler → bytecode → stack-based virtual machine → output.\nFeatures: Lexer, parser, AST, compiler, bytecode VM, CLI, standard library, formatter, linter/static analysis, VS Code extension with syntax highlighting and LSP/error support, documentation site, and interactive browser IDE (profile README).\nReported engineering challenges: Designing an expressive but unambiguous grammar; implementing a correct bytecode compiler; getting VM control flow, functions, and closures right; delivering VS Code tooling and LSP support.\nReported learning: End-to-end language implementation, Rust ownership/type system, compiler decisions across the toolchain, and the discipline of shipping developer tools for other people.\nStack: Rust, TypeScript, Next.js, Vercel; compiler and VM implementation in Rust.\nLive documentation / site: https://ezra-programming-lang.vercel.app/\nGitHub repository: https://github.com/ranaji114/Ezra-programming-lang\nThe GitHub profile README uses some performance and implementation claims (for example opcode counts and execution time) that are not independently validated in this dossier. Those performance figures are presented in the README and have not been independently validated in this dossier."
+  },
+  {
+    "id": "dossier-shri-krishna-coaching-center",
+    "title": "Shri Krishna Coaching Center — Live in portfolio",
+    "text": "A digital platform for Shri Krishna Coaching Center, established in 2021 in Kadipur / Mudila Bazar, Sultanpur, Uttar Pradesh. It aims to make curriculum, faculty, admissions, announcements, and inquiries available online.\nVisitor experience: Public editorial portal with curriculum for Classes 6–10 and 11–12; portfolio text lists Physics, Chemistry, Mathematics, Biology, and English.\nFaculty and communication: Faculty spotlights for Krishna Sir and Priyanshu Singh Sir, schedules/notices, Google Maps coordinates, multi-step admissions, and WhatsApp inquiry.\nAdministration: An /admin management portal for admissions and inquiries. The portfolio describes double-field authentication and SHA-256 Web Crypto use; The listed client-side hashing does not by itself establish that the portal passed a full security audit.\nChallenges / learning: Authentication and cloud integration; reliable mobile form and image use on slower networks; mapping and messaging; full-stack Next.js/Supabase practice and admin ergonomics for non-technical educators.\nStack: Next.js 16.2, React 19, TypeScript, Tailwind CSS v4, Supabase, Vercel\nGitHub: https://github.com/ranaji114/Shri-Krishna-coaching-center\nLive: https://shri-krishna-coaching-center.vercel.app/"
+  },
+  {
+    "id": "dossier-maa-sarswati-digital-library",
+    "title": "Maa Sarswati Digital Library — Live in portfolio",
+    "text": "A digital study-library platform for a library in MudilaDeeh, Kadipur, Sultanpur, Uttar Pradesh. The product covers public information and owner workflows for membership, student admissions, notices, reviews, and gallery content.\nPublic features: Facilities, membership plans, photo gallery, live notices, contact enquiries, and student rating/review flow.\nAdmissions: Online registration with photo and Aadhaar document upload handled as multipart data via Multer and validation.\nAdministration: JWT-protected dashboard to approve/reject admissions, manage students, notices, reviews, gallery, and enquiries; repository/portfolio mentions rate limits, bcrypt, Zod, Helmet, and Cloudinary.\nArchitecture: React/Vite single-page frontend on Vercel → Express 5 ESM REST API on Render → Supabase PostgreSQL. The listed architecture includes JWT and bcrypt, Multer upload handling, and an admin login.\nChallenges / learning: Multipart uploads on mobile connections; CORS and trust-proxy/rate-limit configuration across hosts; mobile viewport behavior; deployment across frontend, API, and database.\nStack: React 19, Vite 7, Express 5, Node.js, Supabase PostgreSQL, Tailwind CSS, Multer, JWT, Render, Vercel\nGitHub: https://github.com/ranaji114/Ma-Sarswati-Digital-Library\nLive: https://ma-sarswati-digital-library-fronten.vercel.app"
+  },
+  {
+    "id": "dossier-vani",
+    "title": "Vani — Archived / offline in portfolio",
+    "text": "A Medium-like full-stack publishing platform for writers and writing professionals, designed around long-form writing and a reader-focused article experience.\nFeatures: Registration/login, author profiles, focused editor, draft/preview/edit/publish workflow, article pages, and article/author/tag content model.\nArchitecture: React frontend, Express/Node REST API, JWT authentication middleware, MongoDB article and author store.\nChallenges / learning: Content-model design beyond a prototype; authentication and user-owned content; end-to-end full-stack product development.\nStack: React, Node.js, Express, MongoDB, JavaScript\nGitHub: https://github.com/ranaji114/Vani-is-for-the-writing-professionals\nRecord boundaries: Portfolio says archived and offline. Current deployment was not established."
+  },
+  {
+    "id": "dossier-al-farooq",
+    "title": "Al-Farooq — Archived in portfolio",
+    "text": "An institutional school portal paired with an administration system, intended to let school staff update common site content without requiring a developer for every change.\nPublic experience: 11 pages listed: Home, About, Academics, Admissions, Gallery, Infrastructure, Staff, Notices, Contact, SMC, and Mandatory Disclosure.\nAdmin modules: Dashboard, Admissions Manager, Gallery Manager, Hero Manager, Notices Manager, and Staff Manager are listed across portfolio and profile sources.\nDesign / architecture: Separate public and admin routing/layouts with reusable dialogs, sheets, tooltips, toasts, sidebars, forms, tables, and tabs; mobile-aware layouts and scroll reveals are listed.\nChallenges / learning: Public/admin separation, accessible lightweight tools for school staff, organizing many institutional pages, reusable UI primitives, and maintainable content management.\nStack: React, TypeScript, Vite, Tailwind CSS, Radix UI\nGitHub: https://github.com/ranaji114/alfarooq\nALL PUBLIC GITHUB REPOSITORIES"
+  },
+  {
+    "id": "dossier-repository-inventory",
+    "title": "Repository inventory",
+    "text": "The dossier reports 11 public repositories on Ankur's GitHub profile in the 18 October 2026 snapshot. Because the dossier's featured projects and repository inventory may overlap, the exact current count should be checked on GitHub before quoting."
+  },
+  {
+    "id": "dossier-arrow-escape",
+    "title": "Arrow Escape — Public GitHub repository",
+    "text": "A single-player, score-focused grid puzzle game: tap arrows to clear them from a board when their corridor is unobstructed.\nGameplay: README describes 500 pregenerated, deterministic, verified-solvable levels across Normal, Boss, and God variants; directional deflector dots, paired arrows, shape silhouettes, lives, star ratings, timers, and zoom/pan.\nPresentation / extras: Dark and light palette; README lists audio, animation, local preferences, and AdMob/Unity integrations.\nStack: Dart, Flutter, Flame, Flame Audio, Provider, Flutter Animate, SharedPreferences\nGitHub: https://github.com/ranaji114/Arrow-Escape\nThe README describes intended gameplay; current store publication and maintenance status were not established in this snapshot."
+  },
+  {
+    "id": "dossier-treklog-repository-trying-devin-ai",
+    "title": "TrekLog (repository: trying-devin-ai-) — Public GitHub repository",
+    "text": "A travel logging and route-discovery product where travelers document a journey with routes, stops, stories, and photos, then share trips for others to discover, follow, or save.\nMain flows: Home and exploration/search; trip detail with route map, timeline, photos, tips, and save; authenticated trip creation; traveler profile/map; saved trips; sign-in.\nMapping / data: MapLibre GL and OpenStreetMap for maps; Supabase Auth, Postgres, and Storage per repository README.\nStack: Next.js 14 App Router, TypeScript, Tailwind CSS, Supabase, MapLibre GL, OpenStreetMap\nGitHub: https://github.com/ranaji114/trying-devin-ai-\nThe repository name is trying-devin-ai-; its README product title is TrekLog."
+  },
+  {
+    "id": "dossier-careerfolio",
+    "title": "Careerfolio — Public GitHub repository",
+    "text": "A no-code website/resume builder; the repository description says it is for people who want to make a website and resume without coding.\nKnown implementation clues: Repository contains a Vite/React app and Supabase; package metadata lists React Router, editable content, Framer Motion, drag-and-drop via dnd-kit, and DOMPurify.\nStack: JavaScript, Vite, React, Supabase, Framer Motion, dnd-kit\nGitHub: https://github.com/ranaji114/careerfolio\nNo README or detailed public product specification was found, so features beyond the repository description remain unconfirmed."
+  },
+  {
+    "id": "dossier-ankur-rana-books-website",
+    "title": "Ankur-rana books website — Public GitHub repository",
+    "text": "Repository description: Ankur's books website. Its GitHub site field points to for-the-books.vercel.app; the primary portfolio is separately ankur-rana.vercel.app.\nKnown: TypeScript repository for the book-site experience. The current checked-out portfolio source contains the book catalogue and biography data used in this dossier.\nStack: TypeScript (repo metadata); portfolio source also uses React / Next.js\nGitHub: https://github.com/ranaji114/Ankur-rana\nLive: https://for-the-books.vercel.app\nThe connection between this domain and the primary portfolio domain was not verified in this snapshot."
+  },
+  {
+    "id": "dossier-leetcode-solutions",
+    "title": "LeetCode solutions — Public GitHub repository",
+    "text": "A C++ DSA practice repository with explanations. The visible repository README/file snapshot showed Set Mismatch (LeetCode 645, Easy).\nKnown solution: Find the duplicate and missing values using a frequency array; README reports O(n) time and O(n) auxiliary space and an accepted run (49/49 at the time captured).\nStack: C++\nGitHub: https://github.com/ranaji114/leetcode-solutions\nThe description says solutions in the plural, but only one detailed solution was visible in the inspected source snapshot."
+  },
+  {
+    "id": "dossier-portfolio-older-github-repository",
+    "title": "Portfolio (older GitHub repository) — Public GitHub repository",
+    "text": "The repository description calls it a portfolio. The public repository showed a stock React + TypeScript + Vite starter README and two commits in the inspected snapshot.\nKnown: This is distinct from the current primary portfolio link Ankur provided: ankur-rana.vercel.app.\nStack: TypeScript, React, Vite (repository metadata / README)\nGitHub: https://github.com/ranaji114/portfolio\nThis repository is separate from the current deployed portfolio and its starter README does not describe the deployed site."
+  },
+  {
+    "id": "dossier-profile-repository",
+    "title": "Profile repository",
+    "text": "The ranaji114 repository hosts Ankur's GitHub profile README rather than a standalone software product. It presents four areas of work: systems/compilers, full-stack platforms, seven books, and two independent research papers. It lists India, Rust/TypeScript/Next.js/React/Supabase among core technologies, and frames AI as a pairing accelerator while Ankur retains architectural ownership. Some high-level labels in that README (such as ‘systems architect’ or ‘mastered’) are self-presentation, not independently verified credentials.\nGitHub profile README: https://github.com/ranaji114/ranaji114\nBOOKS · DETAILED CATALOGUE"
+  },
+  {
+    "id": "dossier-seven-titles-and-their-public-catalogue-descriptions",
+    "title": "Seven titles and their public catalogue descriptions",
+    "text": "The following entries preserve the portfolio's titles, subtitles, positioning, summaries, themes, suggested reader fit, related-title links, and Amazon links. They summarize public catalogue copy; they are not substitutes for the manuscripts, and no full book text was available in the sources inspected."
+  },
+  {
+    "id": "dossier-the-unknowable-reality",
+    "title": "The Unknowable Reality",
+    "text": "Subtitle: The Evolution of Intelligence, Knowledge, and the Limits of Understanding\nCategory / reading style: Science and Philosophy · Deep read\nCore premise: Why intelligence—human or artificial—may never fully grasp the reality it inhabits.\nExamines the co-evolution of intelligence and knowledge across biology, science, philosophy, and AI. Its central proposition is that limits of understanding may be structural features of a mind modelling a reality larger than itself, rather than temporary gaps that more information alone will remove.\nThemes: Intelligence; knowledge; epistemology; philosophy of mind.\nWhy a reader might choose it: Readers interested in boundaries of intelligence; connections between cognitive science, philosophy of science, and AI; and challenges to the idea that more information guarantees deeper understanding.\nRelated titles in the portfolio: The Architecture of Existence; The World Through Our Mind; The Attention Asset\nMetadata: Listed as latest title; publication date 30 July 2026; 169 pages; English.\nAmazon: https://amzn.in/d/06YNVlNC"
+  },
+  {
+    "id": "dossier-the-architecture-of-existence",
+    "title": "The Architecture of Existence",
+    "text": "Subtitle: The Biography of Time\nCategory / reading style: Science and Philosophy · Deep read\nCore premise: A sweeping journey through the question: what is time?\nMoves from ancient shadow clocks and sacred calendars to Einstein, black holes, quantum mechanics, multiverses, and loop quantum gravity. It frames time as scientific mystery and philosophical biography, connecting memory, causality, entropy, relativity, and the possibility that time is real but not fundamental.\nThemes: Time; physics; cosmology; metaphysics.\nWhy a reader might choose it: A flagship, ambitious work for readers who want the history and science of time without heavy mathematics, joining civilizations, paradoxes, and modern physics in one readable arc.\nRelated titles in the portfolio: The World Through Our Mind; The Attention Asset; Learn Awadhi\nMetadata: Publication date, page count, and language were not supplied in the portfolio data captured.\nAmazon: https://www.amazon.in/dp/B0H3CD8QZ6"
+  },
+  {
+    "id": "dossier-the-attention-asset",
+    "title": "The Attention Asset",
+    "text": "Subtitle: Protect Your Focus, Reclaim Your Time, and Win Back Your Mind\nCategory / reading style: Self-Growth and Focus · Accessible\nCore premise: A practical response to attention being fragmented by distraction.\nA clear, compassionate guide to reclaiming attention without anti-technology absolutism. The catalogue description highlights environmental design, digital-reset rituals, low-distraction workspaces, screen-free rest, social boundaries, and relapse recovery.\nThemes: Attention; focus; digital minimalism; self-discipline.\nWhy a reader might choose it: Students, professionals, creators, and others overwhelmed by notifications; readers who want a durable reset approach and think of attention as a life asset.\nRelated titles in the portfolio: The World Through Our Mind; The Architecture of Existence; Long Distance Love Blueprint\nMetadata: Publication year listed as 2026 in the portfolio timeline.\nAmazon: https://www.amazon.in/dp/B0GX2XL7BN"
+  },
+  {
+    "id": "dossier-learn-awadhi",
+    "title": "Learn Awadhi",
+    "text": "Subtitle: A Complete Guide: Hindi/English → Awadhi (Basic to Advanced)\nCategory / reading style: Language and Culture · Structured learning\nCore premise: A bridge into Awadhi language, expression, culture, and living speech.\nThe portfolio describes Ankur as a native Awadhi speaker and positions the book as preserving and modernizing Awadhi learning for Hindi and English speakers. It covers pronunciation, grammar, daily conversation, idioms, storytelling, exercises, quizzes, speaking challenges, and a 2,000+ word Hindi–Awadhi–English dictionary.\nThemes: Awadhi; language learning; culture; heritage.\nWhy a reader might choose it: Learners seeking conversational Awadhi through grammar, vocabulary, cultural expression, exercises, and speaking practice.\nRelated titles in the portfolio: The Architecture of Existence; Tumhare Baad....; The World Through Our Mind\nMetadata: Publication year listed as 2025 in the portfolio timeline. The author's native-speaker description is sourced from portfolio copy.\nAmazon: https://www.amazon.in/dp/B0DKNGWBCN"
+  },
+  {
+    "id": "dossier-the-world-through-our-mind",
+    "title": "The World Through Our Mind",
+    "text": "Subtitle: How Our Mind Shapes the Reality We Live In\nCategory / reading style: Mind and Consciousness · Accessible deep read\nCore premise: An exploration of how the mind turns reality into personal experience.\nExamines perception, memory, belief, morality, consciousness, identity, free will, and meaning. It asks why people do not encounter reality directly and how the brain edits the world into a private version of truth.\nThemes: Mind; perception; consciousness; reality.\nWhy a reader might choose it: An entry point for psychology, philosophy, and self-understanding; abstract questions are framed in clear and emotionally relevant terms.\nRelated titles in the portfolio: The Architecture of Existence; The Attention Asset; Long Distance Love Blueprint\nMetadata: Publication year listed as 2025 in the portfolio timeline.\nAmazon: https://www.amazon.in/dp/B0G3CLWDHC"
+  },
+  {
+    "id": "dossier-long-distance-love-blueprint",
+    "title": "Long Distance Love Blueprint",
+    "text": "Subtitle: How to Stay Connected, Build Trust, Overcome Overthinking, and Make Your Relationship Last\nCategory / reading style: Relationships · Accessible\nCore premise: Practical emotional guidance for couples navigating distance, doubt, and overthinking.\nFrames long-distance love as a skill and covers emotional connection, communication, trust, jealousy, anxiety, overthinking, keeping the spark alive, planning a future, and closing the distance.\nThemes: Long-distance love; trust; communication; emotional clarity.\nWhy a reader might choose it: Couples facing uncertainty or emotional exhaustion; readers seeking usable language about trust, jealousy, overthinking, and communication.\nRelated titles in the portfolio: Tumhare Baad....; The Attention Asset; The World Through Our Mind\nMetadata: Publication year listed as 2026 in the portfolio timeline.\nAmazon: https://www.amazon.in/dp/B0GZJQLR51"
+  },
+  {
+    "id": "dossier-tumhare-baad",
+    "title": "Tumhare Baad....",
+    "text": "Subtitle: एक अधूरी मोहब्बत की कविताएँ\nCategory / reading style: Hindi Poetry · Emotional read\nCore premise: A Hindi poetry collection for people carrying the silence someone left behind.\nGives voice to unfinished love, loneliness, waiting, broken dreams, unanswered questions, and the gradual return to oneself. The catalogue presents heartbreak as something readers may recognize in their own memories.\nThemes: Heartbreak; Hindi poetry; unfinished love; healing.\nWhy a reader might choose it: Readers who connect with love, loss, memory, and quiet grief; it expresses the emotional interior of absence and recovery.\nRelated titles in the portfolio: Long Distance Love Blueprint; The World Through Our Mind; Learn Awadhi\nMetadata: Publication year listed as 2026 in the portfolio timeline.\nAmazon: https://www.amazon.in/dp/B0H395X6R7\nRESEARCH, SKILLS, AND CONTACT"
+  },
+  {
+    "id": "dossier-independent-research-papers",
+    "title": "Independent research papers",
+    "text": "The portfolio lists two Zenodo works. Their titles and descriptions indicate conceptual research. They are conceptual proposals by Ankur; peer-reviewed consensus or experimental validation was not established in this dossier."
+  },
+  {
+    "id": "dossier-a-unified-connectivity-hypothesis-for-the-origin-of-quantum-entanglement",
+    "title": "A Unified Connectivity Hypothesis for the Origin of Quantum Entanglement",
+    "text": "Proposes that entangled particles might not be fundamentally separate entities, but distinct manifestations of a single underlying quantum object, with spatial separation emerging at a higher layer of reality.\nZenodo record: https://zenodo.org/records/16827645"
+  },
+  {
+    "id": "dossier-temporal-layers-exploring-the-divergence-between-human-perception-and-physical-time",
+    "title": "Temporal Layers: Exploring the Divergence Between Human Perception and Physical Time",
+    "text": "Explores whether consciousness experiences time differently from physical reality and whether subjective and objective temporal layers may coexist under different principles.\nZenodo record: https://zenodo.org/records/17274810"
+  },
+  {
+    "id": "dossier-tools-and-technologies-listed-by-the-portfolio",
+    "title": "Tools and technologies listed by the portfolio",
+    "text": "These are technologies listed across public profiles and repositories; that list does not assign an equal proficiency level to every item. A technology appearing in the list does not establish mastery."
+  },
+  {
+    "id": "dossier-public-contact-and-profiles",
+    "title": "Public contact and profiles",
+    "text": "Primary portfolio: https://ankur-rana.vercel.app/\nBooks website link from GitHub repository metadata: https://for-the-books.vercel.app\nGitHub: https://github.com/ranaji114\nLinkedIn: https://www.linkedin.com/in/ankur-rana-45b522312/\nInstagram: https://www.instagram.com/ankur_rana_official/\nPublic Instagram bio: 🜏 Unordained. 𓂀 Beyond cognition. 🧬 Consensus is noise. ⚚ Consequences unseen. ☽ Self-authored. ⛧ Unreachable.\nFacebook: https://www.facebook.com/ankurkumar.kumar.39982\nAmazon author search: https://www.amazon.in/s?k=Ankur+Rana&i=digital-text\nEmail: ranaankur442@gmail.com\nPhone/mobile and WhatsApp: +91 78805 84361 (confirmed by Ankur)"
+  },
+  {
+    "id": "dossier-quick-context",
+    "title": "Quick profile facts",
+    "text": "Public-source snapshot from 18 October 2026; counts and deployment status may change.\nQUICK CONTEXT | CURRENT RECORD\nName / location | Ankur Rana · India\nProfessional identity | AI-assisted developer, programmer, author, independent researcher\nPublic body of work | 11 public GitHub repositories · 7 book listings · 2 Zenodo papers · 5 portfolio case studies\nPortfolio | ankur-rana.vercel.app\nRecord prepared | 18 October 2026 · public-source snapshot; status and counts may change"
+  },
+  {
+    "id": "dossier-recurring-themes",
+    "title": "Recurring themes in Ankur’s work",
+    "text": "THREAD | HOW IT APPEARS\nSystems and structure | Compiler pipelines, virtual machines, web platform architecture, and questions about the structure of time and reality.\nMaking difficult things legible | Readable language design, accessible explanations of science and philosophy, structured guides, and clear user-facing flows.\nHuman experience | Perception, attention, consciousness, trust, overthinking, love, memory, and emotional recovery.\nLanguage and continuity | Awadhi learning and cultural preservation, Hindi poetry, and interest in how language carries identity.\nUseful work | Software for actual local institutions and practical books for readers dealing with everyday concerns."
+  },
+  {
+    "id": "dossier-technology-list",
+    "title": "Technology list and proficiency caveat",
+    "text": "Technologies are listed across public sources; this does not mean equal proficiency or mastery of every tool.\nAREA | LISTED TECHNOLOGIES\nLanguages | Python, JavaScript, TypeScript, C++, Rust, Java, HTML, CSS\nWeb / UI | React, Next.js, Vite, Tailwind CSS, Radix UI, Framer Motion (across repo/profile sources)\nBackend / data | Node.js, Express, MongoDB, Firebase, Supabase / PostgreSQL, Cloudinary\nSystems / tooling | Compiler pipeline, bytecode VM, CLI, VS Code syntax/LSP, Git, GitHub\nDeployment | Vercel, Render"
+  },
+  {
+    "id": "dossier-education",
+    "title": "Education and academic background",
+    "text": "Ankur Rana's educational background, as provided by Ankur:\nClass 10 / secondary: Ram Yash Maurya Memorial Siddharth Shiksha Niketan Inter College, Khalishpur Mubarak; Uttar Pradesh Madhyamik Shiksha Parishad (UPMSP); completed 2022; 76%.\nClass 12 / senior secondary: Ram Yash Maurya Memorial Siddharth Shiksha Niketan Inter College, Khalishpur Mubarak; Uttar Pradesh Madhyamik Shiksha Parishad (UPMSP); completed 2024; 65%.\nBachelor of Computer Applications (BCA): pursuing at Shri Vishwanath Post Graduate College, Kalan, Sultanpur, Uttar Pradesh, India; affiliated with Dr. Ram Manohar Lohia Avadh University (RMLAU), Ayodhya, Uttar Pradesh. Current academic status provided: 5th semester. A CGPA of 8.1/10 was previously reported by Ankur; its date/current validity was not specified, so describe it as previously reported rather than a confirmed current CGPA.\nField of study: computer applications, software development, programming, data structures and algorithms, and computer science fundamentals.\nAcademic interests and learning areas: C++, DSA, Python, Java, HTML, CSS, JavaScript, React, Next.js, Node.js, backend development, MongoDB, Firebase, Supabase, artificial intelligence, machine learning, problem-solving, and interview preparation. These are learning/practice areas; do not imply equal proficiency or mastery.\nLearning approach: combines theory, hands-on coding, projects, and problem-solving to strengthen fundamentals and prepare for internships and entry-level software development opportunities.\nCareer direction: aims to build a technology career, particularly in software development and AI/ML, while continuing BCA studies and developing industry-relevant skills."
+  },
+  {
+    "id": "dossier-hometown",
+    "title": "Hometown and village location",
+    "text": "Ankur Rana provided this hometown/location information: Village: Vari. Block: Kadipur. District: Sultanpur. State: Uttar Pradesh. Country: India. Use these details when visitors ask where Ankur is from or where his village is. This is a village-level location, not a house number or street address. Do not confuse it with his college location or claim more precise address details."
+  },
+  {
+    "id": "dossier-contact-details",
+    "title": "Contact details for Ankur Rana",
+    "text": "Contact details Ankur Rana confirmed for the portfolio AI to share when visitors ask how to contact him: Email: ranaankur442@gmail.com. Phone/mobile: +91 78805 84361. WhatsApp: +91 78805 84361; Ankur confirmed this is the same WhatsApp number."
+  }
+]

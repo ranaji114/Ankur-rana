@@ -40,7 +40,7 @@ export const author = {
     },
     {
       label: "Instagram",
-      href: "https://www.instagram.com/its_my_dark_world/",
+      href: "https://www.instagram.com/ankur_rana_official/",
       platform: "instagram",
     },
     {

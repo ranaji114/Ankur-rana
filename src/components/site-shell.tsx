@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useSyncExternalStore } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { author } from "@/data/content";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { AmbientBackground } from "@/components/ambient-background";
 import { CommandPalette } from "@/components/command-palette";
 import { ScrollProgress } from "@/components/scroll-progress";
+import { PortfolioAssistant } from "@/components/portfolio-assistant";
 import { sound } from "@/lib/audio-haptics";
 
 const navItems = [
@@ -49,6 +51,7 @@ type SiteShellProps = {
 
 export function SiteShell({ children }: SiteShellProps) {
   const pathname = usePathname();
+  const reduceMotion = useReducedMotion();
   const [open, setOpen] = useState(false);
   const [cmdOpen, setCmdOpen] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -143,6 +146,7 @@ export function SiteShell({ children }: SiteShellProps) {
             <button
               type="button"
               className="cmd-trigger-btn"
+              aria-label="Search and actions"
               onClick={() => {
                 sound.play("pop");
                 setCmdOpen(true);
@@ -187,9 +191,24 @@ export function SiteShell({ children }: SiteShellProps) {
         </div>
 
         {/* ── Ultra-Luxury Full-Screen Mobile Glass Sheet ── */}
-        {open && (
-          <div className="mobile-sheet-overlay" role="dialog" aria-modal="true">
-            <div className="container-page mobile-sheet-content">
+        <AnimatePresence initial={false}>
+          {open && (
+            <motion.div
+              className="mobile-sheet-overlay"
+              role="dialog"
+              aria-modal="true"
+              initial={reduceMotion ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: reduceMotion ? 0 : 0.2, ease: "easeOut" }}
+            >
+              <motion.div
+                className="container-page mobile-sheet-content"
+                initial={reduceMotion ? false : { opacity: 0, y: 18, scale: 0.985 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={reduceMotion ? undefined : { opacity: 0, y: 10, scale: 0.99 }}
+                transition={{ duration: reduceMotion ? 0 : 0.32, ease: [0.22, 1, 0.36, 1] }}
+              >
               <p className="eyebrow" style={{ color: "var(--accent)" }}>Navigation</p>
               
               <div className="mobile-links-list">
@@ -248,12 +267,23 @@ export function SiteShell({ children }: SiteShellProps) {
                   </a>
                 )}
               </div>
-            </div>
-          </div>
-        )}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
-      <main>{children}</main>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.main
+          key={pathname}
+          initial={reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(5px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          exit={reduceMotion ? undefined : { opacity: 0, y: -8, filter: "blur(3px)" }}
+          transition={{ duration: reduceMotion ? 0 : 0.42, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {children}
+        </motion.main>
+      </AnimatePresence>
 
       <footer className="footer">
         <div className="container-page footer-grid">
@@ -293,6 +323,8 @@ export function SiteShell({ children }: SiteShellProps) {
           <p>Building software, exploring ideas, and turning curiosity into working products.</p>
         </div>
       </footer>
+
+      <PortfolioAssistant />
     </div>
   );
 }

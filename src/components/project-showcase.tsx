@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
 import { Project, projects } from "@/data/content";
 import { StatusBadge } from "@/components/status-badge";
 import { EzraPlayground } from "@/components/ezra-playground";
@@ -293,13 +294,19 @@ function ProjectVisualPreview({ project }: { project: Project }) {
 }
 
 export function ProjectShowcase() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <div className="project-showcase-container">
-      {projects.map((project) => (
-        <article
+      {projects.map((project, index) => (
+        <motion.article
           key={project.id}
           id={`showcase-${project.slug}`}
           className="project-showcase-item"
+          initial={reduceMotion ? false : { opacity: 0, y: 32, scale: 0.99 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.12, margin: "0px 0px -56px 0px" }}
+          transition={{ duration: 0.7, delay: (index % 2) * 0.07, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="showcase-split-grid">
             {/* Left Column: Project Details & Story */}
@@ -381,7 +388,7 @@ export function ProjectShowcase() {
               <ProjectVisualPreview project={project} />
             </div>
           </div>
-        </article>
+        </motion.article>
       ))}
     </div>
   );
