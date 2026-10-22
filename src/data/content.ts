@@ -12,7 +12,7 @@ export const author = {
   githubUrl: "https://github.com/ranaji114",
   linkedinUrl: "https://www.linkedin.com/in/ankur-rana-45b522312/",
   amazonAuthorUrl: "https://www.amazon.in/s?k=Ankur+Rana&i=digital-text&ref=nb_sb_noss",
-  portrait: "/assets/author/author-photo.jpeg",
+  portrait: "/assets/author/portrait-ankur.jpeg",
   location: "India",
   tagline: "Building software, exploring ideas, and turning curiosity into working products.",
   shortBio:
