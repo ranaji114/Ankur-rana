@@ -334,22 +334,22 @@ export const publicationTimeline = [
     note: "A clear study of perception, consciousness, belief, meaning, and reality.",
   },
   {
-    year: "2026",
+    year: "2025",
     title: "The Attention Asset",
     note: "A practical framework for reclaiming focus in a distracted world.",
   },
   {
-    year: "2026",
+    year: "2025",
     title: "Long Distance Love Blueprint",
     note: "A direct guide to connection, trust, overthinking, and emotional stability.",
   },
   {
-    year: "2026",
+    year: "2025",
     title: "The Architecture of Existence",
     note: "A large-scale inquiry into time across history, physics, and philosophy.",
   },
   {
-    year: "2026",
+    year: "2025",
     title: "Tumhare Baad....",
     note: "A Hindi poetry collection about unfinished love, heartbreak, and return to self.",
   },

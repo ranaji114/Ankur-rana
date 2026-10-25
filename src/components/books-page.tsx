@@ -6,6 +6,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { SiteShell } from "@/components/site-shell";
 import { BookVaultCard } from "@/components/book-vault-card";
 import { BookPreviewModal } from "@/components/book-preview-modal";
+import { VirtualBookshelf } from "@/components/virtual-bookshelf";
 import { PageHeroVisual } from "@/components/page-hero-visual";
 import { sound } from "@/lib/audio-haptics";
 import { author, books, categories, readingPaths, Book } from "@/data/content";
@@ -50,8 +51,12 @@ export function BooksPage() {
 
   return (
     <SiteShell>
-      {/* Interactive Quick Preview Modal */}
-      <BookPreviewModal book={previewBook} onClose={() => setPreviewBook(null)} />
+      {/* Interactive Luxury Reading Sanctuary Modal */}
+      <BookPreviewModal
+        book={previewBook}
+        onClose={() => setPreviewBook(null)}
+        onSelectBook={(b) => setPreviewBook(b)}
+      />
 
       {/* ── Page Hero ── */}
       <section className="page-hero">
@@ -65,6 +70,18 @@ export function BooksPage() {
             </p>
           </Reveal>
           <PageHeroVisual variant="books" />
+        </div>
+      </section>
+
+      {/* ── The Virtual Bookshelf Experience ── */}
+      <section className="section" style={{ borderBottom: "1px solid var(--border)", background: "var(--surface)" }}>
+        <div className="container-page">
+          <Reveal direction="up" distance={30}>
+            <VirtualBookshelf
+              onSelectBook={(b) => setPreviewBook(b)}
+              selectedBookId={previewBook?.id}
+            />
+          </Reveal>
         </div>
       </section>
 

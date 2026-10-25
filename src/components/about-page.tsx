@@ -8,18 +8,16 @@ import { WorkflowCircuit } from "@/components/workflow-circuit";
 import { sound } from "@/lib/audio-haptics";
 import {
   author,
-  publicationTimeline,
-  researchTopics,
   skillCategories,
 } from "@/data/content";
 
 export function AboutPage() {
   return (
     <SiteShell>
-      {/* ── Page Hero with 3D Portrait ── */}
+      {/* ── 1. Page Hero with 3D Portrait ── */}
       <section className="page-hero">
         <div className="container-page split-grid">
-          <Reveal>
+          <Reveal direction="left" distance={40}>
             <p className="eyebrow">My Story &amp; Philosophy</p>
             <h1 className="page-title mt-5">
               I like building things I don&apos;t fully understand yet.
@@ -42,23 +40,23 @@ export function AboutPage() {
           </Reveal>
 
           {/* 3D Glassmorphic Portrait Frame with Live Badges & Signature */}
-          <Reveal delay={0.08}>
+          <Reveal delay={0.08} direction="right" distance={40}>
             <PortraitCard priority={true} />
           </Reveal>
         </div>
       </section>
 
-      {/* ── Skills & Technologies ── */}
-      <section className="section" style={{ borderBottom: "1px solid var(--border)" }}>
+      {/* ── 2. Skills & Engineering Stack ── */}
+      <section className="section" style={{ borderBottom: "1px solid var(--border)", background: "var(--surface)" }}>
         <div className="container-page">
-          <Reveal>
+          <Reveal direction="left">
             <p className="eyebrow">Engineering Stack</p>
             <h2 className="section-title mt-4">Technologies I build with.</h2>
             <p className="body-large mt-4" style={{ maxWidth: "620px" }}>
               These are tools and systems I have actually built with from first principles — no inflated claims.
             </p>
           </Reveal>
-          <div className="skills-grid">
+          <div className="skills-grid mt-10">
             {skillCategories.map((group, i) => (
               <Reveal key={group.label} delay={i * 0.04} direction={i % 2 === 0 ? "left" : "right"} distance={28}>
                 <div className="skill-group">
@@ -75,13 +73,13 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* ── Development Identity & Interactive AI Workflow ── */}
+      {/* ── 3. Development Identity & Interactive AI Workflow ── */}
       <section
         className="section"
-        style={{ borderBottom: "1px solid var(--border)", background: "var(--surface)" }}
+        style={{ borderBottom: "1px solid var(--border)" }}
       >
         <div className="container-page">
-          <Reveal>
+          <Reveal direction="left">
             <p className="eyebrow">How I Work with AI</p>
             <h2 className="section-title mt-4" style={{ maxWidth: "640px" }}>
               AI as an engineering partner, not a replacement for my thinking.
@@ -95,81 +93,18 @@ export function AboutPage() {
           </Reveal>
 
           {/* 9-Step Interactive Workflow Circuit */}
-          <Reveal delay={0.06}>
-            <div style={{ marginTop: "2rem" }}>
+          <Reveal delay={0.06} direction="up" distance={30}>
+            <div style={{ marginTop: "2.5rem" }}>
               <WorkflowCircuit />
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ── Literary & Conceptual Work ── */}
-      <section
-        className="section"
-        style={{ borderBottom: "1px solid var(--border)", background: "var(--surface)" }}
-      >
-        <div className="container-page split-grid">
-          <Reveal>
-            <p className="eyebrow">My Books &amp; Inquiries</p>
-            <h2 className="section-title mt-4">Writing in clear, human language.</h2>
-            <p className="body-large mt-5">{author.philosophy}</p>
-            <div className="about-cta-row">
-              <Link className="button-secondary" href="/books" onClick={() => sound.play("click")}>View My 7 Books</Link>
-              <Link className="button-secondary" href="/research" onClick={() => sound.play("click")}>My Zenodo Papers</Link>
-            </div>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <div className="surface-card" style={{ padding: "1.75rem" }}>
-              <p className="detail-title" style={{ marginBottom: "0.75rem" }}>Questions I Explore</p>
-              <div style={{ display: "grid", gap: "0.5rem" }}>
-                {researchTopics.map((topic) => (
-                  <p key={topic.title} className="list-line"><b>{topic.title}</b> — {topic.description}</p>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ── Publication Timeline ── */}
-      <section className="section" style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="container-page">
-          <Reveal>
-            <p className="eyebrow">My Publication Journey</p>
-            <h2 className="section-title mt-4" style={{ maxWidth: "640px" }}>
-              Works spanning mind, time, attention, language, relationships, and poetry.
-            </h2>
-          </Reveal>
-          <div className="timeline mt-12">
-            {publicationTimeline.map((item) => (
-              <Reveal key={`${item.year}-${item.title}`} direction="left" distance={30}>
-                <article className="timeline-item">
-                  <p className="eyebrow">{item.year}</p>
-                  <div>
-                    <h3
-                      style={{
-                        fontFamily: "var(--font-display), Georgia, serif",
-                        fontSize: "clamp(1.4rem, 2vw, 1.85rem)",
-                        fontWeight: 700,
-                        lineHeight: 1.15,
-                        letterSpacing: "-0.015em",
-                      }}
-                    >
-                      {item.title}
-                    </h3>
-                    <p className="body-copy mt-2">{item.note}</p>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Personal Quote Block ── */}
+      {/* ── 4. Personal Quote Block ── */}
       <section className="quote-block">
         <div className="container-page">
-          <Reveal>
+          <Reveal direction="scale">
             <p className="eyebrow">My Core Conviction</p>
             <blockquote className="quote-text mt-6">{author.quote}</blockquote>
             <p className="body-copy mt-4" style={{ fontWeight: 600 }}>— Ankur Rana</p>
@@ -177,10 +112,10 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* ── End Strip ── */}
+      {/* ── 5. End Strip ── */}
       <div className="work-end-strip" style={{ borderTop: "1px solid var(--border)" }}>
         <div className="container-page">
-          <Reveal>
+          <Reveal direction="up" distance={25}>
             <div
               style={{
                 display: "flex",

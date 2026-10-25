@@ -7,6 +7,7 @@ import { SiteShell } from "@/components/site-shell";
 import { PortraitCard } from "@/components/portrait-card";
 import { BookVaultCard } from "@/components/book-vault-card";
 import { BookPreviewModal } from "@/components/book-preview-modal";
+import { VirtualBookshelf } from "@/components/virtual-bookshelf";
 import { WorkflowCircuit } from "@/components/workflow-circuit";
 import { LiveClock } from "@/components/live-clock";
 import { TickerStrip } from "@/components/ticker-strip";
@@ -172,7 +173,7 @@ export function HomePage() {
   return (
     <SiteShell>
       {/* Book Quick Preview Modal */}
-      <BookPreviewModal book={previewBook} onClose={() => setPreviewBook(null)} />
+      <BookPreviewModal book={previewBook} onClose={() => setPreviewBook(null)} onSelectBook={(b) => setPreviewBook(b)} />
 
       {/* ── 1. Hero Section (Cinematic Split Screen) ── */}
       <section className="section cinema-opening" style={{ paddingBottom: "4rem" }}>
@@ -331,24 +332,24 @@ export function HomePage() {
           <Reveal direction="left" distance={35}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "1rem" }}>
               <div>
-                <p className="eyebrow">Latest Release — July 2026</p>
-                <h2 className="section-title mt-3">The newest published title.</h2>
-                <p className="body-large mt-3" style={{ maxWidth: "560px" }}>
-                  A total of 7 published titles spanning reality, time, attention, relationships, and language.
+                <p className="eyebrow">The Complete Catalog · 7 Volumes</p>
+                <h2 className="section-title mt-3">The Physical Bookshelf &amp; Vault</h2>
+                <p className="body-large mt-3" style={{ maxWidth: "600px" }}>
+                  Seven published titles spanning reality, time, attention, relationships, and language. Hover any volume to inspect; pull to enter the reading sanctuary.
                 </p>
               </div>
               <Link className="button-secondary" href="/books" onClick={() => sound.play("click")}>
-                Explore All 7 Books Catalog →
+                Explore Full Books Vault →
               </Link>
             </div>
           </Reveal>
 
-          {/* Latest Book Detailed Card */}
-          <Reveal delay={0.06} direction="right" distance={45}>
-            <div style={{ marginTop: "2.5rem", maxWidth: "900px" }}>
-              <BookVaultCard
-                book={latestBook}
-                onPreview={(b) => setPreviewBook(b)}
+          {/* Virtual Bookshelf on Home Page */}
+          <Reveal delay={0.06} direction="up" distance={30}>
+            <div style={{ marginTop: "2rem" }}>
+              <VirtualBookshelf
+                onSelectBook={(b) => setPreviewBook(b)}
+                selectedBookId={previewBook?.id}
               />
             </div>
           </Reveal>
