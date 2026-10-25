@@ -83,6 +83,7 @@ export function PortraitCard({ priority = false }: { priority?: boolean }) {
             height={760}
             className="portrait-image"
             priority={priority}
+            loading={priority ? "eager" : undefined}
             sizes="(max-width: 920px) 100vw, 520px"
           />
 
