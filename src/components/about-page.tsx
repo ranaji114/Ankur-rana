@@ -5,6 +5,7 @@ import { Reveal } from "@/components/reveal";
 import { SiteShell } from "@/components/site-shell";
 import { PortraitCard } from "@/components/portrait-card";
 import { WorkflowCircuit } from "@/components/workflow-circuit";
+import { WorksTimeline } from "@/components/works-timeline";
 import { sound } from "@/lib/audio-haptics";
 import {
   author,
@@ -46,7 +47,16 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* ── 2. Skills & Engineering Stack ── */}
+      {/* ── 2. Full Timeline of Projects, Books & Research (Immediately After Hero) ── */}
+      <section className="section" style={{ borderBottom: "1px solid var(--border)" }}>
+        <div className="container-page">
+          <Reveal direction="up" distance={30}>
+            <WorksTimeline />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── 3. Skills & Engineering Stack ── */}
       <section className="section" style={{ borderBottom: "1px solid var(--border)", background: "var(--surface)" }}>
         <div className="container-page">
           <Reveal direction="left">
@@ -73,7 +83,7 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* ── 3. Development Identity & Interactive AI Workflow ── */}
+      {/* ── 4. Development Identity & Interactive AI Workflow ── */}
       <section
         className="section"
         style={{ borderBottom: "1px solid var(--border)" }}
@@ -101,7 +111,7 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* ── 4. Personal Quote Block ── */}
+      {/* ── 5. Personal Quote Block ── */}
       <section className="quote-block">
         <div className="container-page">
           <Reveal direction="scale">
@@ -112,7 +122,7 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* ── 5. End Strip ── */}
+      {/* ── 6. End Strip ── */}
       <div className="work-end-strip" style={{ borderTop: "1px solid var(--border)" }}>
         <div className="container-page">
           <Reveal direction="up" distance={25}>
