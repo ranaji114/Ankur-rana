@@ -4,12 +4,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useSyncExternalStore } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { Search, Volume2, VolumeX } from "lucide-react";
 import { author } from "@/data/content";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { PaletteToggle } from "@/components/palette-toggle";
+import { ExperienceToggle } from "@/components/experience-toggle";
 import { AmbientBackground } from "@/components/ambient-background";
 import { CommandPalette } from "@/components/command-palette";
 import { ScrollProgress } from "@/components/scroll-progress";
-import { PortfolioAssistant } from "@/components/portfolio-assistant";
+import { AIGuidePortrait } from "@/components/ai-guide-portrait";
 import { sound } from "@/lib/audio-haptics";
 
 const navItems = [
@@ -142,6 +145,10 @@ export function SiteShell({ children }: SiteShellProps) {
 
           {/* Header Action Tools */}
           <div className="header-actions">
+            <Link href="/ai" className="ai-guide-header-link" aria-label="Meet the AI guide" title="Meet the AI guide" onClick={() => sound.play("click")}>
+              <AIGuidePortrait status="idle" reducedMotion={reduceMotion ?? false} className="ai-guide-header-portrait" />
+              <span>AI guide</span>
+            </Link>
             {/* Cmd+K trigger */}
             <button
               type="button"
@@ -166,13 +173,19 @@ export function SiteShell({ children }: SiteShellProps) {
               className={`audio-toggle-btn ${soundActive ? "active" : ""}`}
               onClick={handleToggleSound}
               title={soundActive ? "Mute UI sounds" : "Enable tactile UI sounds"}
-              aria-label="Toggle UI sounds"
+              aria-label={soundActive ? "Mute UI sounds" : "Enable UI sounds"}
             >
-              {soundActive ? "🔊" : "🔈"}
+              {soundActive ? <Volume2 size={17} aria-hidden="true" /> : <VolumeX size={17} aria-hidden="true" />}
             </button>
 
             {/* Theme Toggle (Obsidian / Pearl) */}
             <ThemeToggle />
+
+            {/* Optional Studio colorway */}
+            <PaletteToggle />
+
+            {/* Optional interactive portfolio-tree experience */}
+            <ExperienceToggle />
 
             {/* Mobile Animated Hamburger Button */}
             <button
@@ -212,7 +225,7 @@ export function SiteShell({ children }: SiteShellProps) {
               <p className="eyebrow" style={{ color: "var(--accent)" }}>Navigation</p>
               
               <div className="mobile-links-list">
-                {navItems.map((item) => {
+                {[...navItems, { href: "/ai", label: "AI Guide", subtitle: "Talk with Ankur’s portfolio assistant" }].map((item) => {
                   const active =
                     item.href === "/" ? pathname === item.href : pathname.startsWith(item.href);
                   return (
@@ -232,7 +245,19 @@ export function SiteShell({ children }: SiteShellProps) {
                 })}
               </div>
 
-              {/* Mobile Quick Action Strip */}
+              <div className="mobile-sheet-controls" aria-label="Portfolio controls">
+                <button className="mobile-control-button" type="button" onClick={() => { setCmdOpen(true); setOpen(false); }}>
+                  <Search size={16} aria-hidden="true" /><span>Search</span>
+                </button>
+                <button className="mobile-control-button" type="button" onClick={handleToggleSound}>
+                  {soundActive ? <Volume2 size={16} aria-hidden="true" /> : <VolumeX size={16} aria-hidden="true" />}<span>{soundActive ? "Mute sounds" : "Sound effects"}</span>
+                </button>
+                <ThemeToggle />
+                <PaletteToggle />
+                <ExperienceToggle />
+              </div>
+
+              {/* Mobile quick links */}
               <div className="mobile-sheet-actions">
                 <button
                   type="button"
@@ -324,7 +349,6 @@ export function SiteShell({ children }: SiteShellProps) {
         </div>
       </footer>
 
-      <PortfolioAssistant />
     </div>
   );
 }

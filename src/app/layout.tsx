@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import "./home-bento.css";
+import "./page-experience.css";
+import "./studio-redesign.css";
+import "./tree-experience.css";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -66,6 +70,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${inter.variable} ${playfair.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-[#F8F7F4] text-[#111111]">{children}</body>

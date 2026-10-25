@@ -1,34 +1,35 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import { author } from "@/data/content";
 import { sound } from "@/lib/audio-haptics";
 
 export function PortraitCard({ priority = false }: { priority?: boolean }) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
-  const [glarePos, setGlarePos] = useState({ x: 50, y: 50, opacity: 0 });
+  const frameRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!cardRef.current || !frameRef.current || e.pointerType === "touch") return;
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rX = ((y - centerY) / centerY) * -8;
-    const rY = ((x - centerX) / centerX) * 8;
-
-    setRotateX(rX);
-    setRotateY(rY);
-    setGlarePos({
-      x: (x / rect.width) * 100,
-      y: (y / rect.height) * 100,
-      opacity: 0.35,
-    });
+    cardRef.current.style.setProperty("--portrait-pointer-x", `${(x / rect.width) * 100}%`);
+    cardRef.current.style.setProperty("--portrait-pointer-y", `${(y / rect.height) * 100}%`);
+    const offsetX = (x / rect.width) - 0.5;
+    const offsetY = (y / rect.height) - 0.5;
+    cardRef.current.style.setProperty("--portrait-depth-x", `${offsetX * 10}px`);
+    cardRef.current.style.setProperty("--portrait-depth-y", `${offsetY * 10}px`);
+    cardRef.current.style.setProperty("--portrait-orbit-x", `${offsetX * -5}px`);
+    cardRef.current.style.setProperty("--portrait-orbit-y", `${offsetY * -5}px`);
+    cardRef.current.style.setProperty("--portrait-satellite-x", `${offsetX * -16}px`);
+    cardRef.current.style.setProperty("--portrait-satellite-y", `${offsetY * -16}px`);
+    cardRef.current.style.setProperty("--portrait-rotate-x", `${((y - centerY) / centerY) * -8}deg`);
+    cardRef.current.style.setProperty("--portrait-rotate-y", `${((x - centerX) / centerX) * 8}deg`);
+    cardRef.current.dataset.pointerActive = "true";
   };
 
   const handleMouseEnter = () => {
@@ -36,19 +37,28 @@ export function PortraitCard({ priority = false }: { priority?: boolean }) {
   };
 
   const handleMouseLeave = () => {
-    setRotateX(0);
-    setRotateY(0);
-    setGlarePos((prev) => ({ ...prev, opacity: 0 }));
+    if (!cardRef.current) return;
+    cardRef.current.style.setProperty("--portrait-rotate-x", "0deg");
+    cardRef.current.style.setProperty("--portrait-rotate-y", "0deg");
+    cardRef.current.style.setProperty("--portrait-depth-x", "0px");
+    cardRef.current.style.setProperty("--portrait-depth-y", "0px");
+    cardRef.current.style.setProperty("--portrait-orbit-x", "0px");
+    cardRef.current.style.setProperty("--portrait-orbit-y", "0px");
+    cardRef.current.style.setProperty("--portrait-satellite-x", "0px");
+    cardRef.current.style.setProperty("--portrait-satellite-y", "0px");
+    cardRef.current.dataset.pointerActive = "false";
   };
 
   return (
     <div
       className="portrait-3d-card"
       ref={cardRef}
-      onMouseMove={handleMouseMove}
+      onPointerMove={handlePointerMove}
       onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onPointerLeave={handleMouseLeave}
     >
+      <span className="portrait-depth-orbit" aria-hidden="true"><i /><i /><i /></span>
+      <span className="portrait-depth-satellite" aria-hidden="true" />
       {/* Floating Status Badge — Top Right */}
       <div className="portrait-badge-float portrait-badge-tl">
         <span className="live-pulse-dot" />
@@ -63,9 +73,7 @@ export function PortraitCard({ priority = false }: { priority?: boolean }) {
       {/* 3D Glass Frame */}
       <div
         className="portrait-frame-glass"
-        style={{
-          transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-        }}
+        ref={frameRef}
       >
         <div className="portrait-img-inner">
           <Image
@@ -81,11 +89,6 @@ export function PortraitCard({ priority = false }: { priority?: boolean }) {
           {/* Dynamic Glare Reflection */}
           <div
             className="portrait-glare-sweep"
-            style={{
-              background: `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(255,255,255,0.4) 0%, transparent 60%)`,
-              opacity: glarePos.opacity,
-              transition: "opacity 200ms ease",
-            }}
           />
         </div>
 

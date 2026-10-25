@@ -6,6 +6,7 @@ import { Reveal } from "@/components/reveal";
 import { SiteShell } from "@/components/site-shell";
 import { sound } from "@/lib/audio-haptics";
 import { author } from "@/data/content";
+import { PageHeroVisual } from "@/components/page-hero-visual";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
@@ -114,7 +115,7 @@ export function ContactPage() {
   return (
     <SiteShell>
       <section className="page-hero">
-        <div className="container-page">
+        <div className="container-page page-hero-grid">
           <Reveal>
             <p className="eyebrow">Direct Contact &amp; Inquiries</p>
             <h1 className="page-title mt-5">Get in touch.</h1>
@@ -124,6 +125,7 @@ export function ContactPage() {
               write to me.
             </p>
           </Reveal>
+          <PageHeroVisual variant="contact" />
         </div>
       </section>
 

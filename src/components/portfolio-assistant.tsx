@@ -1,8 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { LoaderCircle, MessageCircle, Mic, MicOff, Sparkles, X } from "lucide-react";
+import { LoaderCircle, Mic, MicOff, Sparkles, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { AIGuidePortrait } from "@/components/ai-guide-portrait";
 
 type Message = { role: "user" | "assistant"; content: string };
 
@@ -38,20 +39,21 @@ function MessageText({ text }: { text: string }) {
   );
 }
 
-export function PortfolioAssistant() {
+export function PortfolioAssistant({ mode = "floating" }: { mode?: "floating" | "page" }) {
   const reduceMotion = useReducedMotion();
-  const [open, setOpen] = useState(false);
+  const isPage = mode === "page";
+  const [open, setOpen] = useState(isPage);
   const [messages, setMessages] = useState<Message[]>([]);
   const [error, setError] = useState("");
   const [voiceStatus, setVoiceStatus] = useState<VoiceStatus>("idle");
   const [voiceConnectStep, setVoiceConnectStep] = useState<VoiceConnectStep>(null);
   const [voicePreview, setVoicePreview] = useState<{ user: string; assistant: string }>({ user: "", assistant: "" });
-  const conversationRef = useRef<HTMLDivElement>(null);
   const voiceSocketRef = useRef<WebSocket | null>(null);
   const voiceConnectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const voiceGenerationRef = useRef(0);
   const micStreamRef = useRef<MediaStream | null>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
+  const outputAnalyserRef = useRef<AnalyserNode | null>(null);
   const micNodesRef = useRef<AudioNode[]>([]);
   const playbackSourcesRef = useRef<Set<AudioBufferSourceNode>>(new Set());
   const playbackEndRef = useRef(0);
@@ -77,6 +79,8 @@ export function PortfolioAssistant() {
     playbackEndRef.current = 0;
     const context = audioContextRef.current;
     audioContextRef.current = null;
+    outputAnalyserRef.current?.disconnect();
+    outputAnalyserRef.current = null;
     if (context && context.state !== "closed") void context.close().catch(() => undefined);
     voiceTranscriptRef.current = { user: "", assistant: "" };
     setVoicePreview({ user: "", assistant: "" });
@@ -125,14 +129,25 @@ export function PortfolioAssistant() {
     for (let index = 0; index < pcm.length; index += 1) channel[index] = (pcm[index] ?? 0) / 32768;
     const source = context.createBufferSource();
     source.buffer = audio;
-    source.connect(context.destination);
+    let analyser = outputAnalyserRef.current;
+    if (!analyser) {
+      analyser = context.createAnalyser();
+      analyser.fftSize = 256;
+      analyser.smoothingTimeConstant = 0.78;
+      analyser.connect(context.destination);
+      outputAnalyserRef.current = analyser;
+    }
+    source.connect(analyser);
     const startAt = Math.max(context.currentTime + 0.015, playbackEndRef.current);
     playbackEndRef.current = startAt + audio.duration;
     playbackSourcesRef.current.add(source);
     setVoiceStatus("speaking");
     source.onended = () => {
       playbackSourcesRef.current.delete(source);
-      if (!playbackSourcesRef.current.size && voiceSocketRef.current?.readyState === WebSocket.OPEN) setVoiceStatus("listening");
+      if (!playbackSourcesRef.current.size && voiceSocketRef.current?.readyState === WebSocket.OPEN) {
+        setVoiceStatus("listening");
+        setVoicePreview({ user: "", assistant: "" });
+      }
     };
     source.start(startAt);
   }
@@ -183,7 +198,7 @@ export function PortfolioAssistant() {
         | { token?: string; model?: string; config?: Record<string, unknown>; error?: string }
         | null;
       if (!tokenResponse.ok || !tokenPayload?.token || !tokenPayload.model) {
-        throw new Error("Your voice conversation couldn’t start. Please try again shortly.");
+        throw new Error(tokenPayload?.error || "Your voice conversation couldn’t start. Please try again shortly.");
       }
       if (voiceGenerationRef.current !== generation) return;
 
@@ -264,7 +279,10 @@ export function PortfolioAssistant() {
           if (assistant.trim()) setMessages((current) => [...current, { role: "assistant", content: assistant.trim() }]);
           voiceTranscriptRef.current = { user: "", assistant: "" };
           setVoicePreview({ user: "", assistant: "" });
-          if (!playbackSourcesRef.current.size) setVoiceStatus("listening");
+          if (!playbackSourcesRef.current.size) {
+            setVoiceStatus("listening");
+            setVoicePreview({ user: "", assistant: "" });
+          }
         }
       };
       socket.onerror = () => {
@@ -304,11 +322,6 @@ export function PortfolioAssistant() {
 
   useEffect(() => {
     if (!open) return;
-    conversationRef.current?.scrollTo({ top: conversationRef.current.scrollHeight, behavior: "smooth" });
-  }, [open, messages, voicePreview]);
-
-  useEffect(() => {
-    if (!open) return;
     const onKeyDown = (event: globalThis.KeyboardEvent) => {
       if (event.key === "Escape") {
         stopVoiceChat();
@@ -320,11 +333,12 @@ export function PortfolioAssistant() {
   }, [open]);
 
   return (
-    <div className="portfolio-assistant-root">
+    <div className={`portfolio-assistant-root ${isPage ? "is-page-shell" : ""}`}>
+      <div className={`portfolio-assistant-root ${isPage ? "is-page" : ""}`}>
       <AnimatePresence>
-        {open && (
+        {(open || isPage) && (
           <motion.section
-            className="portfolio-assistant-panel"
+            className={`portfolio-assistant-panel ${isPage ? "is-page" : ""}`}
             role="dialog"
             aria-labelledby="portfolio-assistant-title"
             initial={reduceMotion ? false : { opacity: 0, y: 18, scale: 0.97 }}
@@ -338,34 +352,35 @@ export function PortfolioAssistant() {
                 <p id="portfolio-assistant-title">Ankur&apos;s AI</p>
                 <span><i className={`is-${voiceStatus}`} /> {voiceStatus === "connecting" ? "Getting ready to talk" : voiceStatus === "thinking" ? "Thinking of a reply" : voiceStatus === "speaking" ? "Speaking with you" : voiceStatus === "listening" ? "Listening to you" : "Your portfolio voice guide"}</span>
               </div>
-              <button className="portfolio-assistant-close" type="button" onClick={closeChat} aria-label="Close chat">
-                <X size={18} />
-              </button>
+              {!isPage && <button className="portfolio-assistant-close" type="button" onClick={closeChat} aria-label="Close chat"><X size={18} /></button>}
             </div>
 
-            <div className="portfolio-assistant-context-note">
+            {!isPage && <div className="portfolio-assistant-context-note">
               Ask about Ankur&apos;s background, education, projects, books, and ideas.
-            </div>
+            </div>}
 
-            <div className="portfolio-assistant-messages" ref={conversationRef} aria-live="polite">
+            <div className={isPage ? "portfolio-assistant-workspace" : "portfolio-assistant-workspace is-floating"}>
+              <div className="portfolio-assistant-visual">
+                <AIGuidePortrait
+                  status={voiceStatus}
+                  reducedMotion={reduceMotion ?? false}
+                  className="ai-guide-portrait-large"
+                  overlayText={voicePreview.assistant || voicePreview.user}
+                  overlayLabel={voicePreview.assistant ? "REPLYING" : "I HEARD YOU"}
+                />
+                <div className="portfolio-assistant-voice-caption" aria-live="polite">
+                  {voiceStatus === "connecting" ? "Connecting…" : voiceStatus === "thinking" ? "One moment…" : voiceStatus === "speaking" ? "Speaking" : voiceStatus === "listening" ? "Listening" : "Ready when you are"}
+                </div>
+              </div>
+
+            <div className="portfolio-assistant-messages" aria-live="polite">
               {messages.length === 0 && (
                 <div className="portfolio-assistant-welcome">
-                  <span className="portfolio-assistant-kicker">A PERSONAL PORTFOLIO GUIDE</span>
-                  <h2>Let&apos;s talk about Ankur.</h2>
-                  <p>Ask naturally about his work and ideas. Speak your question and hear the reply, with captions appearing here.</p>
+                  <span className="portfolio-assistant-kicker">YOUR CONVERSATION</span>
+                  <h2>What would you like to know?</h2>
+                  <p>Tap the mic and ask me anything about my work.</p>
                 </div>
               )}
-
-              <div className={`portfolio-assistant-voice-visualizer is-${voiceStatus}`} aria-hidden="true">
-                <span className="portfolio-assistant-orbit orbit-one" />
-                <span className="portfolio-assistant-orbit orbit-two" />
-                <span className="portfolio-assistant-orbit orbit-three" />
-                <span className="portfolio-assistant-voice-core"><i /></span>
-                <span className="portfolio-assistant-equalizer">{[0, 1, 2, 3, 4, 5, 6].map((bar) => <i key={bar} />)}</span>
-              </div>
-              <div className="portfolio-assistant-voice-caption" aria-live="polite">
-                {voiceStatus === "connecting" ? "Getting your conversation ready…" : voiceStatus === "thinking" ? "I heard you — one moment…" : voiceStatus === "speaking" ? "Here’s my reply" : voiceStatus === "listening" ? "I’m listening. Go ahead." : "Tap below and start talking"}
-              </div>
 
               {messages.map((message, index) => (
                 <div className={`portfolio-assistant-message portfolio-assistant-message-${message.role}`} key={`${index}-${message.role}`}>
@@ -373,18 +388,8 @@ export function PortfolioAssistant() {
                   <div className="portfolio-assistant-bubble"><MessageText text={message.content} /></div>
                 </div>
               ))}
-              {voicePreview.user && (
-                <div className="portfolio-assistant-message portfolio-assistant-message-user">
-                  <div className="portfolio-assistant-bubble">{voicePreview.user}</div>
-                </div>
-              )}
-              {voicePreview.assistant && (
-                <div className="portfolio-assistant-message portfolio-assistant-message-assistant">
-                  <span className="portfolio-assistant-message-label"><Sparkles size={12} /> ANKUR&apos;S AI</span>
-                  <div className="portfolio-assistant-bubble">{voicePreview.assistant}</div>
-                </div>
-              )}
               <div aria-hidden="true" />
+            </div>
             </div>
 
             {error && <p className="portfolio-assistant-error" role="status">{error}</p>}
@@ -401,12 +406,12 @@ export function PortfolioAssistant() {
               </button>
               <span>{voiceStatus === "idle" ? "Start talking" : voiceStatus === "connecting" && voiceConnectStep === "microphone" ? "Allow microphone access" : voiceStatus === "connecting" ? "Starting your conversation…" : voiceStatus === "thinking" ? "One moment…" : voiceStatus === "speaking" ? "Tap to end conversation" : "Listening · pause when you’re done"}</span>
             </div>
-            <div className="portfolio-assistant-disclaimer">Speak naturally · Your words appear as captions</div>
+            {!isPage && <div className="portfolio-assistant-disclaimer">Speak naturally · Your words appear as captions</div>}
           </motion.section>
         )}
       </AnimatePresence>
 
-      <motion.button
+      {!isPage && <motion.button
         className={`portfolio-assistant-launcher ${open ? "is-open" : ""}`}
         type="button"
         aria-label={open ? "Close Ankur's AI chat" : "Ask Ankur's AI"}
@@ -421,8 +426,9 @@ export function PortfolioAssistant() {
         whileHover={reduceMotion ? undefined : { y: -3, scale: 1.03 }}
         whileTap={reduceMotion ? undefined : { scale: 0.96 }}
       >
-        {open ? <X size={22} /> : <><MessageCircle size={21} /><span>Ask Ankur&apos;s AI</span><i /></>}
-      </motion.button>
+        {open ? <X size={22} /> : <><AIGuidePortrait status={voiceStatus} reducedMotion={reduceMotion ?? false} className="ai-guide-portrait-launcher" /><span>Talk to the AI guide</span><i /></>}
+      </motion.button>}
+      </div>
     </div>
   );
 }

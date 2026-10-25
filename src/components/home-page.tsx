@@ -12,6 +12,7 @@ import { LiveClock } from "@/components/live-clock";
 import { TickerStrip } from "@/components/ticker-strip";
 import { Counter } from "@/components/counter";
 import { ProjectShowcase } from "@/components/project-showcase";
+import { HomeBento } from "@/components/home-bento";
 import { SpotlightCard } from "@/components/spotlight-card";
 import { sound } from "@/lib/audio-haptics";
 import {
@@ -147,6 +148,9 @@ export function HomePage() {
 
       {/* ── 2. Infinite Luxury Marquee Ticker ── */}
       <TickerStrip />
+
+      {/* ── 2b. Interactive Bento Map ── */}
+      <HomeBento />
 
       {/* ── 3. Featured Projects & Live Ezra Compiler Playground ── */}
       <section

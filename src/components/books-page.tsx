@@ -6,6 +6,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { SiteShell } from "@/components/site-shell";
 import { BookVaultCard } from "@/components/book-vault-card";
 import { BookPreviewModal } from "@/components/book-preview-modal";
+import { PageHeroVisual } from "@/components/page-hero-visual";
 import { sound } from "@/lib/audio-haptics";
 import { author, books, categories, readingPaths, Book } from "@/data/content";
 
@@ -39,7 +40,7 @@ export function BooksPage() {
 
       {/* ── Page Hero ── */}
       <section className="page-hero">
-        <div className="container-page">
+        <div className="container-page page-hero-grid">
           <Reveal>
             <p className="eyebrow">The Complete Catalog</p>
             <h1 className="page-title mt-5">Seven published books.</h1>
@@ -48,6 +49,7 @@ export function BooksPage() {
               digital minimalism, relationships, Hindi poetry, and the Awadhi language.
             </p>
           </Reveal>
+          <PageHeroVisual variant="books" />
         </div>
       </section>
 
@@ -121,12 +123,24 @@ export function BooksPage() {
               <Reveal key={key}>
                 <article
                   className="path-card"
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`Preview the ${pathLabels[key as keyof typeof pathLabels]} reading path`}
                   onClick={() => {
                     const firstId = ids[0];
                     const target = books.find((b) => b.id === firstId);
                     if (target) {
                       sound.play("pop");
                       setPreviewBook(target);
+                    }
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      sound.play("pop");
+                      const firstId = ids[0];
+                      const target = books.find((book) => book.id === firstId);
+                      if (target) setPreviewBook(target);
                     }
                   }}
                   style={{ cursor: "pointer" }}

@@ -38,7 +38,7 @@ export async function POST(request: Request) {
 
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
-    return json({ error: "Voice chat is not connected yet. Please try again later." }, 503);
+    return json({ error: "Live voice is not configured on this server. Add GEMINI_API_KEY to .env.local and restart the site." }, 503);
   }
 
   const model = process.env.GEMINI_LIVE_MODEL || "gemini-3.8-live";

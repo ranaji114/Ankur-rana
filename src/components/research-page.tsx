@@ -3,6 +3,7 @@
 import { Reveal } from "@/components/reveal";
 import { SiteShell } from "@/components/site-shell";
 import { KnowledgeGraph } from "@/components/knowledge-graph";
+import { PageHeroVisual } from "@/components/page-hero-visual";
 import { sound } from "@/lib/audio-haptics";
 import { researchPapers, researchTopics } from "@/data/content";
 
@@ -11,7 +12,7 @@ export function ResearchPage() {
     <SiteShell>
       {/* ── Page Hero ── */}
       <section className="page-hero">
-        <div className="container-page">
+        <div className="container-page page-hero-grid">
           <Reveal>
             <p className="eyebrow">Independent Conceptual Inquiries</p>
             <h1 className="page-title mt-5">Research &amp; Foundations.</h1>
@@ -20,6 +21,7 @@ export function ResearchPage() {
               between subjective and physical time — presented honestly as independent research.
             </p>
           </Reveal>
+          <PageHeroVisual variant="research" />
         </div>
       </section>
 
@@ -51,12 +53,6 @@ export function ResearchPage() {
               <Reveal key={paper.id} delay={index * 0.06}>
                 <article
                   className="research-paper-card"
-                  style={{
-                    border: "1px solid var(--border)",
-                    background: "var(--surface)",
-                    padding: "clamp(1.5rem, 3vw, 2.5rem)",
-                    borderRadius: "10px",
-                  }}
                 >
                   <div className="meta-row">
                     <span className="meta-chip">{paper.publication} Open Access</span>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Reveal } from "@/components/reveal";
 import { SiteShell } from "@/components/site-shell";
 import { ProjectShowcase } from "@/components/project-showcase";
+import { PageHeroVisual } from "@/components/page-hero-visual";
 import { sound } from "@/lib/audio-haptics";
 
 export function WorkPage() {
@@ -11,7 +12,7 @@ export function WorkPage() {
     <SiteShell>
       {/* ── Page Hero ── */}
       <section className="page-hero">
-        <div className="container-page">
+        <div className="container-page page-hero-grid">
           <Reveal>
             <p className="eyebrow">Engineering Systems &amp; Products</p>
             <h1 className="page-title mt-5">Featured Projects &amp; Case Studies.</h1>
@@ -20,6 +21,7 @@ export function WorkPage() {
               editorial publishing systems, and institutional architecture. Each with its own deep architecture case study.
             </p>
           </Reveal>
+          <PageHeroVisual variant="work" />
         </div>
       </section>
 
