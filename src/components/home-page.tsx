@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 import Link from "next/link";
-import { motion, useReducedMotion } from "motion/react";
+import { useReducedMotion } from "motion/react";
 import { Reveal } from "@/components/reveal";
 import { SiteShell } from "@/components/site-shell";
 import { PortraitCard } from "@/components/portrait-card";
@@ -36,20 +36,16 @@ function AnimatedHeroMessage({
   description: string;
   persona: Persona;
 }) {
-  const reduceMotion = useReducedMotion();
   const words = title.split(" ");
 
   return (
     <>
-      <motion.p
+      <p
         key={`${persona}-eyebrow`}
         className="eyebrow hero-eyebrow-reveal"
-        initial={reduceMotion ? false : { opacity: 0, y: 10, letterSpacing: "0.28em" }}
-        animate={reduceMotion ? undefined : { opacity: 1, y: 0, letterSpacing: "0.12em" }}
-        transition={{ duration: 0.58, ease: [0.16, 1, 0.3, 1] }}
       >
         {eyebrow}
-      </motion.p>
+      </p>
 
       <h1
         key={`${persona}-title`}
@@ -58,33 +54,24 @@ function AnimatedHeroMessage({
         aria-label={title}
       >
         {words.map((word, index) => (
-          <motion.span
-            key={`${persona}-${word}-${index}`}
-            className="hero-title-word"
-            aria-hidden="true"
-            initial={reduceMotion ? false : { opacity: 0, y: "108%", rotate: 3, filter: "blur(7px)" }}
-            animate={reduceMotion ? undefined : { opacity: 1, y: "0%", rotate: 0, filter: "blur(0px)" }}
-            transition={{
-              duration: 0.72,
-              delay: 0.12 + index * 0.045,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-          >
-            {word}{index < words.length - 1 ? "\u00a0" : ""}
-          </motion.span>
+          <span key={`${persona}-${word}-${index}`} className="hero-title-word-mask" aria-hidden="true">
+            <span
+              className="hero-title-word"
+              style={{ "--hero-word-delay": `${0.34 + index * 0.11}s` } as CSSProperties}
+            >
+              {word}{index < words.length - 1 ? "\u00a0" : ""}
+            </span>
+          </span>
         ))}
       </h1>
 
-      <motion.p
+      <p
         key={`${persona}-description`}
         className="body-large mt-5 hero-summary-reveal"
         style={{ maxWidth: "560px" }}
-        initial={reduceMotion ? false : { opacity: 0, y: 18, filter: "blur(5px)" }}
-        animate={reduceMotion ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
-        transition={{ duration: 0.7, delay: 0.48, ease: [0.16, 1, 0.3, 1] }}
       >
         {description}
-      </motion.p>
+      </p>
     </>
   );
 }
@@ -92,6 +79,7 @@ function AnimatedHeroMessage({
 export function HomePage() {
   const [persona, setPersona] = useState<Persona>("unified");
   const [previewBook, setPreviewBook] = useState<Book | null>(null);
+  const [heroMotionReady, setHeroMotionReady] = useState(false);
   const reduceMotion = useReducedMotion();
 
   const latestBook = books.find((b) => b.isLatest) || books[0];
@@ -116,8 +104,23 @@ export function HomePage() {
 
   const handlePersonaChange = (mode: Persona) => {
     sound.play("switch");
+    if (mode !== persona) setHeroMotionReady(false);
     setPersona(mode);
   };
+
+  useEffect(() => {
+    if (reduceMotion) return;
+
+    let secondFrame: number | undefined;
+    const firstFrame = window.requestAnimationFrame(() => {
+      secondFrame = window.requestAnimationFrame(() => setHeroMotionReady(true));
+    });
+
+    return () => {
+      window.cancelAnimationFrame(firstFrame);
+      if (secondFrame) window.cancelAnimationFrame(secondFrame);
+    };
+  }, [persona, reduceMotion]);
 
   return (
     <SiteShell>
@@ -131,7 +134,7 @@ export function HomePage() {
         <div className="container-page">
           <div className="hero-split-grid">
             {/* Left Side: Context & Persona Switcher */}
-            <Reveal className="cinema-hero-copy">
+            <div className={`cinema-hero-copy ${heroMotionReady ? "hero-motion-ready" : ""}`}>
               <LiveClock />
 
               {/* Persona Switcher */}
@@ -161,12 +164,7 @@ export function HomePage() {
 
               <AnimatedHeroMessage {...heroContent[persona]} persona={persona} />
 
-              <motion.div
-                className="hero-cta-row"
-                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-                animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-                transition={{ duration: 0.64, delay: 0.68, ease: [0.16, 1, 0.3, 1] }}
-              >
+              <div className="hero-cta-row">
                 <Link className="button-primary" href="/work" onClick={() => sound.play("click")}>
                   Explore My Work
                 </Link>
@@ -182,7 +180,7 @@ export function HomePage() {
                 >
                   GitHub
                 </a>
-              </motion.div>
+              </div>
 
               {/* Animated Stat Bar */}
               <div className="stat-bar mt-8">
@@ -199,7 +197,7 @@ export function HomePage() {
                   </div>
                 ))}
               </div>
-            </Reveal>
+            </div>
 
             {/* Right Side: 3D Portrait Centerpiece */}
             <Reveal delay={0.08} className="cinema-hero-portrait">
