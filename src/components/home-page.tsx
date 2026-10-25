@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useState, useCallback, type CSSProperties } from "react";
 import Link from "next/link";
 import { Reveal } from "@/components/reveal";
 import { SiteShell } from "@/components/site-shell";
@@ -24,54 +24,97 @@ import {
 
 type Persona = "unified" | "dev" | "author";
 
+const PERSONA_SEQUENCE: Persona[] = ["unified", "dev", "author"];
+
+function TypewriterHeroHeading({
+  text,
+  isPaused,
+  onComplete,
+}: {
+  text: string;
+  isPaused: boolean;
+  onComplete: () => void;
+}) {
+  const [displayedLength, setDisplayedLength] = useState(0);
+  const [phase, setPhase] = useState<"typing" | "holding" | "deleting">("typing");
+
+  useEffect(() => {
+    setDisplayedLength(0);
+    setPhase("typing");
+  }, [text]);
+
+  useEffect(() => {
+    if (isPaused) return;
+
+    if (phase === "typing") {
+      if (displayedLength < text.length) {
+        const timer = setTimeout(() => {
+          setDisplayedLength((prev) => prev + 1);
+        }, 34);
+        return () => clearTimeout(timer);
+      } else {
+        const timer = setTimeout(() => {
+          setPhase("deleting");
+        }, 1000);
+        return () => clearTimeout(timer);
+      }
+    } else if (phase === "deleting") {
+      if (displayedLength > 0) {
+        const timer = setTimeout(() => {
+          setDisplayedLength((prev) => Math.max(0, prev - 2));
+        }, 16);
+        return () => clearTimeout(timer);
+      } else {
+        onComplete();
+      }
+    }
+  }, [displayedLength, phase, text, isPaused, onComplete]);
+
+  const visibleText = text.slice(0, displayedLength);
+
+  return (
+    <h1
+      className="display-title cinema-title mt-4"
+      style={{ maxWidth: "680px" }}
+      aria-label={text}
+    >
+      <span>{visibleText}</span>
+      <span className="typewriter-cursor" aria-hidden="true" />
+    </h1>
+  );
+}
+
 function AnimatedHeroMessage({
   eyebrow,
   title,
   description,
   persona,
+  isPaused,
+  onComplete,
 }: {
   eyebrow: string;
   title: string;
   description: string;
   persona: Persona;
+  isPaused: boolean;
+  onComplete: () => void;
 }) {
-  const words = title.split(" ");
-
   return (
-    <>
-      <p
-        key={`${persona}-eyebrow`}
-        className="eyebrow hero-eyebrow-reveal"
-      >
+    <div className="hero-text-block">
+      <p key={`${persona}-eyebrow`} className="eyebrow hero-eyebrow-reveal">
         {eyebrow}
       </p>
 
-      <h1
-        key={`${persona}-title`}
-        className="display-title cinema-title mt-4"
-        style={{ maxWidth: "680px" }}
-        aria-label={title}
-      >
-        {words.map((word, index) => (
-          <span key={`${persona}-${word}-${index}`} className="hero-title-word-mask" aria-hidden="true">
-            <span
-              className="hero-title-word"
-              style={{ "--hero-word-delay": `${0.34 + index * 0.11}s` } as CSSProperties}
-            >
-              {word}{index < words.length - 1 ? "\u00a0" : ""}
-            </span>
-          </span>
-        ))}
-      </h1>
+      <TypewriterHeroHeading
+        text={title}
+        isPaused={isPaused}
+        onComplete={onComplete}
+      />
 
-      <p
-        key={`${persona}-description`}
-        className="body-large mt-5 hero-summary-reveal"
-        style={{ maxWidth: "560px" }}
-      >
+      <p key={`${persona}-description`} className="body-large mt-5 hero-summary-reveal" style={{ maxWidth: "560px" }}>
         {description}
       </p>
-    </>
+    </div>
   );
 }
 
@@ -79,6 +122,7 @@ export function HomePage() {
   const [persona, setPersona] = useState<Persona>("unified");
   const [previewBook, setPreviewBook] = useState<Book | null>(null);
   const [heroMotionReady, setHeroMotionReady] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   const latestBook = books.find((b) => b.isLatest) || books[0];
 
@@ -100,12 +144,19 @@ export function HomePage() {
     },
   } satisfies Record<Persona, { eyebrow: string; title: string; description: string }>;
 
+  const handleTypewriterComplete = useCallback(() => {
+    setPersona((current) => {
+      const nextIdx = (PERSONA_SEQUENCE.indexOf(current) + 1) % PERSONA_SEQUENCE.length;
+      return PERSONA_SEQUENCE[nextIdx];
+    });
+  }, []);
+
   const handlePersonaChange = (mode: Persona) => {
     sound.play("switch");
-    if (mode !== persona) setHeroMotionReady(false);
     setPersona(mode);
   };
 
+  // Initial hero mount reveal
   useEffect(() => {
     let secondFrame: number | undefined;
     const firstFrame = window.requestAnimationFrame(() => {
@@ -116,7 +167,7 @@ export function HomePage() {
       window.cancelAnimationFrame(firstFrame);
       if (secondFrame) window.cancelAnimationFrame(secondFrame);
     };
-  }, [persona]);
+  }, []);
 
   return (
     <SiteShell>
@@ -130,35 +181,41 @@ export function HomePage() {
         <div className="container-page">
           <div className="hero-split-grid">
             {/* Left Side: Context & Persona Switcher */}
-            <div className={`cinema-hero-copy ${heroMotionReady ? "hero-motion-ready" : "hero-motion-pending"}`}>
+            <div
+              className={`cinema-hero-copy ${heroMotionReady ? "hero-motion-ready" : "hero-motion-pending"}`}
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+            >
               <LiveClock />
 
               {/* Persona Switcher */}
-              <div className="persona-switcher-wrap">
-                <button
-                  type="button"
-                  className={`persona-btn ${persona === "unified" ? "persona-btn-active" : ""}`}
-                  onClick={() => handlePersonaChange("unified")}
-                >
-                  ✦ Unified Identity
-                </button>
-                <button
-                  type="button"
-                  className={`persona-btn ${persona === "dev" ? "persona-btn-active" : ""}`}
-                  onClick={() => handlePersonaChange("dev")}
-                >
-                  ⚡ Systems Dev
-                </button>
-                <button
-                  type="button"
-                  className={`persona-btn ${persona === "author" ? "persona-btn-active" : ""}`}
-                  onClick={() => handlePersonaChange("author")}
-                >
-                  📖 Author
-                </button>
+              <div className="persona-switcher-wrap" aria-label="Identity Mode Selector">
+                {PERSONA_SEQUENCE.map((p) => {
+                  const labels: Record<Persona, string> = {
+                    unified: "✦ Unified Identity",
+                    dev: "⚡ Systems Dev",
+                    author: "📖 Author & Thinker",
+                  };
+                  const isActive = persona === p;
+                  return (
+                    <button
+                      key={p}
+                      type="button"
+                      className={`persona-btn ${isActive ? "persona-btn-active" : ""}`}
+                      onClick={() => handlePersonaChange(p)}
+                    >
+                      <span className="persona-btn-text">{labels[p]}</span>
+                    </button>
+                  );
+                })}
               </div>
 
-              <AnimatedHeroMessage {...heroContent[persona]} persona={persona} />
+              <AnimatedHeroMessage
+                {...heroContent[persona]}
+                persona={persona}
+                isPaused={isPaused}
+                onComplete={handleTypewriterComplete}
+              />
 
               <div className="hero-cta-row">
                 <Link className="button-primary" href="/work" onClick={() => sound.play("click")}>
