@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
 import { Reveal } from "@/components/reveal";
 import { SiteShell } from "@/components/site-shell";
 import { PortraitCard } from "@/components/portrait-card";
@@ -22,13 +23,98 @@ import {
   Book,
 } from "@/data/content";
 
+type Persona = "unified" | "dev" | "author";
+
+function AnimatedHeroMessage({
+  eyebrow,
+  title,
+  description,
+  persona,
+}: {
+  eyebrow: string;
+  title: string;
+  description: string;
+  persona: Persona;
+}) {
+  const reduceMotion = useReducedMotion();
+  const words = title.split(" ");
+
+  return (
+    <>
+      <motion.p
+        key={`${persona}-eyebrow`}
+        className="eyebrow hero-eyebrow-reveal"
+        initial={reduceMotion ? false : { opacity: 0, y: 10, letterSpacing: "0.28em" }}
+        animate={reduceMotion ? undefined : { opacity: 1, y: 0, letterSpacing: "0.12em" }}
+        transition={{ duration: 0.58, ease: [0.16, 1, 0.3, 1] }}
+      >
+        {eyebrow}
+      </motion.p>
+
+      <h1
+        key={`${persona}-title`}
+        className="display-title cinema-title mt-4"
+        style={{ maxWidth: "680px" }}
+        aria-label={title}
+      >
+        {words.map((word, index) => (
+          <motion.span
+            key={`${persona}-${word}-${index}`}
+            className="hero-title-word"
+            aria-hidden="true"
+            initial={reduceMotion ? false : { opacity: 0, y: "108%", rotate: 3, filter: "blur(7px)" }}
+            animate={reduceMotion ? undefined : { opacity: 1, y: "0%", rotate: 0, filter: "blur(0px)" }}
+            transition={{
+              duration: 0.72,
+              delay: 0.12 + index * 0.045,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+          >
+            {word}{index < words.length - 1 ? "\u00a0" : ""}
+          </motion.span>
+        ))}
+      </h1>
+
+      <motion.p
+        key={`${persona}-description`}
+        className="body-large mt-5 hero-summary-reveal"
+        style={{ maxWidth: "560px" }}
+        initial={reduceMotion ? false : { opacity: 0, y: 18, filter: "blur(5px)" }}
+        animate={reduceMotion ? undefined : { opacity: 1, y: 0, filter: "blur(0px)" }}
+        transition={{ duration: 0.7, delay: 0.48, ease: [0.16, 1, 0.3, 1] }}
+      >
+        {description}
+      </motion.p>
+    </>
+  );
+}
+
 export function HomePage() {
-  const [persona, setPersona] = useState<"unified" | "dev" | "author">("unified");
+  const [persona, setPersona] = useState<Persona>("unified");
   const [previewBook, setPreviewBook] = useState<Book | null>(null);
+  const reduceMotion = useReducedMotion();
 
   const latestBook = books.find((b) => b.isLatest) || books[0];
 
-  const handlePersonaChange = (mode: "unified" | "dev" | "author") => {
+  const heroContent = {
+    unified: {
+      eyebrow: "AI-ASSISTED DEVELOPER · PROGRAMMER · AUTHOR · RESEARCHER",
+      title: "Software, ideas, and the curiosity to understand how things work.",
+      description: author.tagline,
+    },
+    dev: {
+      eyebrow: "RUST · COMPILERS · FULL-STACK SYSTEMS · AI WORKFLOWS",
+      title: "Compilers, state machines, and building robust systems.",
+      description: "Creator of Ezra (a readable scripting language in Rust) and engineering with AI as an intellectual force multiplier.",
+    },
+    author: {
+      eyebrow: "7 PUBLISHED BOOKS · 2 ZENODO PAPERS · TIME & MIND",
+      title: "Inquiring into the structural boundaries of reality and mind.",
+      description: "Author of 7 published books and independent conceptual research on quantum entanglement and temporal layers.",
+    },
+  } satisfies Record<Persona, { eyebrow: string; title: string; description: string }>;
+
+  const handlePersonaChange = (mode: Persona) => {
     sound.play("switch");
     setPersona(mode);
   };
@@ -73,31 +159,14 @@ export function HomePage() {
                 </button>
               </div>
 
-              <p className="eyebrow">
-                {persona === "dev"
-                  ? "RUST · COMPILERS · FULL-STACK SYSTEMS · AI WORKFLOWS"
-                  : persona === "author"
-                  ? "7 PUBLISHED BOOKS · 2 ZENODO PAPERS · TIME & MIND"
-                  : "AI-ASSISTED DEVELOPER · PROGRAMMER · AUTHOR · RESEARCHER"}
-              </p>
+              <AnimatedHeroMessage {...heroContent[persona]} persona={persona} />
 
-              <h1 className="display-title cinema-title mt-4" style={{ maxWidth: "680px" }}>
-                {persona === "dev"
-                  ? "Compilers, state machines, and building robust systems."
-                  : persona === "author"
-                  ? "Inquiring into the structural boundaries of reality and mind."
-                  : "Software, ideas, and the curiosity to understand how things work."}
-              </h1>
-
-              <p className="body-large mt-5" style={{ maxWidth: "560px" }}>
-                {persona === "dev"
-                  ? "Creator of Ezra (a readable scripting language in Rust) and engineering with AI as an intellectual force multiplier."
-                  : persona === "author"
-                  ? "Author of 7 published books and independent conceptual research on quantum entanglement and temporal layers."
-                  : author.tagline}
-              </p>
-
-              <div className="hero-cta-row">
+              <motion.div
+                className="hero-cta-row"
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                transition={{ duration: 0.64, delay: 0.68, ease: [0.16, 1, 0.3, 1] }}
+              >
                 <Link className="button-primary" href="/work" onClick={() => sound.play("click")}>
                   Explore My Work
                 </Link>
@@ -113,7 +182,7 @@ export function HomePage() {
                 >
                   GitHub
                 </a>
-              </div>
+              </motion.div>
 
               {/* Animated Stat Bar */}
               <div className="stat-bar mt-8">
