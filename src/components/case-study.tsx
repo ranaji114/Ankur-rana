@@ -266,7 +266,7 @@ export function CaseStudy({ project }: CaseStudyProps) {
             </Reveal>
             <div className="feature-cards">
               {project.features.map((feature, i) => (
-                <Reveal key={feature.title} delay={i * 0.03}>
+                <Reveal key={feature.title} delay={i * 0.04} direction={i % 2 === 0 ? "left" : "right"} distance={30}>
                   <div className="feature-card-item">
                     <p className="feature-card-title">{feature.title}</p>
                     <p className="feature-card-desc">{feature.description}</p>

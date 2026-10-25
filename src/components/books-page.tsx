@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { SiteShell } from "@/components/site-shell";
@@ -33,6 +33,21 @@ export function BooksPage() {
     setSelectedCategory(cat);
   };
 
+  useEffect(() => {
+    const handleHash = () => {
+      if (typeof window !== "undefined" && window.location.hash) {
+        const id = window.location.hash.replace("#", "");
+        const target = books.find((b) => b.id === id);
+        if (target) {
+          setPreviewBook(target);
+        }
+      }
+    };
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
   return (
     <SiteShell>
       {/* Interactive Quick Preview Modal */}
@@ -41,7 +56,7 @@ export function BooksPage() {
       {/* ── Page Hero ── */}
       <section className="page-hero">
         <div className="container-page page-hero-grid">
-          <Reveal>
+          <Reveal direction="left" distance={40}>
             <p className="eyebrow">The Complete Catalog</p>
             <h1 className="page-title mt-5">Seven published books.</h1>
             <p className="body-large mt-6" style={{ maxWidth: "720px" }}>
@@ -57,13 +72,13 @@ export function BooksPage() {
       {latestBook && (
         <section className="section" style={{ borderBottom: "1px solid var(--border)" }}>
           <div className="container-page">
-            <Reveal>
+            <Reveal direction="left">
               <SectionHeading
                 eyebrow="Flagship Release — July 2026"
                 title="The newest inquiry into understanding."
               />
             </Reveal>
-            <Reveal delay={0.06}>
+            <Reveal delay={0.06} direction="right" distance={45}>
               <div style={{ marginTop: "2.5rem", maxWidth: "920px" }}>
                 <BookVaultCard
                   book={latestBook}
@@ -119,8 +134,8 @@ export function BooksPage() {
             />
           </Reveal>
           <div className="reading-path-grid mt-12">
-            {Object.entries(readingPaths).map(([key, ids]) => (
-              <Reveal key={key}>
+            {Object.entries(readingPaths).map(([key, ids], idx) => (
+              <Reveal key={key} direction={idx % 2 === 0 ? "left" : "right"} distance={35} delay={idx * 0.05}>
                 <article
                   className="path-card"
                   role="button"
@@ -164,7 +179,7 @@ export function BooksPage() {
       {/* ── All Books Vault Grid ── */}
       <section className="section">
         <div className="container-page">
-          <Reveal>
+          <Reveal direction="left">
             <SectionHeading
               eyebrow="Full Vault"
               title={selectedCategory === "All" ? "All 7 Published Titles" : `${selectedCategory} Titles`}
@@ -172,7 +187,7 @@ export function BooksPage() {
           </Reveal>
           <div className="grid gap-8 mt-12">
             {filteredBooks.map((book, index) => (
-              <Reveal key={book.id} delay={index * 0.03}>
+              <Reveal key={book.id} delay={0.04} direction={index % 2 === 0 ? "left" : "right"} distance={45}>
                 <BookVaultCard
                   book={book}
                   onPreview={(b) => setPreviewBook(b)}

@@ -37,7 +37,7 @@ export function HomeBento() {
         </Reveal>
 
         <div className="home-bento-grid">
-          <Reveal className="home-bento-cell hb-cell-code">
+          <Reveal className="home-bento-cell hb-cell-code" direction="left" distance={45}>
             <Link className="hb-card hb-code-card" href={featuredProject ? `/work/${featuredProject.slug}` : "/work"} onClick={() => sound.play("click")}>
               <div className="hb-card-head"><span className="hb-icon"><Code2 size={16} /></span><span className="hb-overline">01 / SYSTEMS ENGINEERING</span><ArrowUpRight className="hb-card-arrow" size={17} /></div>
               <div className="hb-code-title"><span>Rust · Language Runtime</span><h3>Meet <em>Ezra.</em></h3><p>A readable scripting language, from lexer to bytecode VM.</p></div>
@@ -50,8 +50,8 @@ export function HomeBento() {
             </Link>
           </Reveal>
 
-          <Reveal className="home-bento-cell hb-cell-book" delay={0.05}>
-            <Link className="hb-card hb-book-card" href="/books" onClick={() => sound.play("click")}>
+          <Reveal className="home-bento-cell hb-cell-book" delay={0.06} direction="right" distance={45}>
+            <Link className="hb-card hb-book-card" href={`/books#${latestBook.id}`} onClick={() => sound.play("click")}>
               <div className="hb-card-head"><span className="hb-icon"><BookOpen size={16} /></span><span className="hb-overline">02 / AUTHOR</span><ArrowUpRight className="hb-card-arrow" size={17} /></div>
               <div className="hb-book-copy"><p>THE LATEST BOOK</p><h3>{latestBook.title}</h3><span>{latestBook.subtitle}</span></div>
               <div className="hb-book-art"><div className="hb-book-shadow" /><Image src={latestBook.cover} alt={`${latestBook.title} cover`} width={260} height={390} priority={false} sizes="(max-width: 700px) 35vw, 180px" /><span className="hb-book-orbit hb-book-orbit-one" /><span className="hb-book-orbit hb-book-orbit-two" /></div>
@@ -59,7 +59,7 @@ export function HomeBento() {
             </Link>
           </Reveal>
 
-          <Reveal className="home-bento-cell hb-cell-research" delay={0.1}>
+          <Reveal className="home-bento-cell hb-cell-research" delay={0.08} direction="left" distance={45}>
             <Link className="hb-card hb-research-card" href="/research" onClick={() => sound.play("click")}>
               <div className="hb-card-head"><span className="hb-icon"><Atom size={16} /></span><span className="hb-overline">03 / RESEARCH</span><ArrowUpRight className="hb-card-arrow" size={17} /></div>
               <div className="hb-research-orbit" aria-hidden="true"><span /><i /><i /><i /><b>?</b></div>
@@ -68,7 +68,7 @@ export function HomeBento() {
             </Link>
           </Reveal>
 
-          <Reveal className="home-bento-cell hb-cell-stack" delay={0.05}>
+          <Reveal className="home-bento-cell hb-cell-stack" delay={0.06} direction="right" distance={45}>
             <div className="hb-card hb-stack-card">
               <div className="hb-card-head"><span className="hb-icon"><Layers3 size={16} /></span><span className="hb-overline">04 / THE TOOLKIT</span></div>
               <h3>Small tools.<br /><em>Big systems.</em></h3>
@@ -77,7 +77,7 @@ export function HomeBento() {
             </div>
           </Reveal>
 
-          <Reveal className="home-bento-cell hb-cell-note" delay={0.1}>
+          <Reveal className="home-bento-cell hb-cell-note" delay={0.1} direction="up" distance={30}>
             <div className="hb-card hb-note-card">
               <Sparkles className="hb-note-spark" size={17} />
               <p>THE THREAD THROUGH EVERYTHING</p>

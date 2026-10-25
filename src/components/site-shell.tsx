@@ -301,10 +301,14 @@ export function SiteShell({ children }: SiteShellProps) {
       <AnimatePresence mode="wait" initial={false}>
         <motion.main
           key={pathname}
-          initial={reduceMotion ? false : { opacity: 0, y: 16, filter: "blur(5px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          exit={reduceMotion ? undefined : { opacity: 0, y: -8, filter: "blur(3px)" }}
-          transition={{ duration: reduceMotion ? 0 : 0.42, ease: [0.22, 1, 0.36, 1] }}
+          initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+          animate={{
+            opacity: 1,
+            y: 0,
+            transitionEnd: { transform: "none" },
+          }}
+          exit={reduceMotion ? undefined : { opacity: 0, y: -8 }}
+          transition={{ duration: reduceMotion ? 0 : 0.28, ease: [0.22, 1, 0.36, 1] }}
         >
           {children}
         </motion.main>

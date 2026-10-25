@@ -134,7 +134,7 @@ export function ContactPage() {
           <div className="split-grid" style={{ alignItems: "start" }}>
 
             {/* ── Form ── */}
-            <Reveal>
+            <Reveal direction="left" distance={35}>
               <div className="contact-form">
                 <p className="eyebrow" style={{ marginBottom: "1.5rem" }}>Send a message</p>
 
@@ -287,7 +287,7 @@ export function ContactPage() {
             </Reveal>
 
             {/* ── Contact Info ── */}
-            <Reveal delay={0.06}>
+            <Reveal delay={0.06} direction="right" distance={35}>
               <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
                 <div className="surface-card" style={{ padding: "1.5rem" }}>
                   <p className="eyebrow" style={{ marginBottom: "0.75rem" }}>Direct email</p>

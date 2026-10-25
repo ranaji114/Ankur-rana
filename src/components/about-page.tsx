@@ -60,7 +60,7 @@ export function AboutPage() {
           </Reveal>
           <div className="skills-grid">
             {skillCategories.map((group, i) => (
-              <Reveal key={group.label} delay={i * 0.04}>
+              <Reveal key={group.label} delay={i * 0.04} direction={i % 2 === 0 ? "left" : "right"} distance={28}>
                 <div className="skill-group">
                   <p className="skill-group-label">{group.label}</p>
                   <div className="skill-pills">
@@ -142,7 +142,7 @@ export function AboutPage() {
           </Reveal>
           <div className="timeline mt-12">
             {publicationTimeline.map((item) => (
-              <Reveal key={`${item.year}-${item.title}`}>
+              <Reveal key={`${item.year}-${item.title}`} direction="left" distance={30}>
                 <article className="timeline-item">
                   <p className="eyebrow">{item.year}</p>
                   <div>

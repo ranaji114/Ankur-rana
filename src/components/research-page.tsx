@@ -50,7 +50,7 @@ export function ResearchPage() {
 
           <div style={{ display: "grid", gap: "1.5rem", marginTop: "3rem" }}>
             {researchPapers.map((paper, index) => (
-              <Reveal key={paper.id} delay={index * 0.06}>
+              <Reveal key={paper.id} delay={0.04} direction={index % 2 === 0 ? "left" : "right"} distance={40}>
                 <article
                   className="research-paper-card"
                 >
@@ -177,7 +177,7 @@ export function ResearchPage() {
             className="research-grid"
           >
             {researchTopics.map((topic, index) => (
-              <Reveal key={topic.title} delay={index * 0.025}>
+              <Reveal key={topic.title} delay={index * 0.03} direction={index % 2 === 0 ? "left" : "right"} distance={30}>
                 <article className="topic-card">
                   <h3 className="topic-card-title">{topic.title}</h3>
                   <p className="topic-card-desc">{topic.description}</p>

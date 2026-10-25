@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { Book } from "@/data/content";
 import { sound } from "@/lib/audio-haptics";
@@ -11,25 +12,34 @@ type BookPreviewModalProps = {
 };
 
 export function BookPreviewModal({ book, onClose }: BookPreviewModalProps) {
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!book) return;
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         onClose();
       }
     };
-    if (book) {
-      document.body.style.overflow = "hidden";
-      window.addEventListener("keydown", handleKeyDown);
-    }
+    window.addEventListener("keydown", handleKeyDown);
+
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = originalOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [book, onClose]);
 
-  if (!book) return null;
+  if (!mounted || !book || typeof document === "undefined") return null;
 
-  return (
+  const modalContent = (
     <div
       className="book-modal-backdrop"
       onClick={(e) => {
@@ -81,17 +91,29 @@ export function BookPreviewModal({ book, onClose }: BookPreviewModalProps) {
               {book.publishDate && <span className="meta-chip">{book.publishDate}</span>}
             </div>
 
-            <div style={{ marginTop: "1.5rem", width: "100%" }}>
+            <div style={{ marginTop: "1.5rem", width: "100%", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
               <a
                 className="button-primary"
                 href={book.amazonUrl}
                 target="_blank"
                 rel="noreferrer"
-                style={{ width: "100%" }}
+                style={{ width: "100%", textAlign: "center" }}
                 onClick={() => sound.play("pop")}
               >
-                Read on Amazon Kindle →
+                Read on Amazon Kindle ↗
               </a>
+              {book.previewUrl && book.previewUrl !== book.amazonUrl && (
+                <a
+                  className="button-secondary"
+                  href={book.previewUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ width: "100%", textAlign: "center" }}
+                  onClick={() => sound.play("click")}
+                >
+                  Look Inside / Excerpt ↗
+                </a>
+              )}
             </div>
           </div>
 
@@ -102,6 +124,22 @@ export function BookPreviewModal({ book, onClose }: BookPreviewModalProps) {
               {book.title}
             </h2>
             <p className="book-subtitle mt-2">{book.subtitle}</p>
+
+            {book.hook && (
+              <p
+                style={{
+                  marginTop: "1rem",
+                  fontStyle: "italic",
+                  fontSize: "1rem",
+                  lineHeight: "1.5",
+                  color: "var(--accent-gold)",
+                  borderLeft: "2px solid var(--accent-gold)",
+                  paddingLeft: "0.85rem",
+                }}
+              >
+                &ldquo;{book.hook}&rdquo;
+              </p>
+            )}
 
             <div style={{ marginBlock: "1.25rem", borderTop: "1px solid var(--border)", paddingTop: "1.25rem" }}>
               <p className="body-copy">{book.description}</p>
@@ -127,4 +165,6 @@ export function BookPreviewModal({ book, onClose }: BookPreviewModalProps) {
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 }

@@ -303,10 +303,10 @@ export function ProjectShowcase() {
           key={project.id}
           id={`showcase-${project.slug}`}
           className="project-showcase-item"
-          initial={reduceMotion ? false : { opacity: 0, y: 32, scale: 0.99 }}
-          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0, scale: 1 }}
+          initial={reduceMotion ? false : { opacity: 0, x: index % 2 === 0 ? -45 : 45, scale: 0.985 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, x: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.12, margin: "0px 0px -56px 0px" }}
-          transition={{ duration: 0.7, delay: (index % 2) * 0.07, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.68, delay: 0.04, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="showcase-split-grid">
             {/* Left Column: Project Details & Story */}

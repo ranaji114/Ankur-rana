@@ -253,7 +253,7 @@ export function HomePage() {
             </div>
 
             {/* Right Side: 3D Portrait Centerpiece */}
-            <Reveal delay={0.08} className="cinema-hero-portrait">
+            <Reveal delay={0.08} direction="right" distance={40} className="cinema-hero-portrait">
               <div style={{ maxWidth: "440px", marginInline: "auto", width: "100%" }}>
                 <PortraitCard priority={true} />
               </div>
@@ -279,7 +279,7 @@ export function HomePage() {
         style={{ borderTop: "1px solid var(--border)", background: "var(--surface)" }}
       >
         <div className="container-page">
-          <Reveal>
+          <Reveal direction="left" distance={35}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "1rem" }}>
               <div>
                 <p className="eyebrow">Work &amp; Systems</p>
@@ -304,7 +304,7 @@ export function HomePage() {
       {/* ── 4. AI Workflow Circuit Stepper ── */}
       <section className="section cinema-scene cinema-scene-process" style={{ borderTop: "1px solid var(--border)" }}>
         <div className="container-page">
-          <Reveal>
+          <Reveal direction="left" distance={35}>
             <p className="eyebrow">How I Build</p>
             <h2 className="section-title mt-3" style={{ maxWidth: "640px" }}>
               AI as a development partner, not a replacement for thinking.
@@ -316,7 +316,7 @@ export function HomePage() {
           </Reveal>
 
           {/* Interactive Circuit Stepper */}
-          <Reveal delay={0.06}>
+          <Reveal delay={0.06} direction="up" distance={30}>
             <WorkflowCircuit />
           </Reveal>
         </div>
@@ -328,7 +328,7 @@ export function HomePage() {
         style={{ borderTop: "1px solid var(--border)", background: "var(--surface)" }}
       >
         <div className="container-page">
-          <Reveal>
+          <Reveal direction="left" distance={35}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "1rem" }}>
               <div>
                 <p className="eyebrow">Latest Release — July 2026</p>
@@ -344,7 +344,7 @@ export function HomePage() {
           </Reveal>
 
           {/* Latest Book Detailed Card */}
-          <Reveal delay={0.06}>
+          <Reveal delay={0.06} direction="right" distance={45}>
             <div style={{ marginTop: "2.5rem", maxWidth: "900px" }}>
               <BookVaultCard
                 book={latestBook}
@@ -358,7 +358,7 @@ export function HomePage() {
       {/* ── 6. Research Section ── */}
       <section className="section cinema-scene cinema-scene-research" style={{ borderTop: "1px solid var(--border)" }}>
         <div className="container-page">
-          <Reveal>
+          <Reveal direction="left" distance={35}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "1rem" }}>
               <div>
                 <p className="eyebrow">Independent Conceptual Research</p>
@@ -374,7 +374,7 @@ export function HomePage() {
 
           <div className="book-grid mt-10">
             {researchPapers.map((paper, index) => (
-              <Reveal key={paper.id} delay={index * 0.04}>
+              <Reveal key={paper.id} delay={index * 0.06} direction={index === 0 ? "left" : "right"} distance={40}>
                 <SpotlightCard>
                   <article
                     style={{
@@ -426,7 +426,7 @@ export function HomePage() {
       {/* ── 7. Quote Block ── */}
       <section className="quote-block cinema-quote-scene">
         <div className="container-page">
-          <Reveal>
+          <Reveal direction="scale">
             <p className="eyebrow">Core Philosophy</p>
             <blockquote className="quote-text mt-6">{author.quote}</blockquote>
             <p className="body-copy mt-5">— {author.name}</p>
@@ -437,7 +437,7 @@ export function HomePage() {
       {/* ── 8. Final CTA ── */}
       <section className="section cinema-scene cinema-scene-contact" style={{ background: "var(--surface)" }}>
         <div className="container-page">
-          <Reveal>
+          <Reveal direction="up" distance={35}>
             <div
               className="surface-card"
               style={{ padding: "clamp(1.75rem, 4vw, 3.5rem)", maxWidth: "820px" }}

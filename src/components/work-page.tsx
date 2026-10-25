@@ -13,7 +13,7 @@ export function WorkPage() {
       {/* ── Page Hero ── */}
       <section className="page-hero">
         <div className="container-page page-hero-grid">
-          <Reveal>
+          <Reveal direction="left" distance={40}>
             <p className="eyebrow">Engineering Systems &amp; Products</p>
             <h1 className="page-title mt-5">Featured Projects &amp; Case Studies.</h1>
             <p className="body-large mt-6" style={{ maxWidth: "720px" }}>
@@ -28,7 +28,7 @@ export function WorkPage() {
       {/* ── All 5 Featured Projects Showcase (One below another) ── */}
       <section className="section">
         <div className="container-page">
-          <Reveal>
+          <Reveal direction="left" distance={35}>
             <p className="eyebrow">Project Showcase</p>
             <h2 className="section-title mt-2">All 5 Production Systems</h2>
             <p className="body-large mt-3" style={{ maxWidth: "640px" }}>
@@ -44,7 +44,7 @@ export function WorkPage() {
       {/* ── End strip ── */}
       <div className="work-end-strip" style={{ borderTop: "1px solid var(--border)", background: "var(--surface)" }}>
         <div className="container-page">
-          <Reveal>
+          <Reveal direction="up" distance={30}>
             <div
               style={{
                 display: "flex",

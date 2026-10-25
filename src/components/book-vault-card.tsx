@@ -10,16 +10,27 @@ type BookVaultCardProps = {
 };
 
 export function BookVaultCard({ book, onPreview }: BookVaultCardProps) {
+  const handleOpenPreview = () => {
+    sound.play("pop");
+    onPreview(book);
+  };
+
   return (
     <article className="book-vault-card" id={book.id}>
       {/* 3D Perspective Cover */}
       <div
         className="book-3d-cover-box"
-        onClick={() => {
-          sound.play("pop");
-          onPreview(book);
+        role="button"
+        tabIndex={0}
+        onClick={handleOpenPreview}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            handleOpenPreview();
+          }
         }}
-        title="Click to open interactive preview"
+        title={`Click to open preview for ${book.title}`}
+        style={{ cursor: "pointer" }}
       >
         {book.isLatest && (
           <span className="latest-badge" style={{ display: "block", marginBottom: "0.5rem" }}>
@@ -45,7 +56,22 @@ export function BookVaultCard({ book, onPreview }: BookVaultCardProps) {
           {book.pages && <span className="meta-chip">{book.pages} pages</span>}
         </div>
 
-        <h3 className="book-title mt-4">{book.title}</h3>
+        <h3
+          className="book-title mt-4"
+          role="button"
+          tabIndex={0}
+          style={{ cursor: "pointer", display: "inline-block" }}
+          onClick={handleOpenPreview}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handleOpenPreview();
+            }
+          }}
+          title={`Click to preview ${book.title}`}
+        >
+          {book.title}
+        </h3>
         <p className="book-subtitle mt-1">{book.subtitle}</p>
         <p className="body-copy mt-4" style={{ flex: 1 }}>{book.hook}</p>
 
@@ -61,10 +87,7 @@ export function BookVaultCard({ book, onPreview }: BookVaultCardProps) {
           <button
             type="button"
             className="button-primary"
-            onClick={() => {
-              sound.play("pop");
-              onPreview(book);
-            }}
+            onClick={handleOpenPreview}
           >
             Quick Preview 📖
           </button>
