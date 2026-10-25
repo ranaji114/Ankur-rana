@@ -2,7 +2,6 @@
 
 import { useEffect, useState, type CSSProperties } from "react";
 import Link from "next/link";
-import { useReducedMotion } from "motion/react";
 import { Reveal } from "@/components/reveal";
 import { SiteShell } from "@/components/site-shell";
 import { PortraitCard } from "@/components/portrait-card";
@@ -80,7 +79,6 @@ export function HomePage() {
   const [persona, setPersona] = useState<Persona>("unified");
   const [previewBook, setPreviewBook] = useState<Book | null>(null);
   const [heroMotionReady, setHeroMotionReady] = useState(false);
-  const reduceMotion = useReducedMotion();
 
   const latestBook = books.find((b) => b.isLatest) || books[0];
 
@@ -109,8 +107,6 @@ export function HomePage() {
   };
 
   useEffect(() => {
-    if (reduceMotion) return;
-
     let secondFrame: number | undefined;
     const firstFrame = window.requestAnimationFrame(() => {
       secondFrame = window.requestAnimationFrame(() => setHeroMotionReady(true));
@@ -120,7 +116,7 @@ export function HomePage() {
       window.cancelAnimationFrame(firstFrame);
       if (secondFrame) window.cancelAnimationFrame(secondFrame);
     };
-  }, [persona, reduceMotion]);
+  }, [persona]);
 
   return (
     <SiteShell>
@@ -134,7 +130,7 @@ export function HomePage() {
         <div className="container-page">
           <div className="hero-split-grid">
             {/* Left Side: Context & Persona Switcher */}
-            <div className={`cinema-hero-copy ${heroMotionReady ? "hero-motion-ready" : ""}`}>
+            <div className={`cinema-hero-copy ${heroMotionReady ? "hero-motion-ready" : "hero-motion-pending"}`}>
               <LiveClock />
 
               {/* Persona Switcher */}
